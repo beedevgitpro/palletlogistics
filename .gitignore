@@ -5,6 +5,21 @@
 !*/cache/index.html
 !*/cache/.htaccess
 
+*.zip
+.svn
+.DS_Store
+thumbs.db
+
+# Codeigniter files
+
+*/user_guide
+*/system/logs/log-*.php
+/system/cache/
+*/system/cache/!index.html
+/wsdls/
+*mailing/
+/application/config/*
+
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
@@ -15,3 +30,5 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+/uploads/
+application/config/
