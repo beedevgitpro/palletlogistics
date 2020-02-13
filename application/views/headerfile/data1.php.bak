@@ -1,0 +1,97 @@
+<?php
+if(isset($_REQUEST['stateId']))
+{
+$stateId=$_REQUEST['stateId'];
+$result=$this->User_Model->get_franchise_detail($stateId);
+foreach($result as $row)
+{
+?>
+<option value="<?php echo $row->franchiseId; ?>"><?php echo $row->franchise; ?></option>
+<?php
+}
+}
+
+if(isset($_REQUEST['sponsorId']))
+{
+$sponsorId=$_REQUEST['sponsorId'];
+$result=$this->User_Model->check_sponsorId($sponsorId);
+foreach($result as $row)
+{
+$member_code=$row->member_code;
+$memberId=$row->memberId;
+}
+if(@$member_code==$sponsorId)
+{
+?>
+<label class="control-label " for="sponsorId">Sponsor ID *</label>
+<input type="text" value="<?php echo @$member_code; ?>" class="required form-control" id="sponsorId" name="sponsorId" onfocusout="check_sponsorId(this)" placeholder="Sponsor Id">
+<input type="hidden" name="sponsor" value="<?php echo @$memberId; ?>">
+<?php
+}
+else
+{
+echo "<script>alert('This Sponsor ID Not Valid !!!')</script>";
+?>
+<label class="control-label " for="sponsorId">Sponsor ID *</label>
+<input type="text" class="required form-control" id="sponsorId" name="sponsorId" onfocusout="check_sponsorId(this)" placeholder="Sponsor Id">
+<?php
+}
+}
+
+if(isset($_REQUEST['rdId']))
+{
+$rdId=$_REQUEST['rdId'];
+$result=$this->User_Model->check_rdId($rdId);
+foreach($result as $row)
+{
+$member_code1=$row->member_code;
+$memberId1=$row->memberId;
+}
+if(@$member_code1==$rdId)
+{
+?>
+ <label class="control-label " for="rdId"> SD/RD ID *</label>
+<input id="rdId" value="<?php echo @$member_code1; ?>" name="rdId" type="text" class="required form-control" onfocusout="check_rdId(this)" Placeholder="SD/RD ID">
+<input type="hidden" name="rd" value="<?php echo @$memberId; ?>">
+<?php
+}
+else
+{
+echo "<script>alert('This RD ID Not Valid !!!')</script>";
+?>
+ <label class="control-label " for="rdId"> SD/RD ID *</label>
+<input id="rdId" name="rdId" type="text" class="required form-control" onfocusout="check_rdId(this)" Placeholder="SD/RD ID">
+
+<?php
+}
+}
+
+if(isset($_REQUEST['sponsorId2']))
+{
+$sponsorId2=$_REQUEST['sponsorId2'];
+$rdId2=$_REQUEST['rdId2'];
+$result=$this->User_Model->check_sponsorId($sponsorId2);
+foreach($result as $row)
+{
+$member_code2=$row->member_code;
+$name=$row->first_name;
+}
+$result1=$this->User_Model->check_rdId($rdId2);
+foreach($result1 as $row1)
+{
+$member_code3=$row1->member_code;
+$rd_name=$row1->first_name;
+}
+if($sponsorId2==@$member_code2 && $rdId2==@$member_code3)
+{
+?>
+<ul class="list-unstyled w-list">
+	<li><b>Sponsor ID :</b> <?php echo @$member_code2; ?> </li>
+	<li><b>Sponsor Name :</b><?php echo @$name; ?>  </li>
+	<li><b>RD ID:</b><?php echo @$member_code3; ?></li>
+	<li><b>RD Name:</b> <?php echo @$rd_name; ?></li>
+</ul>
+<?php
+}
+}
+?>

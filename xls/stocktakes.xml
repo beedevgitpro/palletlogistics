@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.6.6
+- https://www.phpmyadmin.net
+-
+- Host: localhost
+- Generation Time: Sep 10, 2018 at 12:17 PM
+- Server version: 10.1.22-MariaDB
+- PHP Version: 7.0.24
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="fxstagin_citstdb" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="stocktakes">
+                CREATE TABLE `stocktakes` (
+                  `id` int(10) NOT NULL AUTO_INCREMENT,
+                  `metaid` int(10) NOT NULL,
+                  `date` date NOT NULL,
+                  `trading_partner` varchar(255) NOT NULL,
+                  `equipment` varchar(255) NOT NULL,
+                  `book_stock` varchar(255) NOT NULL,
+                  `physical_stock` varchar(255) NOT NULL,
+                  `shrinkage` varchar(255) NOT NULL,
+                  `reported_variance` varchar(255) NOT NULL,
+                  `receiving_tp` varchar(255) NOT NULL,
+                  `notes` varchar(255) NOT NULL,
+                  `login_id` int(10) NOT NULL,
+                  `show_hide` int(5) NOT NULL DEFAULT '0',
+                  `date_time` datetime NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'fxstagin_citstdb'
+    -->
+    <database name="fxstagin_citstdb">
+        <!-- Table stocktakes -->
+        <table name="stocktakes">
+            <column name="id">1</column>
+            <column name="metaid">1</column>
+            <column name="date">2018-09-08</column>
+            <column name="trading_partner">1</column>
+            <column name="equipment">test</column>
+            <column name="book_stock">dsd</column>
+            <column name="physical_stock">dd</column>
+            <column name="shrinkage">dd</column>
+            <column name="reported_variance">dd</column>
+            <column name="receiving_tp">dd</column>
+            <column name="notes"></column>
+            <column name="login_id">0</column>
+            <column name="show_hide">0</column>
+            <column name="date_time">2018-09-06 11:28:00</column>
+        </table>
+        <table name="stocktakes">
+            <column name="id">2</column>
+            <column name="metaid">2</column>
+            <column name="date">2018-09-08</column>
+            <column name="trading_partner">2</column>
+            <column name="equipment">test</column>
+            <column name="book_stock">dsd</column>
+            <column name="physical_stock">dd</column>
+            <column name="shrinkage">dd</column>
+            <column name="reported_variance">dd</column>
+            <column name="receiving_tp">dd</column>
+            <column name="notes"></column>
+            <column name="login_id">0</column>
+            <column name="show_hide">0</column>
+            <column name="date_time">2018-09-06 12:31:25</column>
+        </table>
+    </database>
+</pma_xml_export>

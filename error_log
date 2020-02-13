@@ -1,0 +1,20 @@
+[15-Nov-2017 04:49:21 UTC] PHP Fatal error:  Out of memory (allocated 2883584) (tried to allocate 12288 bytes) in /home/infotech/public_html/rellyvision/application/views/data.php on line 79
+[16-Nov-2017 06:06:47 UTC] PHP Fatal error:  Out of memory (allocated 2883584) (tried to allocate 3072 bytes) in /home/rellyvision/public_html/rellyvision/system/libraries/Parser.php on line 79
+[18-Nov-2017 06:51:42 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/rellyvision/public_html/rellyvision/application/views/direct_incentive.php on line 388
+[20-Nov-2017 09:14:54 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home/rellyvision/public_html/rellyvision/application/views/view_associate.php on line 210
+[21-Nov-2017 08:29:20 UTC] PHP Fatal error:  Out of memory (allocated 2359296) (tried to allocate 12288 bytes) in /home/rellyvision/public_html/rellyvision/system/libraries/Session/Session.php on line 112
+[22-Nov-2017 12:35:22 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/rellyvision/public_html/rellyvision/application/views/direct_incentive.php on line 389
+[25-Nov-2017 10:48:53 Asia/Kolkata] PHP Fatal error:  Call to undefined method User_Model::get_profile_picture() in /home/rellyvision/public_html/rellyvision/application/views/left_menu.php on line 20
+[25-Nov-2017 10:49:38 Asia/Kolkata] PHP Fatal error:  Call to undefined method User_Model::get_profile_picture() in /home/rellyvision/public_html/rellyvision/application/views/left_menu.php on line 20
+[25-Nov-2017 10:49:41 Asia/Kolkata] PHP Fatal error:  Call to undefined method User_Model::get_profile_picture() in /home/rellyvision/public_html/rellyvision/application/views/left_menu.php on line 20
+[25-Nov-2017 10:49:42 Asia/Kolkata] PHP Fatal error:  Call to undefined method User_Model::get_profile_picture() in /home/rellyvision/public_html/rellyvision/application/views/left_menu.php on line 20
+[25-Nov-2017 10:49:43 Asia/Kolkata] PHP Fatal error:  Call to undefined method User_Model::get_profile_picture() in /home/rellyvision/public_html/rellyvision/application/views/left_menu.php on line 20
+[25-Nov-2017 10:49:43 Asia/Kolkata] PHP Fatal error:  Call to undefined method User_Model::get_profile_picture() in /home/rellyvision/public_html/rellyvision/application/views/left_menu.php on line 20
+[25-Nov-2017 10:49:47 Asia/Kolkata] PHP Fatal error:  Call to undefined method User_Model::get_profile_picture() in /home/rellyvision/public_html/rellyvision/application/views/left_menu.php on line 20
+[25-Nov-2017 10:51:09 Asia/Kolkata] PHP Fatal error:  Call to undefined method User_Model::get_profile_picture() in /home/rellyvision/public_html/rellyvision/application/views/left_menu.php on line 20
+[25-Nov-2017 10:52:02 Asia/Kolkata] PHP Fatal error:  Call to undefined method User_Model::get_profile_picture() in /home/rellyvision/public_html/rellyvision/application/views/left_menu.php on line 20
+[23-Dec-2017 16:28:11 Asia/Kolkata] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/rellyvision/public_html/rellyvision/system/database/DB_driver.php on line 647
+[17-Jan-2018 17:49:02 Asia/Kolkata] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/rellyvision/public_html/rellyvision/application/views/direct_incentive.php on line 267
+[19-Aug-2018 20:57:14 Asia/Kolkata] PHP Fatal error:  Cannot redeclare User_Model::get_member() in /home/buddhaat/public_html/budhaa/application/models/User_Model.php on line 300
+[19-Aug-2018 20:58:23 Asia/Kolkata] PHP Fatal error:  Cannot redeclare User_Model::get_member_detail() in /home/buddhaat/public_html/budhaa/application/models/User_Model.php on line 300
+[20-Aug-2018 15:24:02 Asia/Kolkata] PHP Fatal error:  Cannot redeclare User_Model::get_user_role() in /home/buddhaat/public_html/budhaa/application/models/User_Model.php on line 311

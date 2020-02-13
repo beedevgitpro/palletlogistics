@@ -1,0 +1,200 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+class User_Model extends CI_Model
+{
+	
+	function __construct()
+	{
+		// Call the Model constructor
+        parent::__construct();
+		
+		$this->load->database();
+		$this->load->library('session');
+	}
+	
+	public function Login($username,$password)
+	{
+	$this->db->select('*');
+	$this->db->from('login');
+	$this->db->where('username',$username);
+	$this->db->where('password',$password);
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_menu()
+	{
+	$query=$this->db->query("SELECT * FROM left_menu where menuParentId='0'");
+	return $query->result();
+	}
+	
+	public function get_sub_menu($menuId)
+	{
+	$query=$this->db->query("SELECT * FROM left_menu where menuParentId!='0' and menuParentId='$menuId'");
+	return $query->result();
+	}
+	
+	public function get_max_franchiseId()
+	{
+		$query=$this->db->query("SELECT max(franchiseId) as franchiseId FROM franchise_view");
+		return $query->result();
+	}
+	
+	public function insert_franchise($data)
+	{
+	$result=$this->db->insert('franchise', $data);
+	return $result;
+	}
+	
+	public function get_franchise()
+	{
+	$this->db->select('*');
+	$this->db->from('franchise_view	');
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_state()
+	{
+	$this->db->select('*');
+	$this->db->from('states');
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_state_detail($id)
+	{
+	$this->db->select('*');
+	$this->db->from('states');
+	$this->db->where('id',$id);
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_max_level_incentiveId()
+	{
+	$query=$this->db->query("SELECT max(level_incentiveId) as level_incentiveId FROM level_incentive_view");
+	return $query->result();
+	}
+	
+	public function insert_level_incentive($data)
+	{
+	$result=$this->db->insert('level_incentive', $data);
+	return $result;
+	}
+	
+	public function get_level_incentive()
+	{
+	$this->db->select('*');
+	$this->db->from('level_incentive_view');
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_max_ipId()
+	{
+	$query=$this->db->query("SELECT max(ipId) as ipId FROM ip_view");
+	return $query->result();
+	}
+	
+	public function insert_ip($data)
+	{
+	$result=$this->db->insert('ip', $data);
+	return $result;
+	}
+	
+	public function get_ip()
+	{
+	$this->db->select('*');
+	$this->db->from('ip_view');
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_franchise_detail($id)
+	{
+	$this->db->select('*');
+	$this->db->from('franchise_view');
+	$this->db->where('state',$id);
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function check_sponsorId($id)
+	{
+	$this->db->select('sponsorId,first_name,memberId,member_code');
+	$this->db->from('member_management_view');
+	$this->db->where('member_code',$id);
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function check_rdId($id)
+	{
+	$this->db->select('rdId,first_name,memberId,member_code');
+	$this->db->from('member_management_view');
+	$this->db->where('member_code',$id);
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_max_memberId()
+	{
+	$query=$this->db->query("SELECT max(memberId) as memberId FROM member_management_view");
+	return $query->result();
+	}
+	
+	public function insert_member($data)
+	{
+	$result=$this->db->insert('member_management',$data);
+	return $result;
+	}
+	
+	public function insert_bank_detail($data2)
+	{
+	$result=$this->db->insert('member_bank_detail',$data2);
+	return $result;
+	}
+	
+	public function insert_login($login)
+	{
+	$result=$this->db->insert('login',$login);
+	return $result;
+	}
+	
+	public function get_member()
+	{
+	$this->db->select('*');
+	$this->db->from('member_management_view');
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_sponsor($id)
+	{
+	$this->db->select('member_code,first_name');
+	$this->db->from('member_management_view');
+	$this->db->where('sponsorId',$id);
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_rd($id)
+	{
+	$this->db->select('member_code,first_name');
+	$this->db->from('member_management_view');
+	$this->db->where('rdId',$id);
+	$query=$this->db->get();
+    return $query->result();
+	}
+	
+	public function get_franchise_detail2($id)
+	{
+	$this->db->select('*');
+	$this->db->from('franchise_view');
+	$this->db->where('state',$id);
+	$query=$this->db->get();
+    return $query->result();
+	}
+}
+?>

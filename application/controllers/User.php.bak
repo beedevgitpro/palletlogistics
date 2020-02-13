@@ -1,0 +1,1487 @@
+<?php
+date_default_timezone_set("Asia/Kolkata");
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class User extends CI_Controller {
+
+	function __construct()
+	{
+		// Call the Model constructor
+        parent::__construct();
+		$this->load->database();
+		$this->load->library('session');
+		$this->load->helper('form');
+        $this->load->library('form_validation');
+		$this->load->model('User_Model');
+		$this->load->model('Admin_model');
+		$this->load->helper('url');
+		$this->load->library('parser');
+
+	}
+	
+	public function index()
+	{
+		$this->load->view('index/login');
+	}
+	
+	public function dashboard()
+	{
+		$login_id=$this->session->userdata('id');
+		$data['login_id']=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('dashboard/index',$data);
+		}
+	}
+	
+	public function add_franchise ()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('franchise/add_franchise');
+		}
+	}
+	
+	public function view_franchise()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('franchise/view_franchise');
+		}
+	}
+	
+	public function add_member()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('member/add_member');
+		}
+	}
+	
+	public function add_equipments()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('level/add_equipments');
+		}
+	}
+
+	public function view_equipments()
+	{
+	$login_id=$this->session->userdata('id');
+	$data['login_id']=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('level/view_equipments',$data);
+		}
+	}
+
+		public function approve_member()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('member/approve_member');
+		}
+	}
+	
+	public function view_incentive_level()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('level/view_incentive_level');
+		}
+	}
+	
+	public function manage_ip()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			
+		}
+	}
+	
+	public function view_ip()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('manage_ip/view_ip');
+		}
+	}
+	
+	public function getData()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('headerfile/data1');
+		}
+	}
+	
+	public function view_member()
+	{
+	$data['login_id']=$this->session->userdata('id');
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('member/view_member',$data);
+		}
+	}
+	public function add_role(){
+	    $login_id=$this->session->userdata('id');
+	    if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('user_right/add_role');
+		}
+	}
+	public function purchase_product(){
+	    $login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('dashboard/purchase_product');
+		}
+	}
+	public function view_member_detail()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('member/view_member_detail');
+		}
+	}
+	
+	public function view_role()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('user_right/view_role');
+		}
+	}
+	
+	public function user_right()
+	{
+		$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('user_right/user_right');
+		}
+	}
+	
+	public function Login()
+	{
+		echo $username=$this->input->post('username');
+		echo $password = $this->input->post('password');
+		$result=$this->User_Model->Login($username,$password);
+		print_r($result);
+		if($result)
+		{
+			foreach($result as $row)
+            {}	
+            $data=array(
+			    'username'=> $row->username,
+				'password'=> $row->password,
+				'id'=> $row->login_id,
+				'memberId'=> $row->memberId
+			);
+            $this->session->set_userdata($data);
+           redirect(base_url().'User/dashboard');
+		}
+		else
+		{
+			//$this->session->set_userdata($data);
+			redirect(base_url().'User/error');
+		}
+	}
+	
+	public function Logout()
+	{
+		$this->session->sess_destroy();
+		redirect('http://saf.easfone.com/cms/web/'); 
+	}
+		public function member_card()
+	{
+	$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('member/member_card');
+		}
+	}
+	public function insert_franchise()
+	{
+	$login_id=$this->session->userdata('id');
+	$franchise=$this->input->post('franchise');
+	$state=$this->input->post('state');
+	$description=$this->input->post('description');
+	$date=date('Y-m-d H:i:s');
+	
+	$result=$this->User_Model->get_max_franchiseId();
+	foreach($result as $row)
+	{
+	$franchiseId=$row->franchiseId;
+	}
+	$franchiseId=++$franchiseId;
+	
+	$data=array(
+	'franchiseId'=>$franchiseId,
+	'login_id'=>$login_id,
+	'franchise'=>$franchise,
+	'state'=>$state,
+	'description'=>$description,
+	'date_time'=>$date
+	);
+	
+	$result1=$this->User_Model->insert_franchise($data);
+	if($result1)
+		{
+			$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong>Franchise Added successfully</div>');
+			redirect('User/add_franchise');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','|| Error ||');
+			redirect('User/add_franchise');
+		}
+	}
+	
+	public function insert_level_incentive()
+	{
+	$login_id=$this->session->userdata('id');
+	$level_name=$this->input->post('level_name');
+	$level_percent=$this->input->post('level_percent');
+	$level_ip=$this->input->post('level_ip');
+	$level_incentive=$this->input->post('level_incentive');
+	$date=date('Y-m-d H:i:s');
+	
+	$result=$this->User_Model->get_max_level_incentiveId();
+	foreach($result as $row)
+	{
+	$level_incentiveId=$row->level_incentiveId;
+	}
+	$level_incentiveId=++$level_incentiveId;
+	
+	$data=array(
+	'level_incentiveId'=>$level_incentiveId,
+	'level_name'=>$level_name,
+	'level_percent'=>$level_percent,
+	'level_ip'=>$level_ip,
+	'level_incentive'=>$level_incentive,
+	'login_id'=>$login_id,
+	'date_time'=>$date
+	);
+	$result1=$this->User_Model->insert_level_incentive($data);
+	if($result1)
+		{
+			$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong>Incentive Level Added successfully</div>');
+			redirect('User/incentive_level');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','|| Error ||');
+			redirect('User/incentive_level');
+		}
+	}
+	
+	public function insert_ip()
+	{
+	$login_id=$this->session->userdata('id');
+	$ip_amount=$this->input->post('ip_amount');
+	$description=$this->input->post('description');
+	$date=date('Y-m-d H:i:s');
+	
+	$result=$this->User_Model->get_max_ipId();
+	foreach($result as $row)
+	{
+	$ipId=$row->ipId;
+	}
+	$ipId=++$ipId;
+	$data=array(
+	'ipId'=>$ipId,
+	'ip_amount'=>$ip_amount,
+	'description'=>$description,
+	'date_time'=>$date
+	);
+	$result1=$this->User_Model->insert_ip($data);
+	if($result1)
+		{
+			$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong>Incentive Level Added successfully</div>');
+			redirect('User/manage_ip');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','|| Error ||');
+			redirect('User/manage_ip');
+		}
+	}
+	
+	public function insert_member()
+	{
+	$a=rand(04540, 98529);
+	$code="KSN".$a."BT";
+	$pass=rand(1111,9999);
+    $login_id=$this->session->userdata('id');
+	$sponsorId=0;
+	$rdId=0;
+	$state=38;
+	$franchise=0;
+	$tp_name=$this->input->post('tp_name');
+    $tp_type=$this->input->post('tp_type');
+	$location=$this->input->post('location');
+	$internal=$this->input->post('internal');
+	$primary=$this->input->post('primary');
+    $codes=$this->input->post('code');
+    $lmd=$this->input->post('lmd');
+    $licence_number=$this->input->post('licence_number');
+    $licence_number=$this->input->post('licence_number');
+	$expiry_date=$this->input->post('expiry_date');
+	$notes=$this->input->post('notes');
+	$email=$this->input->post('emailid');
+	$special=$this->input->post('special');
+	$date=date('Y-m-d H:i:s');
+	$login_type='M';
+	$result=$this->User_Model->get_max_memberId();
+	foreach($result as $row)
+	{
+	$memberId=$row->memberId;
+	}
+	$memberId=++$memberId;
+	
+	$data=array(
+	'memberId'=>$memberId,
+	'tp_type'=>$tp_type,
+	'member_code'=>$code,
+	'franchiseId'=>$franchise,
+	'stateId'=>$state,
+	'sponsorId'=>$sponsorId,
+	'rdId'=>$rdId,
+    'expiry_date'=>$expiry_date,
+	'internal'=>$internal,
+    'tp_primary'=>$primary,
+	'tp_name'=>$tp_name,
+	'location'=>$location,
+	'code'=>$codes,
+	'notes'=>$notes,
+	'emailid'=>$email,
+	'special'=>$special,
+	'login_id'=>$login_id,
+	'date_time'=>$date
+	);
+	
+	/*$data2=array(
+	'memberId'=>$memberId,
+	'bank'=>$bank,
+	'branch'=>$branch,
+	'ifsc'=>$ifsc,
+	'login_id'=>$login_id,
+	'date_time'=>$date
+	);
+	*/
+
+	$login=array(
+	'memberId'=>$memberId,
+	'username'=>$code,
+	'password'=>$pass,
+	'login_type'=>$login_type,
+	'date_time'=>$date
+	);
+	
+	$result1=$this->User_Model->insert_member($data);
+	$result2=$this->User_Model->insert_login($login);
+	//$result1=$this->User_Model->insert_bank_detail($data2);
+	if($result1==$result2)
+		{
+			$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong>Trading Partner Added successfully</div>');
+			redirect('User/add_member');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','|| Error ||');
+			redirect('User/add_member');
+		}
+	}
+//==================================
+	/*   $pass=rand(1111,9999);
+    $login_id=$this->session->userdata('id');
+	
+	$tp_name=$this->input->post('tp_name');
+	$tp_type=$this->input->post('tp_type');
+	$code=$this->input->post('code');
+	$emailid=$this->input->post('emailid');
+	$notify=$this->input->post('notify');
+	$internal=$this->input->post('internal');
+	$special=$this->input->post('special');
+	$special=$this->input->post('location');
+	$licence_number=$this->input->post('licence_number');
+	$expiry_date=$this->input->post('expiry_date');
+	$notes=$this->input->post('notes');
+	
+
+    $data=array(
+	'memberId'=>$memberId,
+	'tp_name'=>$tp_name,
+	'tp_type'=>$tp_type,
+	'tp_code'=>$code,
+	'tp_email'=>$emailid,
+	'password'=>$pass,
+	'tp_notify'=>$notify,
+	'tp_internal'=>$internal,
+	'tp_primary'=>$primary,
+	'tp_last_movement_date'=>$lmd,
+	'tp_special'=>$special,
+	'tp_location_id'=>$location,
+	'tp_licence_no'=>$licence_number,
+	'tp_expiry_date'=>$expiry_date,
+	'tp_notes'=>$notes,
+	'tp_login_id'=>$login_id
+
+*/
+
+
+//=====================================	
+
+
+       function insert_tpaccounts()
+       {
+
+       	 $login_id=$this->session->userdata('id');
+       	 $trading_partner_id=0;
+         $third_party=$this->input->post('third_party');
+         $supplier=$this->input->post('supplier');
+         $account_number=$this->input->post('account_number');
+         $tn_delay_rule=$this->input->post('delay_rule');
+         $tpa_allow_tf=$this->input->post('tpa_allow_tf');
+         $tpa_tf_delay_type=$this->input->post('tpa_tf_delay_type');
+         $tf_delay_days=$this->input->post('tf_delay_days');
+         $tf_delay_rule=$this->input->post('tf_delay_rule');
+         $redeem_exchange=$this->input->post('redeem_exchange');
+         $redeem_same=$this->input->post('redeem_same');
+         $tpa_complete=$this->input->post('tpa_complete');
+         $override_export_status=$this->input->post('override_export_status');
+         $export_Ons=$this->input->post('export_Ons');
+         $export_offs=$this->input->post('export_offs');
+         $docket_format=$this->input->post('docket_format');
+         $con_note_required=$this->input->post('con_note_required');
+         $con_note_characters=$this->input->post('con_note_characters');
+         $con_note_numeric=$this->input->post('con_note_numeric');
+         $con_note_description=$this->input->post('con_note_description');
+         $reference_required=$this->input->post('reference_required');
+         $reference_characters=$this->input->post('reference_characters');
+         $reference_numeric=$this->input->post('reference_numeric');
+         $reference_description=$this->input->post('reference_description');
+         $reminder=$this->input->post('reminder');
+         $note=$this->input->post('note');
+         $result=$this->User_Model->get_max_tp_accountsId();
+	     foreach($result as $row)
+	     {
+	     $metaid=$row->metaid;
+	     }
+	     $metaid=++$metaid;
+	     $data = array('tpa_third_party' => $third_party,
+	     	'tpa_supplier'=>$supplier,
+	     	'metaid'=>$metaid,
+	     	'trading_partner_id'=>$trading_partner_id,
+	     	'tpa_account_number'=>$account_number,
+	     	'tpa_tn_delay_rule'=>$tn_delay_rule,
+	     	'tpa_allow_tf'=>$tpa_allow_tf,
+	     	'tpa_tf_delay_type'=>$tpa_tf_delay_type,
+	     	'tpa_tf_delay_days'=>$tf_delay_days,
+	        'tpa_tf_delay_rule'=>$tf_delay_rule,
+	        'tpa_redeem_exchange'=>$redeem_exchange,
+	        'tpa_redeem_same'=>$redeem_same,
+	        'tpa_complete'=>$tpa_complete,
+	        'tpa_override_export_status'=>$override_export_status,
+	        'tpa_export_on'=>$export_Ons,
+	        'tpa_export_off'=>$export_offs,
+	        'tpa_docket_format'=>$docket_format,
+	        'tpa_con_note_required'=>$con_note_required,
+	         'tpa_con_note_characters'=>$con_note_required,
+	         'tpa_con_note_numeric'=>$con_note_numeric,
+	         'tpa_con_note_decription'=>$con_note_description,
+	         'tpa_reference_required'=>$reference_required,
+	         'tpa_reference_characters'=>$reference_characters,
+	         'tpa_reference_numeric'=>  $reference_numeric,
+	         'tpa_reference_description'=>$reference_description,
+	         'tpa_reminder'=>$reminder,
+	         'tpa_notes'=>$note);
+	     $result12=$this->User_Model->insert_tpaccounts($data);
+	     	if($result12)
+		{
+			$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong>Incentive Level Added successfully</div>');
+			redirect('User/tp_account');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','|| Error ||');
+			redirect('User/tp_account');
+		}
+        }
+
+
+
+	
+	public function wallet_balance()
+	{
+		$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+			$this->load->view('member/member_card');
+		}
+		
+	}
+	public function view_carrier()
+	{
+		$this->load->view('carrier/view_carrier');
+	}
+	public function get_data()
+	{
+		echo"<script>alert('successfully Read')</script>";
+	    $this->load->view('get_data');	
+	}
+	public function add_products(){
+		$this->load->view('dashboard/add_product');
+	}
+	public function add_news(){
+		$this->load->view('dashboard/addnews');
+	}
+	public function add_post(){
+		$loggedIn=$this->session->userdata('meta_id');
+		$newsid=$this->input->post('newsid');
+		$newstitle=$this->input->post('title');
+		$newsdesc=$this->input->post('news');
+		$photo=$_FILES['photo']['name'];
+		$DT=date('Y-m-d H:i:s');
+		$data=array(
+			'news_id'=>$newsid,
+			'login_id'=>$loggedIn,
+			'news_title'=>$newstitle,
+			'news_description'=>$newsdesc,
+			'date'=>$DT,
+			'photo'=>$_FILES['photo']['name'],
+			'show_hide'=>0
+		);
+		$res=$this->Admin_model->insert_news($data);
+		if($res){
+			$file_name = $_FILES['photo']['name'];
+			$file_size = $_FILES['photo']['size'];
+			$file_tmp = $_FILES['photo']['tmp_name'];
+			$file_type = $_FILES['photo']['type'];
+			move_uploaded_file($file_tmp,"assets/images/news/".$file_name);
+			$this->session->set_flashdata('msg','News Added Successfully!');
+			redirect('User/add_news');
+		}
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger hidden fade in">
+                                                <h4>Oh!</h4>
+                                                <p>Something is Wrong!</p>
+                                            </div>');
+			redirect('User/add_news');
+		}
+
+	}
+	public function add_product(){
+		$loggedIn=$this->session->userdata('id');
+		$productid=$this->input->post('product_id');
+		$productname=$this->input->post('product_name');
+		$productprice=$this->input->post('product_price');
+		$total_ip=$this->input->post('total_ip');
+		$productcat=$this->input->post('product_category');
+		$productimg=$_FILES['product_image']['name'];
+		$DT=date('Y-m-d H:i:s');
+		$data=array(
+			'login_id'=>$loggedIn,
+			'product_id'=>$productid,
+			'product_name'=>$productname,
+			'product_category'=>$productcat,
+			'product_price'=>$productprice,
+			'product_ip'=>$total_ip,
+			'product_image'=>$_FILES['product_image']['name'],
+			'date'=>$DT,
+			'show_hide'=>0
+			
+		);
+		$res=$this->Admin_model->insert_product($data);
+		if($res){
+			$file_name = $_FILES['product_image']['name'];
+			$file_size = $_FILES['product_image']['size'];
+			$file_tmp = $_FILES['product_image']['tmp_name'];
+			$file_type = $_FILES['product_image']['type'];
+			move_uploaded_file($file_tmp,"assets/images/products/".$file_name);
+			$this->session->set_flashdata('msg','Product Added Successfully!');
+			redirect('User/add_products');
+		}
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger hidden fade in">
+                                                <h4>Oh!</h4>
+                                                <p>Something is Wrong!</p>
+                                            </div>');
+			redirect('User/add_products');
+		}
+		
+	}
+	public function Add_category(){
+		$loggedIn=$this->session->userdata('id');
+		$this->load->view('dashboard/add_category');
+	}
+	public function add_cat(){
+		$loggedIn=$this->session->userdata('id');
+		$categoryid=$this->input->post('category_id');
+		$categoryname=$this->input->post('category_name');
+		$categoryimage=$_FILES['category_image']['name'];
+		$DT=date('Y-m-d H:i:s');
+		$data=array(
+			'login_id'=>$loggedIn,
+			'category_id'=>$categoryid,
+			'category_name'=>$categoryname,
+			'category_image'=>$_FILES['category_image']['name'],
+			'date'=>$DT,
+			'show_hide'=>0
+		);
+		$res=$this->Admin_model->insert_category($data);
+		if($res){
+			$file_name = $_FILES['category_image']['name'];
+			$file_size = $_FILES['category_image']['size'];
+			$file_tmp = $_FILES['category_image']['tmp_name'];
+			$file_type = $_FILES['category_image']['type'];
+			move_uploaded_file($file_tmp,"assets/images/category".$file_name);
+			$this->session->set_flashdata('msg','Category Added Successfully!');
+			redirect('User/Add_category');
+		}
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger hidden fade in">
+                                                <h4>Oh!</h4>
+                                                <p>Something is Wrong!</p>
+                                            </div>');
+			redirect('User/Add_category');
+		}
+	}
+	public function add_slider(){
+		$this->load->view('dashboard/add_slider');
+	}
+	public function view_product(){
+		$this->load->view('dashboard/view_product');
+	}
+	public function assign_role(){
+	   $this->load->view('user_right/assign_role');
+	}
+	public function add_roles()
+	{
+	    $loginid=$this->session->userdata('id');
+	    $roleid=$this->input->post('roleid');
+	    $rolename=$this->input->post('rolename');
+	    $description=$this->input->post('description');
+	    $DT=date('Y-m-d H:i:s');
+	    $data=array(
+	        'roleId'=>$roleid,
+	        'login_id'=>$loginid,
+	        'role'=>$rolename,
+	        'description'=>$description,
+	        'date_time'=>$DT,
+	        'show_hide'=>0
+	    );
+	    $res=$this->User_Model->insert_role($data);
+	    if($res){
+	        $this->session->set_flashdata('msg','Role Added Successfully!');
+			redirect('User/add_role');
+	    }else{
+	        $this->session->set_flashdata('error','Not Added!');
+			redirect('User/add_role');
+	    }
+	    
+	}
+	
+	public function insert_assign_role()
+	{	
+		$login_id=$this->session->userdata('id');
+		$role=$this->input->post('role');
+		$date=date('Y-m-d H:i:s');
+	    foreach($_POST['right_select'] as $value)
+		{
+		$data=array(
+		           'roleId'=>$role,
+		           'empId'=>$value,
+				   'login_id'=>$login_id,
+		           'date_time'=>$date
+				   );
+  
+        $result=$this->User_Model->insert_assign_role($data);   
+		} 
+		if($result==1)
+		{
+			redirect('User/assign_role');
+		}
+		else
+		{
+		redirect('User/assign_role');
+		}
+	}
+	
+	public function insert_user_right()
+	{
+		$role=$this->input->post('role');
+		$date=date('Y-m-d H:i:s');
+		$login_type='0';
+	    foreach($_POST['right_select1'] as $value)
+		{
+		$data=array(
+		           'login_menuId'=>$role,
+		           'menuId'=>$value,
+				   'login_type'=>$login_type,
+		           'date_time'=>$date
+				   );
+  
+                $result=$this->User_Model->insert_user_right1($data);   
+		} 
+		if($result==1)
+		{
+			redirect('User/user_right');
+		}
+		else
+		{
+		redirect('User/user_right');
+		}	
+	}
+	
+	public function insert_user_right1()
+	{
+		$user=$this->input->post('username');
+		$date=date('Y-m-d H:i:s');
+		$login_type='1';
+	    foreach($_POST['right_select'] as $value)
+		{
+		$data=array(
+		           'login_menuId'=>$user,
+		           'menuId'=>$value,
+				   'login_type'=>$login_type,
+		           'date_time'=>$date
+				   );
+  
+                $result=$this->User_Model->insert_user_right1($data);   
+		} 
+		if($result==1)
+		{
+			redirect('User/user_right');
+		}
+		else
+		{
+		redirect('User/user_right');
+		}	
+	}
+
+	public function view_accounts()
+	{
+
+		$data['login_id']=$this->session->userdata('id');
+		$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('member/view_accounts',$data);
+		}
+	
+	}
+
+	
+
+	public function tp_account()
+	{
+		$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('member/tp_account');
+		}
+	}
+	public function add_stocktakes()
+	{
+		$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('member/add_stocktakes');
+		}
+	}
+	public function insert_stocktake()
+	{
+		$date_time=date("Y-m-d H:i:s");
+		$loginid=$this->session->userdata('id');
+	    $stockdate=$this->input->post('stockdate');
+	    $trading_partner=$this->input->post('trading_partner');
+	    $equipment=$this->input->post('equipment');
+	    $book_stock=$this->input->post('book_stock');
+	    $physical_stock=$this->input->post('physical_stock');
+	    $shrinkage=$this->input->post('shrinkage');
+	    $reported_variance=$this->input->post('reported_variance');
+	    $receiving_tp=$this->input->post('receiving_tp');
+	    $note=$this->input->post('note');
+	    $result=$this->User_Model->get_max_tp_stocktake();
+	     foreach($result as $row)
+	     {
+	     $metaid=$row->metaid;
+	     }
+	     $metaid=++$metaid;
+	    $insert_data =array('metaid'=>$metaid,
+	    	               'date' => $stockdate,
+	                       'trading_partner'=>$trading_partner,
+	                       'equipment'=>$equipment,
+	                       'book_stock'=>$book_stock,
+	                       'physical_stock'=>$physical_stock,
+	                       'shrinkage'=>$shrinkage,
+	                       'reported_variance'=>$reported_variance,
+	                       'receiving_tp'=>$receiving_tp,
+	                       'login_id'=>$note,
+	                       'date_time'=>$date_time);
+	   $res= $this->User_Model->insert_stocktake($insert_data);
+
+	    if($res){
+	        $this->session->set_flashdata('msg','stocktakes Added Successfully!');
+			redirect('User/add_stocktakes');
+	    }else{
+	        $this->session->set_flashdata('error','Not Added!');
+			redirect('User/add_stocktakes');
+	    }
+
+	}
+
+	function view_stocktakes()
+	{
+		$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('member/view_stocktakes');
+		}
+
+	}
+	public function add_carrier()
+	{
+		$login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('carrier/add_carrier');
+		}
+		
+	}
+	public function insert_carrier()
+	{
+	$result=$this->User_Model->get_max_carrierid();
+	$date_time=date("Y-m-d H:i:s");
+	$loginid=$this->session->userdata('id');
+	$carrier=$this->input->post('carrier');
+    $active=$this->input->post('active');
+    $note=$this->input->post('note');
+
+	foreach($result as $row)
+	{
+	$metaid=$row->metaid;
+	}
+	$metaid=++$metaid;
+	$data = array(
+                       'metaid'=>$metaid,
+		               'carrier' =>$carrier,
+	                   'active'=>$active,
+	                   'notes'=>$note,
+	                   'login_id'=>$loginid,
+	                   'date_time'=>$date_time);
+    $result=$this->User_Model->insert_carrier($data);
+    if($result)
+    {
+  		$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong>Added successfully</div>');
+			redirect('User/add_carrier');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','|| Error ||');
+			redirect('User/add_carrier');
+		}
+        }
+
+
+        public function insert_equipment()
+        {
+    $result=$this->User_Model->get_max_equipmentid();
+
+	foreach($result as $row)
+	{
+	$metaid=$row->metaid;
+	}
+	$metaid=++$metaid;
+	$date_time=date("Y-m-d H:i:s");
+	$loginid=$this->session->userdata('id');
+	$equipment=$this->input->post('equipment');
+	$equipment_supplier_tp=$this->input->post('equipment_supplier_tp');
+	$equipment_report_name=$this->input->post('equipment_report_name');
+	$equipment_code=$this->input->post('equipment_code');
+	$equipment_internal_code=$this->input->post('equipment_internal_code');
+	$equipment_book_stock=$this->input->post('equipment_book_stock');
+	$equipment_lost_stock=$this->input->post('equipment_lost_stock');
+	$equipment_supplier_stock=$this->input->post('equipment_supplier_stock');
+	$equipment_rent_unit_price=$this->input->post('equipment_rent_unit_price');
+	$active=$this->input->post('active');
+	$data = array('metaid'=>$metaid,
+	'equipment'=>$equipment,
+	'equipment_supplier_tp'=>$equipment_supplier_tp,
+	'equipment_report_name'=>$equipment_report_name,
+	'equipment_code'=>$equipment_code,
+	'equipment_internal_code'=>$equipment_internal_code,
+	'equipment_book_stock'=>$equipment_book_stock,
+	'equipment_supplier_stock' =>$equipment_lost_stock,
+	'equipment_supplier_stock'=>$equipment_supplier_stock,
+	'equipment_rent_unit_price'=>$equipment_rent_unit_price,
+	'active'=>$active,
+    'login_id'=>$loginid);
+	$res= $this->User_Model->insert_equipment($data);
+	    if($res){
+	        $this->session->set_flashdata('message','Equipment Added Successfully!');
+			redirect('User/add_equipments');
+	    }else{
+	        $this->session->set_flashdata('error','Not Added!');
+			redirect('User/add_equipments');
+	    }
+
+        }
+
+
+        public function daily_reports()
+        {
+        $login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('pallet_reports/daily_reports');
+		}	
+        }
+        public function bills()
+        {
+        $login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('pallet_reports/bills');
+		}	
+
+        }
+        public function operations_reports()
+        {
+        $login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('pallet_reports/operations_reports');
+		}
+
+        }
+        public function movement_reports($movement_id)
+        {
+			$data['movement_id']=$movement_id;
+        $login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('pallet_reports/movement_reports',$data);
+		}
+
+        }
+        function monthly_report()
+        {
+        $login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('pallet_reports/monthly_report');
+		}
+        }
+        function sender_receiver()
+        {
+        $login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('sender_receiver/sender_receiver');
+		}
+        }
+        public function import_stocktakes()
+        {
+        $login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('stocktakes/import_stocktakes');
+		}
+
+        }
+//---------------------------
+        public function stocktakecsv()
+        {
+        
+  $login_id=$this->session->userdata('id');
+if(isset($_POST['submit'])){
+if($_FILES['csv_data']['name']){
+
+$arrFileName = explode('.',$_FILES['csv_data']['name']);
+if($arrFileName[1] == 'csv'){
+$handle = fopen($_FILES['csv_data']['tmp_name'], "r");
+while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
+
+         $result=$this->User_Model->get_max_tp_stocktake();
+	     foreach($result as $row)
+	     {
+	     $metaid=$row->metaid;
+	     }
+	     $metaid=++$metaid;
+	    $insert_data =array('metaid'=>$metaid,
+	    	               'date' => $emapData[1],
+	                       'trading_partner'=>$emapData[2],
+	                       'equipment'=>$emapData[3],
+	                       'book_stock'=>$emapData[4],
+	                       'physical_stock'=>$emapData[5],
+	                       'shrinkage'=>$emapData[6],
+	                       'reported_variance'=>$emapData[7],
+	                       'receiving_tp'=>$emapData[8],
+	                       'login_id'=>$login_id,
+	                       'date_time'=>$emapData[9]);
+	   $res= $this->User_Model->insert_stocktake($insert_data);
+
+
+	    if($res){
+	        $this->session->set_flashdata('message','Equipment Added Successfully!');
+			redirect('User/import_stocktakes');
+	    }else{
+	        $this->session->set_flashdata('error','Not Added!');
+			redirect('User/import_stocktakes');
+	    }
+
+        }
+
+
+
+}
+        }
+}
+}
+
+public function import_trading_partner_accounts()
+{
+  $login_id=$this->session->userdata('id');
+		if($login_id==null){redirect('User/');}
+		else
+		{
+		$this->load->view('import_data/import_trading_partner');
+		}
+
+
+}
+public function trading_partnercsv()
+{
+	$login_id=$this->session->userdata('id');
+	if(isset($_POST['submit'])){
+if($_FILES['csv_data']['name']){
+
+$arrFileName = explode('.',$_FILES['csv_data']['name']);
+if($arrFileName[1] == 'csv'){
+$handle = fopen($_FILES['csv_data']['tmp_name'], "r");
+while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
+
+         $result=$this->User_Model->get_max_tp_accountsId();
+	     foreach($result as $row)
+	     {
+	     $metaid=$row->metaid;
+	     }
+	     $metaid=++$metaid;
+	    $insert_data =array('metaid'=>$metaid,
+	    	               'item' => $emapData[0],
+	    	               'tpa_third_party' => $emapData[1],
+	                       'tpa_supplier'=>$emapData[2],
+	                       'tp_code'=>$emapData[3],
+	                       'tpa_account_number'=>$emapData[3],
+	                       'tpa_tn_delay_rule'=>$emapData[4],
+	                       'tpa_allow_tf'=>$emapData[5],
+	                       'tpa_tf_delay_type'=>$emapData[6],
+	                       'tpa_tf_delay_days'=>$emapData[7],
+	                       'tpa_tf_delay_rule'=>$emapData[8],
+	                       'tpa_redeem_exchange'=>$emapData[9],
+	                       'tpa_redeem_same'=>$emapData[10],
+	                       'tpa_complete'=>$emapData[11],
+	                       'tpa_override_export_status'=>$emapData[11],
+	                       'tpa_export_on'=>$emapData[12],
+	                       'tpa_export_off'=>$emapData[13],
+	                       'tpa_docket_format'=>$emapData[14],
+	                       'tpa_con_note_required'=>$emapData[15],
+	                       'tpa_con_note_characters'=>$emapData[16],
+	                       'tpa_con_note_numeric'=>$emapData[17],
+	                       'tpa_con_note_decription'=>$emapData[18],
+	                       'tpa_reference_required'=>$emapData[19],
+	                       'tpa_reference_characters'=>$emapData[20],
+	                       'tpa_reference_numeric'=>$emapData[21],
+	                       'tpa_reference_description'=>$emapData[22],
+	                       'tpa_reminder'=>$emapData[23],
+	                       'login_id'=>$login_id,
+	                       'tpa_notes'=>$emapData[24],
+	                       'date_time'=>$emapData[25]);
+
+	    $result12=$this->User_Model->insert_tpaccounts($insert_data);
+
+
+
+
+        }
+
+	     	if($result12)
+		{
+			$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong> Added successfully</div>');
+			redirect('User/import_trading_partner_accounts');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','|| Error ||');
+			redirect('User/import_trading_partner_accounts');
+		}
+
+}
+        }
+}
+
+}
+
+public function movements()
+{
+ $login_id=$this->session->userdata('id');
+ if($login_id==null){redirect('User/');}
+else
+	{
+	$this->load->view('operations/movements');
+	}
+
+}
+public function insert_movements()
+{ 
+
+    $result=$this->User_Model->get_max_movementsid();
+	foreach($result as $row)
+	{
+	$metaid=$row->metaid;
+	}
+	$metaid=++$metaid;
+	$date_time=date("Y-m-d H:i:s");
+	$loginid=$this->session->userdata('id');
+	$mov_date=$this->input->post('mov_date');
+	$equipment=$this->input->post('equipment');
+	$sending_tp=$this->input->post('sending_tp');
+	$receiving_tp=$this->input->post('receiving_tp');
+	$reference=$this->input->post('reference');
+	$quantity=$this->input->post('quantity');
+	$transfer=$this->input->post('transfer');
+	$transaction=$this->input->post('transaction');
+	$effective_date=$this->input->post('effective_date');
+	$docket_number=$this->input->post('docket_number');
+	$rai_corr=$this->input->post('rai_corr');
+	$type=$this->input->post('type');
+	$orig_movemevt=$this->input->post('orig_movemevt');
+	$export=$this->input->post('export');
+	$batch=$this->input->post('batch');
+	$bill=$this->input->post('bill');
+	$notes=$this->input->post('notes');
+	$data = array('metaid'=>$metaid,
+	'movements_date'=>$mov_date,
+	'equipment'=>$equipment,
+	'sending_tp'=>$sending_tp,
+	'receiving_tp'=>$receiving_tp,
+	'reference'=>$reference,
+	'quantity'=>$quantity,
+	'transfer' =>$transfer,
+	'transaction'=>$transaction,
+	'effective_date'=>$effective_date,
+	'docket_number'=>$docket_number,
+	'rai_corr'=>$rai_corr,
+	'type'=>$type,
+	'orig_movemevt'=>$orig_movemevt,
+	'export'=>$export,
+	'batch'=>$batch,
+	'bill'=>$bill,
+	'Notes'=>$notes,
+    'login_id'=>$loginid);
+	$res= $this->User_Model->insert_movements($data);
+	    if($res){
+	        $this->session->set_flashdata('message','movements Added Successfully!');
+			redirect('User/movements');
+	    }else{
+	        $this->session->set_flashdata('error','Not Added!');
+			redirect('User/movements');
+	    }
+
+
+}
+
+public function view_movement()
+{
+$login_id=$this->session->userdata('id');
+if($login_id==null){redirect('User/');}
+else
+{
+$this->load->view('operations/view_movement');
+}
+}
+public function add_bills()
+{
+$login_id=$this->session->userdata('id');
+if($login_id==null){redirect('User/');}
+else
+{
+$this->load->view('operations/add_bills');
+}	
+}
+
+public function insert_bills()
+{
+	$result=$this->User_Model->get_max_billsid();
+	foreach($result as $row)
+	{
+	$metaid=$row->metaid;
+	}
+	$metaid=++$metaid;
+	$date_time=date("Y-m-d H:i:s");
+	$loginid=$this->session->userdata('id');
+	$bill_date=$this->input->post('bill_date');
+	$equipment=$this->input->post('equipment');
+	$source=$this->input->post('source');
+	$opening_balance=$this->input->post('opening_balance');
+	$quantity_on=$this->input->post('quantity_on');
+	$unreconciled_qty_on=$this->input->post('unreconciled_qty_on');
+	$quantity_off=$this->input->post('quantity_off');
+	$unreconciled_qty_off=$this->input->post('unreconciled_qty_off');
+	$closing_balance=$this->input->post('closing_balance');
+	$equipment_days=$this->input->post('equipment_days');
+	$unreconciled_equipment_days=$this->input->post('unreconciled_equipment_days');
+	$rent_unit_price=$this->input->post('rent_unit_price');
+	$rent=$this->input->post('rent');
+	$fees=$this->input->post('fees');
+	$Other_charges=$this->input->post('Other_charges');
+	$amount=$this->input->post('amount');
+	$unreconciled_amount=$this->input->post('unreconciled_amount');
+	$data = array('metaid'=>$metaid,
+	'bills_date'=>$bill_date,
+	'equipment'=>$equipment,
+	'source'=>$source,
+	'opening_balance'=>$opening_balance,
+	'quantity_on'=>$quantity_on,
+	'Unreconciled_qty_on'=>$unreconciled_qty_on,
+	'quantity_off' =>$quantity_off,
+	'unreconciled_qty_off'=>$unreconciled_qty_off,
+	'closing_balance'=>$closing_balance,
+	'equipment_days'=>$equipment_days,
+	'unreconciled_equipment_days'=>$unreconciled_equipment_days,
+	'rent_unit_price'=>$rent_unit_price,
+	'rent'=>$rent,
+	'fees'=>$fees,
+	'amount'=>$amount,
+	'unreconciled_amount'=>$unreconciled_amount,
+	'date_time'=>$date_time,
+    'login_id'=>$loginid);
+	 $res= $this->User_Model->insert_bills($data);
+	 if($res){
+	 $this->session->set_flashdata('message',' Added Successfully!');
+	 redirect('User/add_bills');
+	  }else
+	  {
+	  $this->session->set_flashdata('error','Not Added!');
+	 redirect('User/add_bills');
+	  }
+
+}
+
+public function insert_sender_receicer()
+{
+	$result=$this->User_Model->get_max_sender_receiverid();
+	foreach($result as $row)
+	{
+	$metaid=$row->metaid;
+	}
+	$metaid=++$metaid;
+	$date_time=date("Y-m-d H:i:s");
+	$loginid=$this->session->userdata('id');
+	$sender_receicer=$this->input->post('sender_receicer');
+	$trading_partner_id=$this->input->post('trading_partner_id');
+	$phone_number=$this->input->post('phone_number');
+	$mobile_number=$this->input->post('mobile_number');
+	$email_id=$this->input->post('email_id');
+	$active=$this->input->post('active');
+	$default=$this->input->post('default');
+	$note=$this->input->post('note');
+    $data = array( 'metaid'=>$metaid,
+    	           'sender_receiver_name' =>$sender_receicer,
+                   'trading_partner_name' =>$trading_partner_id,
+                   'phone_number'=>$mobile_number,
+                   'email'=>$email_id,
+                   'active'=>$active,
+                   'defaults'=>$default,
+                   'note'=>$note,
+                   'login_id'=>$loginid,
+                   'date_time'=>$date_time);
+   $res= $this->User_Model->insert_sender_receiver($data);
+	    if($res){
+	        $this->session->set_flashdata('message','sender/receiver Added Successfully!');
+			redirect('User/sender_receiver');
+	    }else{
+	        $this->session->set_flashdata('error','Not Added!');
+			redirect('User/sender_receiver');
+	    }
+
+        
+}
+public function view_sender_receiver()
+{
+$login_id=$this->session->userdata('id');
+if($login_id==null){redirect('User/');}
+else
+{
+$this->load->view('sender_receiver/view_sender_receiver');
+}	
+}
+
+public function  equipment_report()
+{
+$login_id=$this->session->userdata('id');
+if($login_id==null){redirect('User/');}
+else
+{
+$this->load->view('pallet_reports/equipment_report');
+}
+}
+public function movementreports()
+{
+$login_id=$this->session->userdata('id');
+if($login_id==null){redirect('User/');}
+else
+{
+$this->load->view('pallet_reports/movementreports');
+}	
+}
+public function Trading_Partner_report()
+{
+	$login_id=$this->session->userdata('id');
+if($login_id==null){redirect('User/');}
+else
+{
+$this->load->view('pallet_reports/trading_partner_report');
+}
+	
+}
+public function financial_report()
+{
+$login_id=$this->session->userdata('id');
+if($login_id==null){redirect('User/');}
+else
+{
+$this->load->view('pallet_reports/financial_report');
+}
+	
+}
+
+public function add_profile()
+{
+$login_id=$this->session->userdata('id');
+if($login_id==null){redirect('User/');}
+else
+{
+$this->load->view('profile/add_profile');
+}	
+}
+public function import_equipment_csv()
+{
+	$login_id=$this->session->userdata('id');
+if($login_id==null){redirect('User/');}
+else
+{
+$this->load->view('import_data/import_equipment.php');
+}
+	
+}
+
+
+public function import_equipments_csv()
+{
+$login_id=$this->session->userdata('id');
+	if(isset($_POST['submit'])){
+if($_FILES['csv_data']['name']){
+
+$arrFileName = explode('.',$_FILES['csv_data']['name']);
+if($arrFileName[1] == 'csv'){
+$handle = fopen($_FILES['csv_data']['tmp_name'], "r");
+while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
+
+         $result=$this->User_Model->get_max_tp_accountsId();
+	     foreach($result as $row)
+	     {
+	     $metaid=$row->metaid;
+	     }
+	     $metaid=++$metaid;
+	    $insert_data =array('metaid'=>$metaid,
+	    	              // 'item' => $emapData[0],
+	    	               'equipment' => $emapData[2],
+	                       'equipment_supplier_tp'=>$emapData[3],
+	                       'equipment_report_name'=>$emapData[4],
+	                       'equipment_code'=>$emapData[5],
+	                       'equipment_internal_code'=>$emapData[6],
+	                       'equipment_book_stock'=>$emapData[7],
+	                       'equipment_lost_stock'=>$emapData[8],
+	                       'equipment_supplier_stock'=>$emapData[9],
+	                       'equipment_rent_unit_price'=>$emapData[10],
+	                       'active'=>$emapData[11],
+	                       'login_id'=>$login_id,
+	                       
+	                       'date_time'=>$emapData[13]);
+
+	    $result12=$this->User_Model->insert_tpaccounts($insert_data);
+
+
+
+
+        }
+
+	     	if($result12)
+		{
+			$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong> Added successfully</div>');
+			redirect('User/import_trading_partner_accounts');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','|| Error ||');
+			redirect('User/import_trading_partner_accounts');
+		}
+
+}
+        }
+}	
+}
+
+}
+
+
+
+
