@@ -18,7 +18,7 @@ thumbs.db
 */system/cache/!index.html
 /wsdls/
 *mailing/
-/application/config/*
+
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
@@ -30,5 +30,5 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
-/uploads/
+
 
