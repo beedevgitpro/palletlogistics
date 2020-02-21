@@ -173,9 +173,10 @@ foreach ($result as $row) {
 </div>
 </div>
 <div class="clearfix"></div>
-<div class="col-md-6" <?php if (@$z[2]==122){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-6" <?php  //if (@$z[2]==122){} else { echo 'style="display:none;"'; } ;?>>
+
 <div class="form-group clearfix">
-<label class="control-label " for="father">Type1111111111</label>
+<label class="control-label " for="father">Type</label>
 <div id="type"></div>
 
 
