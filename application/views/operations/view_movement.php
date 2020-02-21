@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -9,6 +10,35 @@
         <link rel="shortcut icon" href="<?php  base_url('assets/images/favicon.jpg'); ?>">
         <!-- App title -->
          <title>saas</title>
+         <style type="text/css">
+    /*a {
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }*/
+
+    #pagination a {
+      
+  color: black;
+  /*float: right;*/
+  
+  padding-left: 5px;
+      padding-right: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+#pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+#pagination a:hover:not(.active) {background-color: #ddd;}
+   
+    </style>
         <!-- DataTables -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -110,7 +140,7 @@ input[type="checkbox"]{
 <th data-breakpoints="xs sm md">Docket Number</th>
 <th data-breakpoints="xs sm md">Carrier</th>
 <th data-breakpoints="xs sm md">Rai/Corr</th>
-<th data-breakpoints="xs sm md">Type</th>
+<th data-breakpoints="xs sm md">Type Of Carrier</th>
 <th data-breakpoints="xs sm md">Orig.Movement</th>
 <th data-breakpoints="xs sm md">Export</th>
 <th data-breakpoints="xs sm md">Batch</th>
@@ -121,10 +151,13 @@ input[type="checkbox"]{
 <th data-breakpoints="xs sm md">Genrate Docket</th>
 </tr>
         </thead>
-        <tbody>
+        <tbody id="tbodys">
         </tbody>
       </table>   
+
+       
     </div> 
+    <div style='margin-top: 10px;text-align: right' id='pagination'></div>
   </div> <!-- container -->
 
                 </div> <!-- content -->
@@ -170,13 +203,27 @@ $result=$this->User_Model->fetch_equipment();
 ?> 
 <script type="text/javascript" language="javascript">
 $(document).ready(function(){
-  function load_data()
+
+   $('#pagination').on('click','a',function(e){
+       e.preventDefault(); 
+       var pageno = $(this).attr('data-ci-pagination-page');
+       load_data(pageno);
+     });
+
+  load_data(0);
+
+  function load_data(pagno)
   {
        $.ajax({
     //  url:"<?php echo base_url(); ?>livetable/load_data",
-        url:"<?php echo base_url('User/movement_one')?>",
-        dataType:"JSON",
-        success:function(data){
+        url:"<?php echo base_url('User/movement_one/')?>"+pagno,
+        //dataType:"JSON",
+        success:function(datas){
+         console.log( datas );
+           var posts = JSON.parse(datas);
+        var e = posts.links;
+        var data = posts.authors;
+        var co = posts.row;
         var html = '<tr>';
 		html += '<td></td>';
         html += '<td id="Date" contenteditable placeholder="Enter First Name"><?php echo date("d-m-Y")?></td>';
@@ -228,12 +275,14 @@ $(document).ready(function(){
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Reference" id="Reference'+data[count].metaid+'" contenteditable>'+data[count].reference+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Quantity" id="Quantity'+data[count].metaid+'" contenteditable>'+data[count].quantity+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Transfer" id="Transfer'+data[count].metaid+'" contenteditable>'+data[count].transfer+'</td>'; 
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Transaction"  contenteditable><select class="form-control transaction'+count+'" id="Transaction'+data[count].metaid+'"><?php foreach($transaction as $rowt) { ?> <option value="<?php echo $rowt->transaction; ?>"><?php echo  $rowt->transaction; ?></option> <?php } ?></select></td>';
+          // html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Transaction"  contenteditable><select class="form-control transaction'+count+'" id="Transaction'+data[count].metaid+'"><?php foreach($transaction as $rowt) { ?> <option value="<?php echo $rowt->transaction; ?>"><?php echo  $rowt->transaction; ?></option> <?php } ?></select></td>';
+          html += '<td data-row_id="'+data[count].metaid+'" data-column_name="Transaction" contenteditable><select class="form-control transaction'+count+'" id="Transaction'+data[count].metaid+'"><?php foreach($transaction as $rowt) { ?> <option value="<?php echo $rowt->transaction; ?>"><?php echo  $rowt->transaction; ?></option> <?php } ?></select></td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Effective_date" id="Effective_date'+data[count].metaid+'" contenteditable>'+data[count].effective_date+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Docket_Number" id="Docket_Number'+data[count].metaid+'" contenteditable>'+data[count].docket_number+'</td>';
 		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Carrier"  id="carrierlists'+data[count].metaid+'" contenteditable></td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Rai_Corr" id="Rai_Corr'+data[count].metaid+'" contenteditable>'+data[count].rai_corr+'</td>';
-          html += '<td data-row_id="'+data[count].metaid+'" data-column_name="type"  contenteditable> <select class="form-control type'+count+'" id="Type'+data[count].metaid+'"><?php foreach($type as $rowtt) {  ?> <option value="<?php echo $rowtt->type; ?>"><?php echo $rowtt->type; ?></option> <?php } ?></select></td>'; 
+          // html += '<td data-row_id="'+data[count].metaid+'" data-column_name="type"  contenteditable> <select class="form-control type'+count+'" id="Type'+data[count].metaid+'"><?php foreach($type as $rowtt) {  ?> <option value="<?php echo $rowtt->type; ?>"><?php echo $rowtt->type; ?></option> <?php } ?></select></td>'; 
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="type" contenteditable><select class="form-control type'+count+'" id="Type'+data[count].metaid+'"><?php foreach($type as $rowtt) {  ?> <option value="<?php echo $rowtt->type; ?>"><?php echo $rowtt->type; ?></option> <?php } ?></select></td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Orig_Movement" id="Orig_Movement'+data[count].metaid+'" contenteditable>'+data[count].orig_movemevt+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Export" id="Export'+data[count].metaid+'" contenteditable>'+data[count].export+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Batch" id="Batch'+data[count].metaid+'" contenteditable>'+data[count].batch+'</td>';
@@ -241,9 +290,11 @@ $(document).ready(function(){
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Notes" id="Notes'+data[count].metaid+'" contenteditable>'+data[count].notes+'</td>';
           html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
 		  html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>'
-		  html += '<td><button type="button" name="docket_tabel" id="'+data[count].metaid+'" class="btn btn-xs fa fa-file-pdf-o docket_tabel" aria-hidden="true"><i class="fa fa-file"></i></button></td></tr>';
+		  html += '<td><button type="button" name=" " id="'+data[count].metaid+'" class="btn btn-xs fa fa-file-pdf-o docket_tabel" aria-hidden="true"><i class="fa fa-file"></i></button></td></tr>';
           }
-        $('tbody').html(html);
+        //$('tbody').html(html);
+        $('#tbodys').html(html);
+        $('#pagination').html(e);
 	   for(var count = 0; count < data.length; count++)
         {	
             load_equipment(equiee[count],count,transaction[count],typ[count]);   
@@ -256,6 +307,7 @@ $(document).ready(function(){
         {
        $(".chb").prop('checked',false);
     $(this).prop('checked',true);
+    
       });
       }
     });
@@ -273,7 +325,7 @@ $(document).ready(function(){
     var Effective_date = $('#Effective_date').text();
     var Docket_Number = $('#Docket_Number').text();
     var Carrier = $('#Carrier').val();
-	alert(Carrier);
+	// alert(Carrier);
     var Rai_Corr = $('#Rai_Corr').text();
     var Type = $('#Type').val();   
     var Orig_Movement = $('#Orig_Movement').text();
@@ -332,6 +384,9 @@ $(document).ready(function(){
           data:{id:id,Dates:Dates, equipments:equipments, Sending_Tps:Sending_Tps,Receiving_Tps:Receiving_Tps,References:References, Quantitys:Quantitys, Transfers:Transfers,Transactions:Transactions,Effective_dates:Effective_dates, Docket_Numbers:Docket_Numbers,Carrier:Carrier, Rai_Corrs:Rai_Corrs,Types:Types,Orig_Movements:Orig_Movements, Exports:Exports, Batchs:Batchs,Bills:Bills,Notess:Notess},
       success:function(data)
       {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
         load_data();
       }
     })

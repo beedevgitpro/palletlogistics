@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -267,4 +267,4 @@ $('#detail').load('<?php echo base_url("User/getData")?>',{"sponsorId2":sponsorI
 }
 </script>
 </body>
-</html>
+</html> -->

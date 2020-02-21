@@ -14,6 +14,10 @@ class User extends CI_Controller {
 		$this->load->model('Admin_model');
 		$this->load->helper('url');
 		$this->load->library('parser');
+		$this->load->library("pagination");	 
+		ini_set('max_execution_time', 0);
+        ini_set("memory_limit", "1024M");
+		
 	}
 	public function index()
 	{
@@ -1135,11 +1139,35 @@ public function updated_sender_receicer()
 		if($login_id==null){redirect('User/');}
 		else
 		{
+			$data['url'] = $this->uri->segment(3);
 			$this->load->view('carrier/view_carrier',$data);
 		}
 	}
 	
-	
+
+
+public function load_carrier($rowno=0)
+{
+		  
+    $rowperpage = 15;
+    if($rowno != 0){
+      $rowno = ($rowno-1) * $rowperpage;
+    }
+
+    $allcount = $this->User_Model->get_count();
+    $users_record = $this->User_Model->get_authors($rowno,$rowperpage);
+    $configs['base_url'] = base_url()."User/view_carrier";
+    $configs['use_page_numbers'] = TRUE;
+    $configs['total_rows'] = $allcount;
+    $configs['per_page'] = $rowperpage;
+    $this->pagination->initialize($configs);
+    $data['links'] = $this->pagination->create_links();
+    $data['authors'] = $users_record;
+    $data['row'] = $rowno;
+    echo json_encode($data);
+}
+
+
 	
 	
 	public function get_data()
@@ -1433,13 +1461,14 @@ public function updated_sender_receicer()
 		}
 		public function update_carrers()
 		{
+			// echo "f";exit;
 			$date_time=date("Y-m-d H:i:s");
 	$loginid=$this->session->userdata('id');
 	$metaid=$this->input->post('id');
 	$carrier=$this->input->post('carrier');
     $active=$this->input->post('actives');
     $note=$this->input->post('notes');
-
+   
 	$data = array(
                        'metaid'=>$metaid,
 		               'carrier' =>$carrier,
@@ -1448,6 +1477,15 @@ public function updated_sender_receicer()
 	                   'login_id'=>$loginid,
 	                   'date_time'=>$date_time);
     $result=$this->User_Model->insert_carrier($data);
+     // echo $this->db->affected_rows();exit;
+
+    if( $this->db->affected_rows() == 1){
+    	echo 'success';
+    }
+    else{
+    	$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Error !! </strong>Something Went Wrong</div>');
+			redirect('User/view_carrier');
+    }
 		}
 		
 	public function updatesss_carrier()
@@ -1608,7 +1646,7 @@ public function updated_sender_receicer()
 if(isset($_POST['submit'])){
 if($_FILES['csv_data']['name']){
 $arrFileName = explode('.',$_FILES['csv_data']['name']);
-if($arrFileName[1] == 'csv'){
+if($arrFileName[1] == 'csv' || $arrFileName[1] == 'xlsx'){
 $handle = fopen($_FILES['csv_data']['tmp_name'], "r");
 $skip_line = true;//rest of your code
 while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -1634,7 +1672,7 @@ while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
 	   $res= $this->User_Model->insert_stocktake($insert_data);
         }
     if($res){
-	        $this->session->set_flashdata('message','Stocktakes Added Successfully!');
+	        $this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong>Stocktakes Added Successfully!</div>');
 			redirect('User/import_stocktakes');
 	    }else{
 	        $this->session->set_flashdata('error','Not Added!');
@@ -1642,6 +1680,10 @@ while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
 	    }
 
 
+}
+else{
+	$this->session->set_flashdata('message','<div class="alert alert-danger"><strong>Error !! </strong>Only Csv or Xslx Files are allowed</div>');
+			redirect('User/import_stocktakes');
 }
         }
 }
@@ -1890,6 +1932,7 @@ public function insert_movements()
 	'dockets'=>$dockets,
 	'Notes'=>$notes,
     'login_id'=>$loginid);
+
 	$res= $this->User_Model->insert_movements($data);
 	    if($res){
 	        $this->session->set_flashdata('message','movements Added Successfully!');
@@ -2451,6 +2494,7 @@ $data['login_id']=$this->session->userdata('id');
 if($login_id==null){redirect('User/');}
 else
 {
+	
 $this->load->view('profile/add_profile',$data);
 }	
 }
@@ -2473,7 +2517,7 @@ $login_id=$this->session->userdata('id');
 if($_FILES['csv_data']['name']){
 
 $arrFileName = explode('.',$_FILES['csv_data']['name']);
-if($arrFileName[1] == 'csv'){
+if($arrFileName[1] == 'csv' || $arrFileName[1] == 'xlsx'){
 $handle = fopen($_FILES['csv_data']['tmp_name'], "r");
 $skip_line = true;//rest of your code
 while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -2513,10 +2557,14 @@ while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
 		}
 		else
 		{
-			$this->session->set_flashdata('message','|| Error ||');
+			$this->session->set_flashdata('error','|| Error ||');
 			redirect('User/import_equipment_csv');
 		}
 
+}
+else{
+	$this->session->set_flashdata('message','<div class="alert alert-danger"><strong>Error !! </strong>Only Csv or Xslx Files are allowed</div>');
+			redirect('User/import_equipment_csv');
 }
         }
 }	
@@ -2538,7 +2586,7 @@ $login_id=$this->session->userdata('id');
 if($_FILES['csv_data']['name']){
 
 $arrFileName = explode('.',$_FILES['csv_data']['name']);
-if($arrFileName[1] == 'csv'){
+if($arrFileName[1] == 'csv' || $arrFileName[1] == 'xlsx' ){
 $handle = fopen($_FILES['csv_data']['tmp_name'], "r");
 while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
 $a=rand(04540, 98529);
@@ -2613,6 +2661,10 @@ $pass=rand(1111,9999);
 		}
 
 }
+else{
+	$this->session->set_flashdata('error','Only Css & Xlsx files are allowed');
+			redirect('User/import_csv_for_trading_partner');
+}
         }
 }		
 }
@@ -2637,7 +2689,7 @@ $login_id=$this->session->userdata('id');
 if(isset($_POST['submit'])){
 if($_FILES['csv_data']['name']){
 $arrFileName = explode('.',$_FILES['csv_data']['name']);
-if($arrFileName[1] == 'csv'){
+if($arrFileName[1] == 'csv' || $arrFileName[1] == 'xlsx' ){
 $handle = fopen($_FILES['csv_data']['tmp_name'], "r");
 $skip_line = true;//rest of your code
 while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -2702,6 +2754,10 @@ while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
 			redirect('User/imports_csv_movements');
 		}
 }
+else{
+	$this->session->set_flashdata('message','<div class="alert alert-danger"><strong>Error !! </strong>Only Csv or Xslx Files are allowed</div>');
+			redirect('User/imports_csv_movements');
+}
 }
 	}
 }
@@ -2713,10 +2769,12 @@ public function trading_partner_accounts_csv()
 if($_FILES['csv_data']['name']){
 
 $arrFileName = explode('.',$_FILES['csv_data']['name']);
-if($arrFileName[1] == 'csv'){
+// print_r($arrFileName);exit;
+if($arrFileName[1] == 'csv' || $arrFileName[1] == 'xlsx' ){
 $handle = fopen($_FILES['csv_data']['tmp_name'], "r");
 $skip_line = true;
 while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
+	print_r( $emapData);exit;
            if($skip_line) { $skip_line = false; continue; }
          $result=$this->User_Model->get_max_tp_accountsId();
 	     foreach($result as $row)
@@ -2734,7 +2792,7 @@ while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
 	                       'tpa_tn_delay_rule'=>$emapData[5],
 	                       'tn_delay_type'=>$emapData[6],
 	                       'tpa_allow_tf'=>$emapData[7],
-	                       'tpa_tf_delay_type'=>$emapData[8],
+	                       // 'tpa_tf_delay_type'=>$emapData[8],
 	                       'tpa_tf_delay_days'=>$emapData[9],
 	                       'tpa_tf_delay_rule'=>$emapData[10],
 	                       'tpa_redeem_exchange'=>$emapData[11],
@@ -2769,6 +2827,10 @@ while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
 			redirect('User/import_trading_partner_accounts');
 		}
 
+}
+else{
+	$this->session->set_flashdata('message','<div class="alert alert-danger"><strong>Error !! </strong> Only Css & Xlxs files are allow</div>');
+			redirect('User/import_trading_partner_accounts');
 }
         }
 }
@@ -3207,12 +3269,28 @@ public function view_bill()
 		}
 }
 
-public function load_bills()
+public function load_bills( $rowno = 0)
 {
-	    $this->db->order_by('bills_id', 'DESC');
-		$query = $this->db->get('bills_view');
-		$datas=$query->result_array();
-		echo json_encode($datas); 
+	 //    $this->db->order_by('bills_id', 'DESC');
+		// $query = $this->db->get('bills_view');
+		// $datas=$query->result_array();
+		// echo json_encode($datas); 
+	   $rowperpage = 10;
+    if($rowno != 0){
+      $rowno = ($rowno-1) * $rowperpage;
+    }
+
+    $allcount = $this->User_Model->get_bill();
+    $users_record = $this->User_Model->get_bills($rowno,$rowperpage);
+    $configs['base_url'] = base_url()."User/view_carrier";
+    $configs['use_page_numbers'] = TRUE;
+    $configs['total_rows'] = $allcount;
+    $configs['per_page'] = $rowperpage;
+    $this->pagination->initialize($configs);
+    $data['links'] = $this->pagination->create_links();
+    $data['authors'] = $users_record;
+    $data['row'] = $rowno;
+    echo json_encode($data);
 		
 }
 
@@ -3297,22 +3375,24 @@ $login_id=$this->session->userdata('id');
 if($_FILES['csv_data']['name']){
 
 $arrFileName = explode('.',$_FILES['csv_data']['name']);
-if($arrFileName[1] == 'csv'){
+if($arrFileName[1] == 'csv' || $arrFileName[1] == 'xlsx' ){
 $handle = fopen($_FILES['csv_data']['tmp_name'], "r");
 $skip_line = true;//rest of your code
 while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
 
+
          if($skip_line) { $skip_line = false; continue;}
          $result=$this->User_Model->get_max_carrierid();
-         print_r($result);
+         
 	     foreach($result as $row)
 	     {
 	     $metaid=$row->metaid;
 	     }
 	     $metaid=++$metaid;
 	    $insert_data =array('metaid'=>$metaid,
-	    	               'carrier' => $emapData[0],
+	    	               'carrier' => $emapData[2],
 	                       'login_id'=>$login_id);
+	    // print_r($insert_data);exit;
 						   if($emapData[0]=='')
 						   {
 							   break;
@@ -3332,6 +3412,10 @@ while (($emapData = fgetcsv($handle, 1000, ",")) !== FALSE) {
 			redirect('User/carrier_controller');
 		}
 
+}
+else{
+	$this->session->set_flashdata('message','<div class="alert alert-danger"><strong>Error !! </strong>Only Css & Xlsx Files allowed </div>');
+			redirect('User/carrier_controller');
 }
         }
 }	
@@ -3510,6 +3594,12 @@ public function update_movements()
     'notes'=>$_POST['Notess'],
     'login_id'=>$loginid);
 	$res= $this->User_Model->insert_movements($data);
+	if( $this->db->affected_rows() == 1 ){
+		echo "success";
+	}
+	else{
+
+	}
 }
 
 public function member_datass()
@@ -3803,21 +3893,26 @@ print_r(array_merge($compan,$projec));
 
 
 
-public function movement_one()
+public function movement_one( $rowno=0 )
 {
-	    $this->db->order_by('movements_id', 'DESC');
-		$query = $this->db->get('movements_view');
-		$datas=$query->result_array();
-		echo json_encode($datas); 
+	 $rowperpage = 10;
+    if($rowno != 0){
+      $rowno = ($rowno-1) * $rowperpage;
+    }
+
+    $allcount = $this->User_Model->get_counts();
+    $users_record = $this->User_Model->get_authorss($rowno,$rowperpage);
+    $configs['base_url'] = base_url()."User/view_carrier";
+    $configs['use_page_numbers'] = TRUE;
+    $configs['total_rows'] = $allcount;
+    $configs['per_page'] = $rowperpage;
+    $this->pagination->initialize($configs);
+    $data['links'] = $this->pagination->create_links();
+    $data['authors'] = $users_record;
+    $data['row'] = $rowno;
+    echo json_encode($data);
 }
 
-public function load_carrier()
-{
-        $this->db->order_by('carrier_id', 'DESC');
-		$query = $this->db->get('carrier_view');
-		$datas=$query->result_array();
-		echo json_encode($datas);	
-}
 
 public function get_stocktake_json()
 {

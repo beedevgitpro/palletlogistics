@@ -122,7 +122,7 @@ echo $this->session->flashdata('msg');
 
 <div class="col-md-4">
 <div class="form-group clearfix">
-<label class="control-label " for="father">Csv/Xsl</label>
+<label class="control-label " for="father">Csv/Xlsx</label>
 
 <input type="file" class="required form-control"  name="csv_data" placeholder="Reported Variance">
 

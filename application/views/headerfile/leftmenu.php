@@ -46,7 +46,7 @@ $username=$this->session->userdata('username');
 								foreach($result1 as $row1)
 								{
 								?>
-                                    <li><a href="<?php echo $row1->menuLink; ?>"><?php echo $row1->menuName; ?></a></li>
+                                    <li><a href="<?php echo base_url().'User/'.$row1->menuLink; ?>"><?php echo $row1->menuName; ?></a></li>
 									<?php
 									}
 									?>

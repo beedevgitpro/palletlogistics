@@ -72,7 +72,7 @@ height: 30px;
 <div class="row">
 <div class="col-xs-12">
 <div class="page-title-box">
-<h4 class="page-title">Pallet Logistics</h4><?php echo $this->session->flashdata('message'); ?>
+<h4 class="page-title">Pallet Logistics</h4><?php //echo $this->session->flashdata('message'); ?>
 <ol class="breadcrumb p-0 m-0">
 <input type="submit"   class="btn btn-danger"  onclick="myFunctionq()" value="Scroll down" /> 
 <li>
@@ -89,6 +89,8 @@ height: 30px;
 </div>
 </div>
 <!-- end row -->
+<?php if( $this->session->flashdata('message') ){ echo '<div class="alert alert-success"><strong>Success !! </strong>'.$this->session->flashdata('message').'</div>';} ?>
+<?php if( $this->session->flashdata('error') ){ echo '<div class="alert alert-danger"><strong>Error !! </strong>'.$this->session->flashdata('error').'</div>';} ?>
 <?php
 //error_reporting(0);
 $form_id=4;
@@ -128,19 +130,19 @@ foreach($fields_id as $row)
 <section>
 <div class="col-md-6" <?php if (@$z[0]==112){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="first_name">Sender/Receiver Name *</label>
+<label class="control-label " for="first_name">Sender/Receiver Name <i style="color:red">*</i></label>
 
-<input type="text" class="form-control" id="first_name" name="sender_receicer" placeholder="Sender Name">
+<input type="text" class="form-control" id="first_name" name="sender_receicer" placeholder="Sender Name" required="">
 
 </div>
 </div>
 
 
-<div class="col-md-6" <?php if (@$z[1]==113){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-6" <?php //if (@$z[1]==113){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
 <label class="control-label " for="last_name">Trading Partner</label>
 
-<select name="trading_partner_id" class="form-control valid" aria-required="true" aria-invalid="false">
+<select name="trading_partner_id" class="form-control valid" aria-required="true" aria-invalid="false" >
 <option>--- Select Trading Partner---</option>
 <?php $result=$this->User_Model->fetch_tp_send_recieve();
 foreach ($result as $row) {
@@ -157,7 +159,7 @@ foreach ($result as $row) {
 </div>
 </div>
 
-<div class="col-md-6" <?php if (@$z[2]==114){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-6" <?php //if (@$z[2]==114){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
 <label class="control-label " for="father">Phone Number</label>
 
@@ -169,7 +171,7 @@ foreach ($result as $row) {
 <div class="form-group clearfix">
 <label class="control-label " for="father">Mobile Number</label>
 
-<input type="text" class="form-control" id="father" name="mobile_number" placeholder="Mobile Number">
+<input type="text" class="form-control" id="father" name="mobile_number" placeholder="Mobile Number" >
 
 </div>
 </div>
@@ -177,13 +179,13 @@ foreach ($result as $row) {
 <div class="form-group clearfix">
 <label class="control-label " for="father">Email Id</label>
 
-<input type="email" class="form-control" id="father" name="email_id" placeholder="Email Id">
+<input type="email" class="form-control" id="father" name="email_id" placeholder="Email Id" >
 
 </div>
 </div>
 <div class="clearfix"></div>
 
-<div class="col-md-6" <?php if (@$z[5]==117){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-6" <?php //if (@$z[5]==117){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix checkboxcontainer">
 <input type="checkbox" name="active" class="form-control" value='1'>
 <label class="control-label " for="address">Active</label>
@@ -191,7 +193,7 @@ foreach ($result as $row) {
 </div>
 <div class="clearfix"></div>
 
-<div class="col-md-6" <?php if (@$z[6]==118){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-6" <?php //if (@$z[6]==118){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix checkboxcontainer">
 
 <input type="checkbox" name="default" class="form-control" value='1'>     
@@ -200,11 +202,11 @@ foreach ($result as $row) {
 </div>
 <div class="clearfix"></div>
 
-<div class="col-md-12" <?php if (@$z[7]==119){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-12" <?php ///if (@$z[7]==119){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="address">Notes *</label>
+<label class="control-label " for="address">Notes <i style="color:red">*</i></label>
 
-<textarea name="note" class="form-control">
+<textarea name="note" class="form-control" required>
 </textarea>
 </div>
 </div>

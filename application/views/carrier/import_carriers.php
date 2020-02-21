@@ -246,7 +246,7 @@
 
                                                             <div class="form-group clearfix">
 
-                                                                <label class="control-label " for="father">Csv/Xsl</label>
+                                                                <label class="control-label " for="father">Csv/Xlsx</label>
 
 
 

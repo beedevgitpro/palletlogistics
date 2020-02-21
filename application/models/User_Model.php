@@ -144,6 +144,38 @@ class User_Model extends CI_Model
 	    return $result->result();
 	    
 	}
+
+
+    public function get_count() {
+        return $this->db->count_all('carrier_view');
+    }
+public function get_counts() {
+        return $this->db->count_all('movements_view');
+    }
+    public function get_authors($rowno,$rowperpage) {
+    	
+        $this->db->limit($rowperpage, $rowno);
+        $query = $this->db->get('carrier_view');
+        return $query->result();
+    }
+     public function get_authorss($rowno,$rowperpage) {
+    	
+        $this->db->limit($rowperpage, $rowno);
+        $this->db->order_by('movements_id', 'DESC');
+        $query = $this->db->get('movements_view');
+        return $query->result();
+    }
+    public function get_bill() {
+        return $this->db->count_all('bills_view');
+    }
+    public function get_bills($rowno,$rowperpage) {
+    	
+        $this->db->limit($rowperpage, $rowno);
+        $this->db->order_by('bills_id', 'DESC');
+        $query = $this->db->get('bills_view');
+        return $query->result();
+    }
+
 	public function insert_role($data){
 	    $res=$this->db->insert('role',$data);
 	    return $res;
@@ -589,16 +621,29 @@ public function get_max_tp_equipment()
 	}
 	public function get_equipments()
 	{
-		$this->db->select('*');
-	$this->db->from(' equipment_view');
+	// 	$this->db->select('*');
+	// $this->db->from(' equipment_view');
 	
-	$query=$this->db->get();
+	// $query=$this->db->get();
+		$query = $this->db->query("select *,(CASE 
+        WHEN  active = '1' THEN 'Active'  ELSE 'Inactive' end
+        ) as active from equipment_view order by equipment_id desc");
     return $query->result();
 	}
 	public function insert_equipment($data)
 	{
 		$result=$this->db->insert('equipment',$data);
-		return $result;
+		 return $result;
+		
+
+	}
+	public function updates_equipment($data,$id)
+	{
+		
+		 $this->db->where('metaid', $id);
+		 $result = $this->db->update('equipment', $data);
+		 return $result;
+		
 
 	}
 	public function get_max_equipmentid()
@@ -1383,6 +1428,7 @@ return $data['transaction'];
 	public function get_form_fieldsddd($form_id,$member_login_id)
 	{
 	$sql="SELECT * FROM `user_field_rights` where field_rights_id=(select max(field_rights_id) from user_field_rights WHERE member_login_id=$member_login_id and form_id=$form_id)";
+	// echo $sql;exit;
 	 $query=$this->db->query($sql);
      $data=$query->row_array();
     return $data['field_id'];	

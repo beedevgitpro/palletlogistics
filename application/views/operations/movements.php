@@ -203,7 +203,7 @@ font-size: 14px;
 <div class="row">
 <div class="col-xs-12">
 <div class="page-title-box">
-<h4 class="page-title">Pallet Logistics</h4><?php echo $this->session->flashdata('message'); ?>
+<h4 class="page-title">Pallet Logistics</h4>
 <ol class="breadcrumb p-0 m-0">
 <input type="submit"   class="btn btn-danger"  onclick="myFunctionq()" value="Scroll down" /> 
 <li>
@@ -214,11 +214,14 @@ font-size: 14px;
 </li>
 
 </ol>
+
 <div class="clearfix"></div>
 </div>
 </div>
 </div>
 <!-- end row -->
+<?php if( $this->session->flashdata('message') ){ echo '<div class="alert alert-success"><strong>Success !! </strong>'.$this->session->flashdata('message').'</div>';} ?>
+<?php if( $this->session->flashdata('error') ){ echo '<div class="alert alert-danger"><strong>Error !! </strong>'.$this->session->flashdata('error').'</div>';} ?>
 <?php
 $form_id=6;
 
@@ -252,9 +255,9 @@ foreach($fields_id as $row)
 
 <section>
 
-<div class="col-md-6" <?php if (@$z[0]==1){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-6" >
 <div class="form-group clearfix datecontainer">
-<label class="control-label " for="doj">Delivery date *</label>
+<label class="control-label " for="doj">Delivery date <i style="color:red">*</i></label>
 
 <input type="text" data-inputmask="'alias': 'date'" data-date="" data-date-format="DD-M-YYYY" value="<?php echo date('d-m-Y');?>" class="required form-control ddmmyy"  name="mov_date" placeholder="Date"  id="ids">
 
@@ -267,7 +270,7 @@ foreach($fields_id as $row)
 
 <div class="col-md-6" <?php if (@$z[1]==2){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="first_name">Equipment*</label>
+<label class="control-label " for="first_name">Equipment<i style="color:red">*</i></label>
 
 <input class="form-control" name="equipment" id="demo-5"  placeholder="Select Equipment" />
 
@@ -278,7 +281,7 @@ foreach($fields_id as $row)
 
 <div class="col-md-6" <?php if (@$z[2]==3){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="first_name">Sending Tp*</label>
+<label class="control-label " for="first_name">Sending Tp<i style="color:red">*</i></label>
 <select name="sending_tp" id="sendind_tp"   class="required form-control chosen" onchange="myFunctioness(this.value),myFunctionesssssss(this.value),docketnumber(this.value)">
 <option value="" hidden>Select Sending Tp</option>
 <?php 
@@ -286,7 +289,7 @@ $result=$this->User_Model->fetch_trading_partner_sender();
 foreach($result as $row)
 {
 ?>
-<option value="<?php echo $row->memberId;?>"><?php echo $row->tp_name;?></option>
+<option value="<?php echo $row->tp_name;?>"><?php echo $row->tp_name;?></option>
 <?php } ?>
 </select>
 
@@ -321,7 +324,7 @@ foreach ($result as $row) {
 
 <div class="col-md-6" <?php if (@$z[4]==5){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="first_name">Receiving Tp*</label>
+<label class="control-label " for="first_name">Receiving Tp<i style="color:red">*</i></label>
 
 <select name="receiving_tp" id="rcv_tp" class="required form-control valid chosen"  onchange="myFunctionesssss(this.value),myFunctionesssssss(this.value)" aria-required="true" aria-invalid="false">
 <option value="" hidden>Select Receiving Tp</option>
@@ -331,7 +334,7 @@ $result=$this->User_Model->fetch_trading_partner_sender();
 foreach($result as $row)
 {
 ?>
-<option value="<?php echo $row->memberId;?>"><?php echo $row->tp_name;?></option>
+<option value="<?php echo $row->tp_name;?>"><?php echo $row->tp_name;?></option>
 <?php } ?>
 
 
@@ -365,7 +368,7 @@ foreach ($result as $row) {
 </div>
 
 <div class="clearfix"></div>
-<div class="col-md-6" <?php if (@$z[21]==22){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-6" <?php if (@$z[22]==23){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
 <label class="control-label " for="father">Docket Number</label>
 
@@ -398,6 +401,8 @@ $(".chosen").chosen();
 
 </div>
 </div>
+<div class="clearfix"></div>
+
 <div class="col-md-6" <?php if (@$z[8]==9){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
 <label class="control-label " for="father">Con Note</label>
@@ -507,7 +512,7 @@ $(".chosen").chosen();
 
 <div class="clearfix"></div>
 
-<div class="col-md-4" <?php if (@$z[15]==16){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-4" <?php //if (@$z[15]==16){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix checkboxcontainer">
 
 
@@ -544,9 +549,9 @@ $(".chosen").chosen();
 </div>
 </div>
 
-<div class="col-md-6" <?php if (@$z[19]==20){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-6" <?php if (@$z[13]==14){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="first_name">Transaction*</label>
+<label class="control-label " for="first_name">Transaction<i style="color:red">*</i></label>
 
 <select name="transaction" id="transferof" class="required form-control valid" onchange="chechk_send_reciever(this.value)" aria-required="true" aria-invalid="false">
 <option hidden>Select Transaction</option>
@@ -554,7 +559,7 @@ $(".chosen").chosen();
 foreach ($result as $row) {
 ?>
 
-<option value="<?php echo $row->transaction_id;?>"><?php echo $row->transaction; ?></option>
+<option value="<?php echo $row->transaction;?>"><?php echo $row->transaction; ?></option>
 <?php
 }
 ?>
@@ -602,7 +607,7 @@ foreach ($result as $row) {
 </div>
 <div class="col-md-6" <?php if (@$z[24]==25){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="first_name">Type*</label>
+<label class="control-label " for="first_name">Type<i style="color:red">*</i></label>
 
 <select name="type" class="required form-control valid" aria-required="true" aria-invalid="false">
 <option hidden>Select Type</option>
@@ -610,7 +615,7 @@ foreach ($result as $row) {
 foreach ($result as $row) {
 ?>
 
-<option value="<?php echo $row->type_id;?>"><?php echo $row->type; ?></option>
+<option value="<?php echo $row->type;?>"><?php echo $row->type; ?></option>
 <?php
 }
 ?>
@@ -656,7 +661,7 @@ foreach ($result as $row) {
 
 <div class="col-md-6" <?php if (@$z[28]==29){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="first_name">Batch*</label>
+<label class="control-label " for="first_name">Batch<i style="color:red">*</i></label>
 <?php $result=$this->User_Model->fetch_trading_partner_senderdd(); ?>
 <select name="batch" class="required form-control"> 
 <?php
@@ -682,7 +687,7 @@ $date_times = $createDate->format('d-m-Y');
 </div>
 <div class="col-md-6" style="display:none">
 <div class="form-group clearfix">
-<label class="control-label " for="first_name">Bill*</label>
+<label class="control-label " for="first_name">Bill<i style="color:red">*</i></label>
 
 <input class="form-control" name="bill" id="demo-14"  placeholder="Select Equipment" />
 
@@ -1164,6 +1169,7 @@ $i=1;
 $result=$this->User_Model->fetch_equipment();
 foreach($result as $row)
 {
+
 $ii=$row->equipment;
 $remove[] = "'";
 $remove[] = '"';
@@ -1175,7 +1181,7 @@ $supplier=$row->equipment_supplier_tp;
 
 $memberId=$row->metaid;
 
-echo"{value:'$memberId',text:'$tp_name',type:'$supplier'},"; 
+echo"{value:'$tp_name',text:'$tp_name',type:'$supplier'},"; 
 $i++; } ?>
 
 ],

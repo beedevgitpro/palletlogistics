@@ -16,7 +16,7 @@ $result=$this->User_Model->get_equipments();
                                              'supplier_stock'   => $row->equipment_supplier_stock,
                                              
                                              'equipment_rent_unit_price'   => $row->equipment_rent_unit_price,
-                                             'Active'   => $row->active);
+                                             'Status'   => $row->active);
 											
 										}
 										header("Content-Type: application/json");

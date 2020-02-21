@@ -6,6 +6,7 @@
 		
 
 	$loginid=$this->session->userdata('id');
+	$id = $_POST['id'];
 	$data = array('metaid'=>$_POST['id'],
 	'equipment'=>$_POST['equipment'],
 	'equipment_supplier_tp'=>$_POST['supplier_tp'],
@@ -16,11 +17,12 @@
     'equipment_lost_stock'=>$_POST['equipment_lost_stock'],
     'equipment_supplier_stock'=>$_POST['equipment_supplier_stock'],
     'login_id'=>$loginid);
-	$res= $this->User_Model->insert_equipment($data);
+	$res= $this->User_Model->updates_equipment($data,$id);
 		}
 	
 	if($_SERVER['REQUEST_METHOD'] == "GET")
 {
+	
 		$data=array('show_hide'=>1);
      $this->db->where('metaid',$_GET["id"]);
      $res=$this->db->update('equipment',$data);

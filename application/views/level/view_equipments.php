@@ -153,12 +153,14 @@
        });
       },
       updateItem: function(item){
+
        return $.ajax({
-		data: { myData: 'sss' },
+
         type: "POST",
         url: "<?php echo base_url('User/equipment_two')?>",
         data: item
        });
+
       },
       deleteItem: function(item){
        return $.ajax({
@@ -250,6 +252,12 @@
       },
 	  	        {
        name: "equipment_supplier_stock", 
+    type: "text", 
+    width: 60 
+   
+      },
+       {
+       name: "Status", 
     type: "text", 
     width: 60 
    

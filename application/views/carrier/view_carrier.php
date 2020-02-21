@@ -10,7 +10,35 @@
         <!-- App title -->
          <title>saas</title>
         <!-- DataTables -->
-    
+    <style type="text/css">
+    /*a {
+      padding-left: 5px;
+      padding-right: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }*/
+
+    #pagination a {
+      
+  color: black;
+  /*float: right;*/
+  
+  padding-left: 5px;
+      padding-right: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+#pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+#pagination a:hover:not(.active) {background-color: #ddd;}
+   
+    </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -82,6 +110,7 @@ th.scaffolding {
                       <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
+                                  <input type="hidden" class="urlid" value="<?=$url?>">
    <div class="table-responsive">
       <br />
       <table id="_datatable-buttons" class="footable table table-striped  table-colored table-info footable-info table-bordered m-0" data-toggle-column="first" data-paging="true">
@@ -93,9 +122,12 @@ th.scaffolding {
 <th data-breakpoints="xs sm md">Update</th>
 </tr>
         </thead>
-        <tbody>
+        <tbody id="tbodys">
+
         </tbody>
-      </table>   
+      </table>  
+      <!-- <p class='link'></p>  -->
+      <div style='margin-top: 10px;text-align: right' id='pagination'></div>
     </div> 
   </div> <!-- container -->
 
@@ -128,35 +160,65 @@ th.scaffolding {
 <script type="text/javascript" language="javascript" >
 $(document).ready(function(){
   
-  function load_data()
+  $('#pagination').on('click','a',function(e){
+       e.preventDefault(); 
+       var pageno = $(this).attr('data-ci-pagination-page');
+       load_data(pageno);
+     });
+
+  load_data(0);
+
+  function load_data( pagno )
   {
+    
     $.ajax({
-    //  url:"<?php echo base_url(); ?>livetable/load_data",
-      url:"<?php echo base_url('User/load_carrier')?>",
-      dataType:"JSON",
-      success:function(data){
+      // url:"<?php //echo base_url('User/load_carrier?urlid=')?>"+ids,
+      url: '<?=base_url()?>User/load_carrier/'+pagno,
+      // dataType:"JSON",
+
+      success:function(datas){
+        // console.log( datas);
+        var posts = JSON.parse(datas);
+        var e = posts.links;
+        var data = posts.authors;
+        var co = posts.row;
+        // alert( co );
+        
         var html = '<tr>';
         html += '<td id="carrier" contenteditable></td>';
         html += '<td id="actives" contenteditable></td>';
         html += '<td id="notes" contenteditable></td>';
         html += '<td><button type="button" name="btn_add" id="btn_add" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span></button></td></tr>';
+        
         for(var count = 0; count < data.length; count++)
         {
+
           html += '<tr>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="carrier" id="carrier'+data[count].metaid+'" contenteditable>'+data[count].carrier+'</td>';
+           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="carrier" id="carrier'+data[count].metaid+'" contenteditable>'+data[count].carrier+'</td>';
         
 		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="actives" id="actives'+data[count].metaid+'" contenteditable>'+data[count].active+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="notes" id="notes'+data[count].metaid+'" contenteditable>'+data[count].notes+'</td>';
 
           html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
 		  html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
-        }
-        $('tbody').html(html);
-      }
+
+       
+        }   
+        $('#tbodys').html(html);
+        $('#pagination').html(e);
+        
+
+      },
+
+      
     });
+
+
   }
 
+  
   load_data();
+
 
   $(document).on('click', '#btn_add', function(){
     var carrier = $('#carrier').text();
@@ -190,7 +252,12 @@ $(document).ready(function(){
           data:{id:id,carrier:carrier, actives:actives, notes:notes},
       success:function(data)
       {
+        console.log(data);
+        
         load_data();
+        if( data == 'success' ){
+          alert('Data Updated Successfully');
+        }
       }
     })
   });
