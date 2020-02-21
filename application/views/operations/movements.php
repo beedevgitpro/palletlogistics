@@ -22,7 +22,7 @@
 <link href="<?php echo base_url('assets/css/menu.css')?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/css/responsive.css')?>" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url('assets/plugins2/switchery/switchery.min.css')?>">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> -->
 
 <link href="https://www.jqueryscript.net/demo/Multi-column-Dropdown-Plugin-jQuery-Inputpicker/src/jquery.inputpicker.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
