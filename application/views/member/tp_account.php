@@ -141,11 +141,11 @@ echo"<option value='$row->type_id'>$row->supplier_name</option>";
 
 </div>
 </div>
-<div class="col-md-6" <?php if (@$z[2]==59){} else { echo 'style="display:none;"'; } ;?>>
+<div class="col-md-6" <?php //if (@$z[2]==59){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="last_name">Account Number</label>
+<label class="control-label " for="last_name">Chep/Loscam  Account Number</label>
 
-<input type="text" class="form-control"  name="account_number" placeholder="Account Number">
+<input type="text" class="form-control"  name="account_number" placeholder="Chep/Loscam Account Number">
 
 </div>
 </div>

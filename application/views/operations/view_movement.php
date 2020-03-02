@@ -117,7 +117,8 @@ input[type="checkbox"]{
             <div class="content-page">
                 <!-- Start content -->
                 <div class="content">
-                       <div class="container">  
+                       <div class="container">
+                         
                      <br />
                       <div class="row">
                             <div class="col-sm-12">
@@ -522,7 +523,7 @@ $("#receiver_tps"+count).load('<?php echo base_url("User/receiver_tps")?>',{"oth
 $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"otherss":otherss,"carri":carri});
 }
 </script>
-<script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
+ <script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js')?>"></script>
 <script src="<?php echo base_url('assets/js/detect.js')?>"></script>
 <script src="<?php echo base_url('assets/js/fastclick.js')?>"></script>
@@ -530,7 +531,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
 <script src="<?php echo base_url('assets/js/waves.js')?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.slimscroll.js')?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.scrollTo.min.js')?>"></script>
-<script src="<?php echo base_url('assets/plugins2/switchery/switchery.min.js')?>"></script>
+<script src="<?php echo base_url('assets/plugins2/switchery/switchery.min.js')?>"></script> 
 
 <script src="<?php echo base_url('assets/plugins2/datatables/jquery.dataTables.min.js')?>"></script>
 <script src="<?php echo base_url('assets/plugins2/datatables/dataTables.bootstrap.js')?>"></script>
@@ -552,8 +553,8 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
 <!-- init -->
 <script src="<?php echo base_url('assets/pages/jquery.datatables.init.js')?>"></script>
 <script src="<?php echo base_url('assets/plugins2/footable/footable.min.js')?>"></script>
-<!-- App js -->
-<script src="<?php echo base_url('assets/js/jquery.core.js')?>"></script>
-<script src="<?php echo base_url('assets/js/jquery.app.js')?>"></script>
+<!-- App js-->
+ <script src="<?php echo base_url('assets/js/jquery.core.js')?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.app.js')?>"></script> 
     </body>
 </html>
