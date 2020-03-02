@@ -2044,8 +2044,7 @@ public function updated_movements()
 
 }
 
-public function view_movement()
-{
+public function view_movement(){
 $login_id=$this->session->userdata('id');
 $data['login_id']=$this->session->userdata('id');
 if($login_id==null){redirect('User/');}
@@ -2349,7 +2348,7 @@ public function abc()
 	 $y='';
  }
 	?>
-	<select class="form-control trading_partner_name<?php echo$x;?>" id="trading_partner_name<?php echo$x;?>"><?php foreach($sender as $row) {
+	<select class="form-control table_drop1 trading_partner_name<?php echo$x;?>" id="trading_partner_name<?php echo$x;?>"><?php foreach($sender as $row) {
 		if($y==$row->tp_name)
 		{
 			$select="selected";
@@ -2372,7 +2371,7 @@ public function receiver_tps()
 	 $x='';
 	 $y='';}
 	?>
-	<select class="form-control Receiving_Tp<?php echo$x;?>" id="Receiving_Tp<?php echo$x;?>"><?php foreach($sender as $row) {
+	<select class=" form-control table_drop2 Receiving_Tp<?php echo$x;?>" id="Receiving_Tp<?php echo$x;?>"><?php foreach($sender as $row) {
 		if($y==$row->tp_name)
 		{
 			$select="selected";
@@ -2380,7 +2379,7 @@ public function receiver_tps()
 		else{
 		$select='';	
 		}
-		?> <option value="<?php echo $row->tp_name; ?>" <?php echo $select; ?>><?php echo $row->tp_name; ?></option> <?php 
+		?> <option  value="<?php echo $row->tp_name; ?>" <?php echo $select; ?>><?php echo $row->tp_name; ?></option> <?php 
 		} ?></select>
 	<?php
 }
@@ -2437,7 +2436,7 @@ public function carrierlists()
 	 $x='';
 	 $y='';}
 	?>
-	<select class="form-control" id="Carrier<?php echo$x?>"><?php foreach($carrier as $sha) {
+	<select class=" carrier form-control" id="Carrier<?php echo$x?>"><?php foreach($carrier as $sha) {
 	   if($y==$sha->carrier)
 		{
 			$select="selected";

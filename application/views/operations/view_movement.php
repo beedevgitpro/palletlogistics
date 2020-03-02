@@ -267,28 +267,30 @@ $(document).ready(function(){
 			transaction[count]=trans;
 			carri[count]=carr;
 			typ[count]=tps;
+
           html += '<tr>';
+          html+='<td hidden ><input hidden type="text" id="ids'+data[count].metaid+'" value="'+data[count].movements_id+'"></td>';
 		  html += '<td><input type="checkbox" name="cb1"  id="'+data[count].metaid+'" class="chb btn btn-xs btn-info cha_id"></td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Date" id="Date'+data[count].metaid+'" contenteditable>'+data[count].movements_date+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="equipment"  contenteditable><select class="form-control equipment'+count+'" id="equipment'+data[count].metaid+'"><?php foreach($result as $rowss) { ?> <option value="<?php echo $rowss->equipment; ?>"><?php echo $rowss->equipment; ?></option> <?php } ?></select> </td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Sending_Tp" id="trading_partner_names'+data[count].metaid+'"  contenteditable></td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Date" class="table_datas"  id="Date'+data[count].metaid+'" contenteditable>'+data[count].movements_date+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="equipment"    contenteditable><select  class=" table_drop form-control equipment'+count+'" id="equipment'+data[count].metaid+' "><?php foreach($result as $rowss) { ?> <option  value="<?php echo $rowss->equipment; ?>"><?php echo $rowss->equipment; ?></option> <?php } ?></select> </td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Sending_Tp"  id="trading_partner_names'+data[count].metaid+'"  contenteditable></td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Receiving_Tp" id="receiver_tps'+data[count].metaid+'"  contenteditable></td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Reference" id="Reference'+data[count].metaid+'" contenteditable>'+data[count].reference+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Quantity" id="Quantity'+data[count].metaid+'" contenteditable>'+data[count].quantity+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Transfer" id="Transfer'+data[count].metaid+'" contenteditable>'+data[count].transfer+'</td>'; 
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Reference" class="table_datas1"  id="Reference'+data[count].metaid+'" contenteditable>'+data[count].reference+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Quantity" class="table_quality" id="Quantity'+data[count].metaid+'" contenteditable>'+data[count].quantity+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Transfer" class="table_transfer" id="Transfer'+data[count].metaid+'" contenteditable>'+data[count].transfer+'</td>'; 
           // html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Transaction"  contenteditable><select class="form-control transaction'+count+'" id="Transaction'+data[count].metaid+'"><?php foreach($transaction as $rowt) { ?> <option value="<?php echo $rowt->transaction; ?>"><?php echo  $rowt->transaction; ?></option> <?php } ?></select></td>';
-          html += '<td data-row_id="'+data[count].metaid+'" data-column_name="Transaction" contenteditable><select class="form-control transaction'+count+'" id="Transaction'+data[count].metaid+'"><?php foreach($transaction as $rowt) { ?> <option value="<?php echo $rowt->transaction; ?>"><?php echo  $rowt->transaction; ?></option> <?php } ?></select></td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Effective_date" id="Effective_date'+data[count].metaid+'" contenteditable>'+data[count].effective_date+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Docket_Number" id="Docket_Number'+data[count].metaid+'" contenteditable>'+data[count].docket_number+'</td>';
+          html += '<td data-row_id="'+data[count].metaid+'" data-column_name="Transaction" contenteditable><select class=" table_drop3 form-control transaction'+count+'" id="Transaction'+data[count].metaid+'"><?php foreach($transaction as $rowt) { ?> <option value="<?php echo $rowt->transaction; ?>"><?php echo  $rowt->transaction; ?></option> <?php } ?></select></td>';
+          html += '<td  data-row_id="'+data[count].metaid+'"  class="effective" data-column_name="Effective_date" id="Effective_date'+data[count].metaid+'" contenteditable>'+data[count].effective_date+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" class="docket" data-column_name="Docket_Number" id="Docket_Number'+data[count].metaid+'" contenteditable>'+data[count].docket_number+'</td>';
 		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Carrier"  id="carrierlists'+data[count].metaid+'" contenteditable></td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Rai_Corr" id="Rai_Corr'+data[count].metaid+'" contenteditable>'+data[count].rai_corr+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Rai_Corr" class="rai" id="Rai_Corr'+data[count].metaid+'" contenteditable>'+data[count].rai_corr+'</td>';
           // html += '<td data-row_id="'+data[count].metaid+'" data-column_name="type"  contenteditable> <select class="form-control type'+count+'" id="Type'+data[count].metaid+'"><?php foreach($type as $rowtt) {  ?> <option value="<?php echo $rowtt->type; ?>"><?php echo $rowtt->type; ?></option> <?php } ?></select></td>'; 
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="type" contenteditable><select class="form-control type'+count+'" id="Type'+data[count].metaid+'"><?php foreach($type as $rowtt) {  ?> <option value="<?php echo $rowtt->type; ?>"><?php echo $rowtt->type; ?></option> <?php } ?></select></td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Orig_Movement" id="Orig_Movement'+data[count].metaid+'" contenteditable>'+data[count].orig_movemevt+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Export" id="Export'+data[count].metaid+'" contenteditable>'+data[count].export+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Batch" id="Batch'+data[count].metaid+'" contenteditable>'+data[count].batch+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Bill" id="Bill'+data[count].metaid+'" contenteditable>'+data[count].bill+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Notes" id="Notes'+data[count].metaid+'" contenteditable>'+data[count].notes+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="type" contenteditable><select class=" type form-control type'+count+'" id="Type'+data[count].metaid+'"><?php foreach($type as $rowtt) {  ?> <option value="<?php echo $rowtt->type; ?>"><?php echo $rowtt->type; ?></option> <?php } ?></select></td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" class="orig" data-column_name="Orig_Movement" id="Orig_Movement'+data[count].metaid+'" contenteditable>'+data[count].orig_movemevt+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" class="export" data-column_name="Export" id="Export'+data[count].metaid+'" contenteditable>'+data[count].export+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Batch" class="batch" id="Batch'+data[count].metaid+'" contenteditable>'+data[count].batch+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Bill" class="bill" id="Bill'+data[count].metaid+'" contenteditable>'+data[count].bill+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Notes" class="notes" id="Notes'+data[count].metaid+'" contenteditable>'+data[count].notes+'</td>';
           html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
 		  html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>'
 		  html += '<td><button type="button" name=" " id="'+data[count].metaid+'" class="btn btn-xs fa fa-file-pdf-o docket_tabel" aria-hidden="true"><i class="fa fa-file"></i></button></td></tr>';
@@ -408,6 +410,9 @@ $(document).ready(function(){
       })
     }
   });
+
+  
+
     $(document).on('click', '.docket_tabel', function(){
 		 var id = $(this).attr('id'); 
 	 window.location='<?php echo base_url("User/movement_reports/")?>'+id;
@@ -522,8 +527,496 @@ $("#trading_partner_names"+count).load('<?php echo base_url("User/abc")?>',{"oth
 $("#receiver_tps"+count).load('<?php echo base_url("User/receiver_tps")?>',{"otherss":otherss,"receiver_tp":receiver_tp});
 $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"otherss":otherss,"carri":carri});
 }
+
+//edit without submitting
+
+ $(document).on('keyup', '.table_datas', function(){
+    var Dates = $(this).text();
+    var id = $(this).attr('id'); 
+    var res = id.substring(4, 5);
+    
+    var ids = $("#ids"+res).val();
+         
+  
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_date')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('keyup', '.table_quality', function(){
+    var Dates = $(this).text();
+    // alert(Dates);
+    var id = $(this).attr('id'); 
+    // alert(id);
+    var res = id.substring(8, 9);
+    // alert(res);return;
+    
+    var ids = $("#ids"+res).val();
+         
+  
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_quality')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('keyup', '.table_transfer', function(){
+    var Dates = $(this).text();
+    // alert(Dates);
+    var id = $(this).attr('id'); 
+    // alert(id);
+    var res = id.substring(8, 9);
+    // alert(res);return;
+    
+    var ids = $("#ids"+res).val();
+         
+  
+    $.ajax({
+      url:"<?php echo base_url('Edit/table_transfer')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('keyup', '.table_datas1', function(){
+    var Dates = $(this).text();
+    var id = $(this).attr('id');
+     
+    var res = id.substring(9, 10);
+
+    var ids = $("#ids"+res).val();  
+  //alert(Types);
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_referene')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('keyup', '.effective', function(){
+    var Dates = $(this).text();
+    var id = $(this).attr('id');
+     
+    var res = id.substring(14, 15);
+
+    var ids = $("#ids"+res).val();  
+  // alert(res);return;
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_effective')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('keyup', '.docket', function(){
+    var Dates = $(this).text();
+    // alert( Dates);
+    var id = $(this).attr('id');
+     
+    var res = id.substring(13, 14);
+
+    var ids = $("#ids"+res).val();  
+  // alert(res);return;
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_docket')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+  $(document).on('keyup', '.rai', function(){
+    var Dates = $(this).text();
+    // alert( Dates);
+    var id = $(this).attr('id');
+     
+    var res = id.substring(8, 9 );
+
+    var ids = $("#ids"+res).val();  
+  // alert(res);return;
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_rai')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+/////////////////
+  $(document).on('keyup', '.orig ', function(){
+    var Dates = $(this).text();
+    // alert( Dates);
+    var id = $(this).attr('id');
+     
+    var res = id.substring(13, 14 );
+
+    var ids = $("#ids"+res).val();  
+  // alert(res);return;
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_orig')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+  $(document).on('keyup', '.export ', function(){
+    var Dates = $(this).text();
+    // alert( Dates);
+    var id = $(this).attr('id');
+     
+    var res = id.substring(6, 7 );
+
+    var ids = $("#ids"+res).val();  
+  // alert(res);return;
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_export')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+  $(document).on('keyup', '.bill ', function(){
+    var Dates = $(this).text();
+    // alert( Dates);
+    var id = $(this).attr('id');
+     
+    var res = id.substring(4, 5 );
+
+    var ids = $("#ids"+res).val();  
+  // alert(res);return;
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_bill')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+  $(document).on('keyup', '.notes ', function(){
+    var Dates = $(this).text();
+    // alert( Dates);
+    var id = $(this).attr('id');
+     
+    var res = id.substring(5, 6 );
+
+    var ids = $("#ids"+res).val();  
+  // alert(res);return;
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_notes')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+$(document).on('keyup', '.batch ', function(){
+    var Dates = $(this).text();
+    // alert( Dates);
+    var id = $(this).attr('id');
+     
+    var res = id.substring(5, 6 );
+
+    var ids = $("#ids"+res).val();  
+  // alert(res);return;
+    $.ajax({  
+      url:"<?php echo base_url('Edit/update_batch')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+///
+
+ $(document).on('change', '.table_drop', function(){
+    var Dates = $(this).val();
+    var id = $(this).attr('id');
+    var res = id.substring(9, 10);
+    var ids = $("#ids"+res).val();  
+  //alert(Types);
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_equipment')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('change', '.table_drop1', function(){
+    var Dates = $(this).val();
+    // alert( Dates );return;
+    var id = $(this).attr('id');
+    // alert(id);return;
+    var res = id.substring(20, 21);
+    // alert(res);return;
+    var ids = $("#ids"+res).val();  
+  //alert(Types);
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_sending')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('change', '.carrier', function(){
+    var Dates = $(this).val();
+    // alert( Dates );return;
+    var id = $(this).attr('id');
+    // alert(id);return;
+    var res = id.substring(7, 8);
+    // alert(res);return;
+    var ids = $("#ids"+res).val();  
+  //alert(Types);
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_carrier')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('change', '.type', function(){
+    var Dates = $(this).val();
+    // alert( Dates );return;
+    var id = $(this).attr('id');
+    // alert(id);return;
+    var res = id.substring(4, 5);
+    // alert(res);return;
+    var ids = $("#ids"+res).val();  
+  //alert(Types);
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_type')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('change', '.table_drop2', function(){
+    var Dates = $(this).val();
+    // alert( Dates );return;
+    var id = $(this).attr('id');
+    // alert(id);return;
+    var res = id.substring(12, 13);
+    // alert(res);return;
+    var ids = $("#ids"+res).val();  
+  //alert(Types);
+    $.ajax({  
+      url:"<?php echo base_url('Edit/update_trading')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+ $(document).on('change', '.table_drop3', function(){
+    var Dates = $(this).val();
+    // alert( Dates );
+    var id = $(this).attr('id');
+    // alert(id);
+    var res = id.substring(11, 12);
+    // alert(res);
+    var ids = $("#ids"+res).val();  
+  //alert(Types);
+    $.ajax({  
+      url:"<?php echo base_url('Edit/update_transcation')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          alert( "Data Updated Successfully ");
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
 </script>
  <script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
+  <script src="<?php echo base_url('assets/js/custom.js')?>"></script>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js')?>"></script>
 <script src="<?php echo base_url('assets/js/detect.js')?>"></script>
 <script src="<?php echo base_url('assets/js/fastclick.js')?>"></script>

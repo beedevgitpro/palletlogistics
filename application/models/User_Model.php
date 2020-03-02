@@ -684,6 +684,8 @@ public function insert_movements($data)
 
 }
 
+
+
 public function lmd_date($login_id)
 {
 $sql="SELECT date(max(movements_date)) as lmd FROM `movements_view` where login_id=$login_id";
