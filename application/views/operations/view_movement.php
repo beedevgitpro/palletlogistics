@@ -415,6 +415,7 @@ $(document).ready(function(){
   
 
     $(document).on('click', '.docket_tabel', function(){
+      return;
      var id = $(this).attr('id'); 
    window.location='<?php echo base_url("User/movement_reports/")?>'+id;
    });
@@ -531,7 +532,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
 
 //edit without submitting
 
- $(document).on('focusout', '.table_datas', function(){
+ $(document).on('keyup', '.table_datas', function(){
     var Dates = $(this).text();
     var id = $(this).attr('id'); 
     var res = id.substring(4, 5);
@@ -558,7 +559,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('focusout', '.table_quality', function(){
+ $(document).on('keyup', '.table_quality', function(){
     var Dates = $(this).text();
     // alert(Dates);
     var id = $(this).attr('id'); 
@@ -591,7 +592,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('focusout', '.table_transfer', function(){
+ $(document).on('keyup', '.table_transfer', function(){
     var Dates = $(this).text();
     // alert(Dates);
     var id = $(this).attr('id'); 
@@ -622,7 +623,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('focusout', '.table_datas1', function(){
+ $(document).on('keyup', '.table_datas1', function(){
     var Dates = $(this).text();
     var id = $(this).attr('id');
      
@@ -649,7 +650,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('focusout', '.effective', function(){
+ $(document).on('keyup', '.effective', function(){
     var Dates = $(this).text();
     var id = $(this).attr('id');
      
@@ -676,7 +677,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('focusout', '.docket', function(){
+ $(document).on('keyup', '.docket', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -705,7 +706,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
-  $(document).on('focusout', '.rai', function(){
+  $(document).on('keyup', '.rai', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -733,7 +734,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
-  $(document).on('focusout', '.orig ', function(){
+  $(document).on('keyup', '.orig ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -763,7 +764,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
 
   });
 
-  $(document).on('focusout', '.export ', function(){
+  $(document).on('keyup', '.export ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -790,7 +791,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       }
     })
   });
-  $(document).on('focusout', '.bill ', function(){
+  $(document).on('keyup', '.bill ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -817,7 +818,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       }
     })
   });
-  $(document).on('focusout', '.notes ', function(){
+  $(document).on('keyup', '.notes ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -845,7 +846,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
-$(document).on('focusout', '.batch ', function(){
+$(document).on('keyup', '.batch ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
