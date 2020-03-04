@@ -472,7 +472,7 @@ return '1';
 <script src="<?php echo base_url('assets/js/jquery.blockUI.js')?>"></script>
 <script src="<?php echo base_url('assets/js/waves.js')?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.slimscroll.js')?>"></script>
-<script src="<?php echo base_url('assets/js/jquery.scrollTo.min.js')?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.scrollerlTo.min.js')?>"></script>
 <script src="<?php echo base_url('assets/plugins2/switchery/switchery.min.js')?>"></script>
 
 <script src="<?php echo base_url('assets/plugins2/datatables/jquery.dataTables.min.js')?>"></script>

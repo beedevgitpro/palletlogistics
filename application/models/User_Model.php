@@ -38,6 +38,7 @@ class User_Model extends CI_Model
 	    	UNION (SELECT menuId FROM assign_role_view,`user_right`,role WHERE login_menuId='$login_id' and login_type='1'
 	    	and assign_role_view.empId=user_right.login_menuId and assign_role_view.roleId=role.roleId 
 	    	and user_right.date_time=(select max(date_time) from user_right where login_menuId='$login_id' and login_type='1')) )t))ORDER BY menuId ASC");
+	    	
         	return $query->result();
 	}
 	

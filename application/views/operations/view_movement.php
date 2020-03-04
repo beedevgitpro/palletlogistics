@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+  <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
@@ -50,11 +50,11 @@
      
         <link href="<?php echo base_url('assets/css/menu.css')?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/css/responsive.css')?>" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="<?php echo base_url('assets/plugins2/switchery/switchery.min.css')?>">
-		<link rel="stylesheet" href="<?php echo base_url('assets/plugins2/footable/footable.bootstrap.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/plugins2/switchery/switchery.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/plugins2/footable/footable.bootstrap.min.css')?>">
              <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="<?php echo base_url('assets/js/modernizr.min.js')?>"></script>
-   <script src="<?php echo base_url('assets/pages/jsgrid.min.js')?>"></script>	
+   <script src="<?php echo base_url('assets/pages/jsgrid.min.js')?>"></script>  
   <style>
     body
     {
@@ -78,22 +78,22 @@ th.scaffolding {
 button#one:focus
 {
     background:#6f7175;
-	color: white;
+  color: white;
 }
 button#two:focus
 {
     background:#6f7175;
-	color: white;
+  color: white;
 }
 button#three:focus
 {
     background:#6f7175;
-	 color: white;
+   color: white;
 }
 button#fourth:focus
 {
     background:#6f7175;
-	color: white;
+  color: white;
 }
 input[type="checkbox"]{
   width: 30px; /*Desired width*/
@@ -106,10 +106,10 @@ input[type="checkbox"]{
         <!-- Begin page -->
         <div id="wrapper">
             <!-- Top Bar Start -->
-			<?php $this->load->view('headerfile/header');?>
+      <?php $this->load->view('headerfile/header');?>
             <!-- Top Bar End -->
             <!-- ========== Left Sidebar Start ========== -->
-			<?php $this->load->view('headerfile/leftmenu');?>
+      <?php $this->load->view('headerfile/leftmenu');?>
             <!-- Left Sidebar End -->
             <!-- ============================================================== -->
             <!-- Start right Content here -->
@@ -148,7 +148,7 @@ input[type="checkbox"]{
 <th data-breakpoints="xs sm md">Bill</th>
 <th data-breakpoints="xs sm md">Notes</th>
 <th data-breakpoints="xs sm md">Delete</th>
-<th data-breakpoints="xs sm md">Update</th>
+<!-- <th data-breakpoints="xs sm md">Update</th> -->
 <th data-breakpoints="xs sm md">Genrate Docket</th>
 </tr>
 <span id="f"></span>
@@ -175,19 +175,19 @@ input[type="checkbox"]{
             <!-- ============================================================== -->
 
         </div>
-		</div>
-		      <div class="row card-box">
+    </div>
+          <div class="row card-box">
                             <div class="col-lg-3">
-							</div>
+              </div>
                                 <div class="col-lg-9">
              <button type="button" id="one" class="btn equipment-receive">Created/Modified</button>&nbsp;&nbsp;
             <button type="button" id="two" class="btn equipment-sent">Rejections/Corrections</button>&nbsp;&nbsp;
          
                                 
-								
+                
                                 </div>
                           </div>
-		   <div id="second-table"></div>
+       <div id="second-table"></div>
         <!-- END wrapper -->
 
 
@@ -196,7 +196,7 @@ input[type="checkbox"]{
             var resizefunc = [];
         </script>
 
-				  <?php
+          <?php
 $result=$this->User_Model->fetch_equipment();
 //$sender=$this->User_Model->fetch_trading_partner_sendere();
  //$receiver=$this->User_Model->get_sender_reciever();
@@ -227,7 +227,7 @@ $(document).ready(function(){
         var data = posts.authors;
         var co = posts.row;
         var html = '<tr>';
-		html += '<td></td>';
+    html += '<td></td>';
         html += '<td id="Date" contenteditable placeholder="Enter First Name"><?php echo date("d-m-Y")?></td>';
         html += '<td contenteditable placeholder="Enter Last Name"><select class="form-control" id="equipment"><?php foreach($result as $rowss) { ?> <option value="<?php echo $rowss->equipment; ?>"><?php echo $rowss->equipment; ?></option> <?php } ?></select></td>';
         html += '<td  id="tradingpartnet_insert" contenteditable></td>'; 
@@ -238,8 +238,8 @@ $(document).ready(function(){
         html += '<td  contenteditable><select class="form-control" id="Transaction"><?php foreach($transaction as $rowt) { ?> <option value="<?php echo $rowt->transaction; ?>"><?php echo  $rowt->transaction; ?></option> <?php } ?></select></td>';
         html += '<td id="Effective_date" contenteditable><?php echo date("d-m-Y")?></td>';
         html += '<td id="Docket_Number" contenteditable></td>';
-		
-	    html += '<td id="carrierid" contenteditable></td>';
+    
+      html += '<td id="carrierid" contenteditable></td>';
         html += '<td id="Rai_Corr" contenteditable></td>';
         html += '<td  contenteditable><select class="form-control" id="Type"><?php foreach($type as $rowtt) {  ?> <option value="<?php echo $rowtt->type; ?>"><?php echo $rowtt->type; ?></option> <?php } ?></select></td>';
         html += '<td id="Orig_Movement" contenteditable></td>';
@@ -248,12 +248,12 @@ $(document).ready(function(){
         html += '<td id="Bill" contenteditable></td>';
         html += '<td id="Notes" contenteditable></td>';
         html += '<td><button type="button" name="btn_add" id="btn_add" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span></button></td></tr>';
-		 var equiee = new Array();
-		 var sender_tp = new Array();
-		 var receiver_tp = new Array();
-		 var transaction = new Array();
-		 var carri = new Array();
-		 var typ = new Array();
+     var equiee = new Array();
+     var sender_tp = new Array();
+     var receiver_tp = new Array();
+     var transaction = new Array();
+     var carri = new Array();
+     var typ = new Array();
         for(var count = 0; count < data.length; count++)
         {
             var x =  data[count].equipment;
@@ -262,16 +262,16 @@ $(document).ready(function(){
             var trans =  data[count].transaction; 
             var carr =  data[count].carrier; 
             var tps =  data[count].type; 
-			equiee[count]=x;
-			sender_tp[count]=y;
-			receiver_tp[count]=z;
-			transaction[count]=trans;
-			carri[count]=carr;
-			typ[count]=tps;
+      equiee[count]=x;
+      sender_tp[count]=y;
+      receiver_tp[count]=z;
+      transaction[count]=trans;
+      carri[count]=carr;
+      typ[count]=tps;
 
           html += '<tr>';
           html+='<td hidden ><input hidden type="text" id="ids'+data[count].metaid+'" value="'+data[count].movements_id+'"></td>';
-		  html += '<td><input type="checkbox" name="cb1"  id="'+data[count].metaid+'" class="chb btn btn-xs btn-info cha_id"></td>';
+      html += '<td><input type="checkbox" name="cb1"  id="'+data[count].metaid+'" class="chb btn btn-xs btn-info cha_id"></td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Date" class="table_datas"  id="Date'+data[count].metaid+'" contenteditable>'+data[count].movements_date+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="equipment"    contenteditable><select  class=" table_drop form-control equipment'+count+'" id="equipment'+data[count].metaid+' "><?php foreach($result as $rowss) { ?> <option  value="<?php echo $rowss->equipment; ?>"><?php echo $rowss->equipment; ?></option> <?php } ?></select> </td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Sending_Tp"  id="trading_partner_names'+data[count].metaid+'"  contenteditable></td>';
@@ -283,7 +283,7 @@ $(document).ready(function(){
           html += '<td data-row_id="'+data[count].metaid+'" data-column_name="Transaction" contenteditable><select class=" table_drop3 form-control transaction'+count+'" id="Transaction'+data[count].metaid+'"><?php foreach($transaction as $rowt) { ?> <option value="<?php echo $rowt->transaction; ?>"><?php echo  $rowt->transaction; ?></option> <?php } ?></select></td>';
           html += '<td  data-row_id="'+data[count].metaid+'"  class="effective" data-column_name="Effective_date" id="Effective_date'+data[count].metaid+'" contenteditable>'+data[count].effective_date+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" class="docket" data-column_name="Docket_Number" id="Docket_Number'+data[count].metaid+'" contenteditable>'+data[count].docket_number+'</td>';
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Carrier"  id="carrierlists'+data[count].metaid+'" contenteditable></td>';
+       html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Carrier"  id="carrierlists'+data[count].metaid+'" contenteditable></td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Rai_Corr" class="rai" id="Rai_Corr'+data[count].metaid+'" contenteditable>'+data[count].rai_corr+'</td>';
           // html += '<td data-row_id="'+data[count].metaid+'" data-column_name="type"  contenteditable> <select class="form-control type'+count+'" id="Type'+data[count].metaid+'"><?php foreach($type as $rowtt) {  ?> <option value="<?php echo $rowtt->type; ?>"><?php echo $rowtt->type; ?></option> <?php } ?></select></td>'; 
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="type" contenteditable><select class=" type form-control type'+count+'" id="Type'+data[count].metaid+'"><?php foreach($type as $rowtt) {  ?> <option value="<?php echo $rowtt->type; ?>"><?php echo $rowtt->type; ?></option> <?php } ?></select></td>';
@@ -293,20 +293,20 @@ $(document).ready(function(){
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Bill" class="bill" id="Bill'+data[count].metaid+'" contenteditable>'+data[count].bill+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Notes" class="notes" id="Notes'+data[count].metaid+'" contenteditable>'+data[count].notes+'</td>';
           html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
-		  html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>'
-		  html += '<td><button type="button" name=" " id="'+data[count].metaid+'" class="btn btn-xs fa fa-file-pdf-o docket_tabel" aria-hidden="true"><i class="fa fa-file"></i></button></td></tr>';
+      // html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>'
+      html += '<td><button type="button" name=" " id="'+data[count].metaid+'" class="btn btn-xs fa fa-file-pdf-o docket_tabel" aria-hidden="true"><i class="fa fa-file"></i></button></td></tr>';
           }
         //$('tbody').html(html);
         $('#tbodys').html(html);
         $('#pagination').html(e);
-	   for(var count = 0; count < data.length; count++)
-        {	
+     for(var count = 0; count < data.length; count++)
+        { 
             load_equipment(equiee[count],count,transaction[count],typ[count]);   
-	        var metaids=data[count].metaid;
-               //    alert(metaids);	
-               dropdown_lists(metaids,sender_tp[count],receiver_tp[count],carri[count]);     			
-		}
-		dropdown_list();
+          var metaids=data[count].metaid;
+               //    alert(metaids);  
+               dropdown_lists(metaids,sender_tp[count],receiver_tp[count],carri[count]);          
+    }
+    dropdown_list();
       $(".chb").change(function()
         {
        $(".chb").prop('checked',false);
@@ -319,7 +319,7 @@ $(document).ready(function(){
   load_data();
   $(document).on('click', '#btn_add', function(){
     var Date = $('#Date').text();
-	var equipment=$('#equipment').val();
+  var equipment=$('#equipment').val();
     var Sending_Tp=$('#trading_partner_name_one').val();
     var Receiving_Tp = $('#Receiving_Tp').val();
     var Reference = $('#Reference').text();
@@ -329,7 +329,7 @@ $(document).ready(function(){
     var Effective_date = $('#Effective_date').text();
     var Docket_Number = $('#Docket_Number').text();
     var Carrier = $('#Carrier').val();
-	// alert(Carrier);
+  // alert(Carrier);
     var Rai_Corr = $('#Rai_Corr').text();
     var Type = $('#Type').val();   
     var Orig_Movement = $('#Orig_Movement').text();
@@ -347,11 +347,11 @@ $(document).ready(function(){
       alert('Enter Equipment');
       return false;
     }
-	if(Quantity=='')
-	{
-		 alert('Enter Quantity');
+  if(Quantity=='')
+  {
+     alert('Enter Quantity');
       return false;
-	}
+  }
     $.ajax({
       url:"<?php echo base_url(); ?>User/insert_movement",
       method:"POST",
@@ -381,7 +381,7 @@ $(document).ready(function(){
     var Batchs = $('#Batch'+id).text();
     var Bills = $('#Bill'+id).text();
     var Notess = $('#Notes'+id).text();
-	//alert(Types);
+  //alert(Types);
     $.ajax({
       url:"<?php echo base_url('User/update_movements')?>",
       method:"POST",
@@ -397,11 +397,11 @@ $(document).ready(function(){
   });
   $(document).on('click', '.btn_delete', function(){
     var id = $(this).attr('id');
-	//alert(id);
+  //alert(id);
     if(confirm("Are you sure you want to delete this?"))
     {
       $.ajax({
-		 url:"<?php echo base_url('User/dalete_movemedsss')?>",
+     url:"<?php echo base_url('User/dalete_movemedsss')?>",
         //url:"<?php echo base_url(); ?>User/dalete_movemedsss",
         method:"POST",
         data:{id:id},
@@ -415,13 +415,13 @@ $(document).ready(function(){
   
 
     $(document).on('click', '.docket_tabel', function(){
-		 var id = $(this).attr('id'); 
-	 window.location='<?php echo base_url("User/movement_reports/")?>'+id;
+     var id = $(this).attr('id'); 
+   window.location='<?php echo base_url("User/movement_reports/")?>'+id;
    });
    $(document).on('change', '.cha_id', function() {
     if(this.checked) {
      var id = $(this).attr('id');
-	 document.getElementById("myOutput").value = id;
+   document.getElementById("myOutput").value = id;
     }
 }); 
   $(document).on('click', '.equipment-receive', function() {
@@ -430,7 +430,7 @@ $(document).ready(function(){
  });
 $(document).on('click', '.equipment-sent', function() {
   var rej_corr_id = document.getElementById("myOutput").value;
- $("#second-table").load('<?php echo base_url("User/movement_datass")?>',{"rej_corr_id":rej_corr_id});		  
+ $("#second-table").load('<?php echo base_url("User/movement_datass")?>',{"rej_corr_id":rej_corr_id});      
 }); 
 });
 </script>
@@ -531,7 +531,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
 
 //edit without submitting
 
- $(document).on('keyup', '.table_datas', function(){
+ $(document).on('focusout', '.table_datas', function(){
     var Dates = $(this).text();
     var id = $(this).attr('id'); 
     var res = id.substring(4, 5);
@@ -558,7 +558,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('keyup', '.table_quality', function(){
+ $(document).on('focusout', '.table_quality', function(){
     var Dates = $(this).text();
     // alert(Dates);
     var id = $(this).attr('id'); 
@@ -576,8 +576,9 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-         // alert( "Data Updated Successfully ");
+         // alert( "Quality data updated Successfully ");
          $("#f").html('Quality data updated Successfully');  
+         
 
 
         }
@@ -590,7 +591,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('keyup', '.table_transfer', function(){
+ $(document).on('focusout', '.table_transfer', function(){
     var Dates = $(this).text();
     // alert(Dates);
     var id = $(this).attr('id'); 
@@ -608,8 +609,9 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          // alert( "Data Updated Successfully ");
-           $("#f").html('Transfer data updated Successfully');  
+          // alert( "Transfer data updated Successfully ");
+          $("#f").html('Transfer data updated Successfully');  
+          
         }
         else{
           alert( "Data Not Updated ");
@@ -620,7 +622,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('keyup', '.table_datas1', function(){
+ $(document).on('focusout', '.table_datas1', function(){
     var Dates = $(this).text();
     var id = $(this).attr('id');
      
@@ -647,7 +649,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('keyup', '.effective', function(){
+ $(document).on('focusout', '.effective', function(){
     var Dates = $(this).text();
     var id = $(this).attr('id');
      
@@ -674,7 +676,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
- $(document).on('keyup', '.docket', function(){
+ $(document).on('focusout', '.docket', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -703,7 +705,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
-  $(document).on('keyup', '.rai', function(){
+  $(document).on('focusout', '.rai', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -731,7 +733,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
-  $(document).on('keyup', '.orig ', function(){
+  $(document).on('focusout', '.orig ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -761,7 +763,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
 
   });
 
-  $(document).on('keyup', '.export ', function(){
+  $(document).on('focusout', '.export ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -788,7 +790,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       }
     })
   });
-  $(document).on('keyup', '.bill ', function(){
+  $(document).on('focusout', '.bill ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -815,7 +817,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       }
     })
   });
-  $(document).on('keyup', '.notes ', function(){
+  $(document).on('focusout', '.notes ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
@@ -843,7 +845,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
     })
   });
 
-$(document).on('keyup', '.batch ', function(){
+$(document).on('focusout', '.batch ', function(){
     var Dates = $(this).text();
     // alert( Dates);
     var id = $(this).attr('id');
