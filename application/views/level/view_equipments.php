@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+  <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
@@ -27,15 +27,15 @@
         <link href="<?php echo base_url('assets/css/pages.css')?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/css/menu.css')?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/css/responsive.css')?>" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="<?php echo base_url('assets/plugins2/switchery/switchery.min.css')?>">
-		<link rel="stylesheet" href="<?php echo base_url('assets/plugins2/footable/footable.bootstrap.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/plugins2/switchery/switchery.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/plugins2/footable/footable.bootstrap.min.css')?>">
              <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="<?php echo base_url('assets/js/modernizr.min.js')?>"></script>
-		     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
   <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
-		
+    
   <style>
   .hide
   {
@@ -55,12 +55,12 @@
         <div id="wrapper">
 
             <!-- Top Bar Start -->
-			<?php $this->load->view('headerfile/header');?>
+      <?php $this->load->view('headerfile/header');?>
             <!-- Top Bar End -->
 
 
             <!-- ========== Left Sidebar Start ========== -->
-			<?php $this->load->view('headerfile/leftmenu');?>
+      <?php $this->load->view('headerfile/leftmenu');?>
             <!-- Left Sidebar End -->
             <!-- ============================================================== -->
             <!-- Start right Content here -->
@@ -81,7 +81,7 @@
                <?php $this->load->view('headerfile/footer');?>
 
             </div>
-			
+      
 
 
             <!-- ============================================================== -->
@@ -117,11 +117,11 @@
         <script src="<?php echo base_url('assets/plugins2/datatables/dataTables.fixedColumns.min.js')?>"></script>
         <!-- init -->
         <script src="<?php echo base_url('assets/pages/jquery.datatables.init.js')?>"></script>
-		<script src="<?php echo base_url('assets/plugins2/footable/footable.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/plugins2/footable/footable.min.js')?>"></script>
         <!-- App js -->
         <script src="<?php echo base_url('assets/js/jquery.core.js')?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.app.js')?>"></script>
-				  <?php
+          <?php
 ?> 
  <script>
     $('#grid_table').jsGrid({
@@ -141,7 +141,7 @@
        return $.ajax({
         type: "GET",
         url: "<?php echo base_url('User/equipment_one')?>",
-		
+    
         data: filter
        });
       },
@@ -183,8 +183,8 @@
     validate: "required"
       },
   
-	  
-	  {
+    
+    {
     name: "supplier_tp", 
     type: "select", 
     items: [
@@ -200,36 +200,36 @@
     textField: "Name", 
     validate: "required"
       },  
-	  
-/* 	  {
+    
+/*    {
      name: "supplier_tp", 
     type: "select", 
     items: [
      { Name: "", Id: '' },
-	 <?php
+   <?php
       foreach($result as $row)
       {  ?>
      { Name: '<?php echo $row->supplier_name; ?>', Id: '<?php echo $row->type_id;?>' }
     
-	<?php 
-	 }
-	 
-	 ?>
-	  { Name: "", Id: '' },
+  <?php 
+   }
+   
+   ?>
+    { Name: "", Id: '' },
  
     ], 
     valueField: "Id", 
     textField: "Name", 
     validate: "required"
       }, */
-	  
-	  
-	  
+    
+    
+    
 
 
-	  
-	  
-	  
+    
+    
+    
       {
        name: "report_name", 
     type: "text", 
@@ -237,20 +237,20 @@
  
   
       },
-	  
+    
             {
        name: "code", 
     type: "text", 
     width: 60
       },
-	  
-	        {
+    
+          {
        name: "internal_code", 
     type: "text", 
     width: 60
 
       },
-	  	        {
+              {
        name: "equipment_supplier_stock", 
     type: "text", 
     width: 60 
@@ -358,6 +358,6 @@ if($method == "DELETE")
  
 
  
-		
+    
     </body>
 </html>

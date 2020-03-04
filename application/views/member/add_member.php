@@ -54,7 +54,7 @@ right: 0;
 color: black;
 opacity: 1;
 }
-</style>	
+</style>  
 <!-------------------------------->
 <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link href="https://bootswatch.com/flatly/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -109,8 +109,8 @@ $ii=0;
 foreach($fields_id as $row)
 {
 
-	$z[$row->fields_order]=@$fields[$ii];
-	$ii++;
+  $z[$row->fields_order]=@$fields[$ii];
+  $ii++;
 }
 ?>
 <!-- ============================================================== -->
@@ -264,7 +264,7 @@ foreach ($result as $row) {
 <?php  $resultss=$this->User_Model->get_Country(); 
 foreach($resultss as $row)
 {
-	if($row->id==13){$f="selected";}else{$f="";}
+  if($row->id==13){$f="selected";}else{$f="";}
 ?>
 <option value="<?php echo $row->id; ?>" <?php echo $f;?>><?php echo $row->name; ?></option>
 <?php } ?>
@@ -301,7 +301,7 @@ foreach($resultss as $row)
 </div>
 <div class="col-md-6" <?php if (@$z[13]==101){} else { echo 'style="display:none;"'; } ;?>>
 <div class="form-group clearfix">
-<label class="control-label " for="email">Postcode/ZIP</label>	
+<label class="control-label " for="email">Postcode/ZIP</label>  
 <input type="number" class="form-control" name="zip"   placeholder="Postcode/ZIP" />
 
 </div>
@@ -311,7 +311,7 @@ foreach($resultss as $row)
 
 <div class="col-md-6" style="display:none">
 <div class="form-group clearfix">
-<label class="control-label " for="email">Report Name</label>	
+<label class="control-label " for="email">Report Name</label> 
 <input type="text" class="form-control" name="report"  placeholder="Report Name" />
 
 </div>
@@ -611,24 +611,24 @@ $(".datecontainer input").inputmask();
 <script>
 function get_fields(data)
 {
-	var type_data=data;
-	//alert(type_data);
+  var type_data=data;
+  //alert(type_data);
 $('#type_id').load('<?php echo base_url("User/getData")?>',{"type_id":type_data});
-}	
+} 
 
 </script>
 
 <script>
 function insert_location_id(data)
 {
-	var locations=data;
-	if(locations=='Site')
-	{
-	 document.getElementById("location_id").value = '<?php echo rand(0000000,99999999);?>';
-	}
-	else{
-		 document.getElementById("location_id").value = '';
-	}
+  var locations=data;
+  if(locations=='Site')
+  {
+   document.getElementById("location_id").value = '<?php echo rand(0000000,99999999);?>';
+  }
+  else{
+     document.getElementById("location_id").value = '';
+  }
 }
 </script>
 <script>
@@ -675,30 +675,30 @@ function find_lenth(data)
   var n = str.length;
 if(n > 4)
 {
-alert('Not More Than 4 Char');	
-}	
+alert('Not More Than 4 Char');  
+} 
 }
 
 </script>
 <script>
 function startnumber(data)
 {
-	 var str = data;
+   var str = data;
   var n = str.length;
 if(n > 3)
 {
-alert('Not More Than 3 Number');	
+alert('Not More Than 3 Number');  
 }
 }
 </script>
 <script>
 function nextnumber(data)
 {
-	 var str = data;
+   var str = data;
   var n = str.length;
 if(n > 3)
 {
-alert('Not More Than 3 Number');	
+alert('Not More Than 3 Number');  
 }
 }
 </script>
@@ -710,19 +710,19 @@ function endnumber(data)
   var n = str.length;
   if(n > 2)
   {
-  alert('Not More Than 2 Number');	
+  alert('Not More Than 2 Number');  
   }
-	
+  
 }
 </script>
 <script>
 function suffixes(data)
 {
-	 var str = data;
+   var str = data;
   var n = str.length;
   if(n > 1)
   {
-  alert('Not More Than 1 Char');	
+  alert('Not More Than 1 Char');  
   }
 }
 </script>
@@ -732,20 +732,20 @@ $(function() {
     $('#type').change(function(){
         if($('#type').val() == 3) {
             $('#primary').hide(); 
-			 $('#sptp').hide();
-			 $('#last-movement').hide();
-			 $('#internal').hide();
+       $('#sptp').hide();
+       $('#last-movement').hide();
+       $('#internal').hide();
         } 
-		else if($('#type').val() == 1) 
-		{
+    else if($('#type').val() == 1) 
+    {
             $('#licence-number').hide(); 
             $('#expiry-date').hide(); 
-			
+      
         }
 else{
-	$('#primary').show(); 
-			$('#sptp').show();
-}	
+  $('#primary').show(); 
+      $('#sptp').show();
+} 
     });
 });
 </script>
@@ -755,7 +755,7 @@ else{
 
 <script>
 function myFunctionq(){
-	
+  
     var divLoc = $('#div1').offset();
     $('html, body').animate({scrollTop: divLoc.top},"slow");
     return false

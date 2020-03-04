@@ -109,11 +109,11 @@ $result=$this->User_Model->get_form_fieldsddd($form_id,$login_id);
 $result2=$this->User_Model->get_form_fieldss($result);
 foreach($result2 as $row)
 {
-	
-	if($row->field_id!=52 && $row->field_id!=53)
-	{
-	?>
-	<div class="col-md-6">
+  
+  if($row->field_id!=52 && $row->field_id!=53)
+  {
+  ?>
+  <div class="col-md-6">
 <div class="form-group clearfix">
 <label class="control-label " for="first_name"><?php echo $row->form_label; ?></label>
 <?php echo $row->movement_form_input_box; ?>
@@ -122,10 +122,10 @@ foreach($result2 as $row)
 </div>
 </div>
 <?php
-	}
-	else
-	{ ?>
-				<div class="col-md-6">
+  }
+  else
+  { ?>
+        <div class="col-md-6">
 <div class="form-group clearfix checkboxcontainer">
 
 <?php echo $row->movement_form_input_box; ?>
@@ -133,7 +133,7 @@ foreach($result2 as $row)
 
 </div>
 </div>
-<?php	}
+<?php }
 
 }
 ?>
@@ -154,7 +154,7 @@ foreach($result2 as $row)
 
 
 
-	<div class="col-md-4" id="div1">
+  <div class="col-md-4" id="div1">
 
 <div class="hidden-print">
  <div class="pull-right">
@@ -297,7 +297,7 @@ document.getElementById("movement_fee").value = x;
 
 <script>
 function myFunctionq(){
-	
+  
     var divLoc = $('#div1').offset();
     $('html, body').animate({scrollTop: divLoc.top},"slow");
     return false

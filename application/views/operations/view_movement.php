@@ -151,6 +151,7 @@ input[type="checkbox"]{
 <th data-breakpoints="xs sm md">Update</th>
 <th data-breakpoints="xs sm md">Genrate Docket</th>
 </tr>
+<span id="f"></span>
         </thead>
         <tbody id="tbodys">
         </tbody>
@@ -545,7 +546,8 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Date data has been Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -574,7 +576,10 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+         // alert( "Data Updated Successfully ");
+         $("#f").html('Quality data updated Successfully');  
+
+
         }
         else{
           alert( "Data Not Updated ");
@@ -603,7 +608,8 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+           $("#f").html('Transfer data updated Successfully');  
         }
         else{
           alert( "Data Not Updated ");
@@ -629,7 +635,8 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+           $("#f").html('Referene data updated Successfully');  
         }
         else{
           alert( "Data Not Updated ");
@@ -655,7 +662,8 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Effective data updated Successfully');  
         }
         else{
           alert( "Data Not Updated ");
@@ -682,7 +690,9 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Docket data updated Successfully');  
+
         }
         else{
           alert( "Data Not Updated ");
@@ -709,7 +719,8 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Rai/Corr data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -719,7 +730,7 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       }
     })
   });
-/////////////////
+
   $(document).on('keyup', '.orig ', function(){
     var Dates = $(this).text();
     // alert( Dates);
@@ -736,15 +747,18 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+
+          // var a = alert( "Data Updated Successfully ");
+          $("#f").html('Orig Movement data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
         }
         console.log( data );
-        // load_data();
+         return;
       }
     })
+
   });
 
   $(document).on('keyup', '.export ', function(){
@@ -763,7 +777,8 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Export data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -789,7 +804,8 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Bill data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -815,7 +831,8 @@ $("#carrierlists"+count).load('<?php echo base_url("User/carrierlists")?>',{"oth
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Notes data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -842,7 +859,8 @@ $(document).on('keyup', '.batch ', function(){
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Batch data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -868,7 +886,8 @@ $(document).on('keyup', '.batch ', function(){
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Equipment data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -895,7 +914,9 @@ $(document).on('keyup', '.batch ', function(){
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Sending Tp data updated Successfully');
+
         }
         else{
           alert( "Data Not Updated ");
@@ -922,7 +943,8 @@ $(document).on('keyup', '.batch ', function(){
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Carrier data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -949,7 +971,8 @@ $(document).on('keyup', '.batch ', function(){
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Type of Carrier data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -976,7 +999,8 @@ $(document).on('keyup', '.batch ', function(){
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+           $("#f").html('Receiving Tp data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");
@@ -1003,7 +1027,8 @@ $(document).on('keyup', '.batch ', function(){
       success:function(data)
       {
         if( data == 'success' ){
-          alert( "Data Updated Successfully ");
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Transcation data updated Successfully');
         }
         else{
           alert( "Data Not Updated ");

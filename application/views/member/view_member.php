@@ -140,7 +140,7 @@ ul.icon_line {
 }
 tr.highlighted td {
     background: #6b6868;
-	color: white;
+  color: white;
 }
 </style>
 <script>
@@ -205,7 +205,7 @@ $(".show1").show();
         <script>
             var resizefunc = [];
         </script>
-				  <?php
+          <?php
 //$result=$this->User_Model->fetch_equipment();
 //$sender=$this->User_Model->fetch_trading_partner_sender();
 $result=$this->User_Model->fetch_trading_partner_type();
@@ -232,75 +232,75 @@ $(document).ready(function(){
         html += '<td id="code" contenteditable><?php echo(rand(0000000000,9999999999));?></td>';
         html += '<td id="emailid" contenteditable></td>';
         html += '<td id="notify" contenteditable></td>';
-		html += '<td id="phone_number" contenteditable></td>';
+    html += '<td id="phone_number" contenteditable></td>';
         html += '<td id="internal" contenteditable></td>';
         html += '<td id="tp_primary" contenteditable></td>';
         html += '<td id="lmd" contenteditable></td>';
         html += '<td id="special" contenteditable></td>';
-		html += '<td id="location" contenteditable></td>';
-		html += '<td id="licence_number" contenteditable></td>';
-		html += '<td id="expiry_date" contenteditable></td>';
-		html += '<td id="active" contenteditable></td>';
-		html += '<td id="notes" contenteditable></td>';
-	
+    html += '<td id="location" contenteditable></td>';
+    html += '<td id="licence_number" contenteditable></td>';
+    html += '<td id="expiry_date" contenteditable></td>';
+    html += '<td id="active" contenteditable></td>';
+    html += '<td id="notes" contenteditable></td>';
+  
         html += '<td><button type="button" name="btn_add" id="btn_add" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span></button></td></tr>';
-		//var equiee = new Array();
-		// var sender_tp = new Array();
-		//var receiver_tp = new Array();
-		// var transaction = new Array();
-		// var carri = new Array();
-		 var typ = new Array();
+    //var equiee = new Array();
+    // var sender_tp = new Array();
+    //var receiver_tp = new Array();
+    // var transaction = new Array();
+    // var carri = new Array();
+     var typ = new Array();
         for(var count = 0; count < data.length; count++)
         {
-			//var x =  data[count].trading_partner;
+      //var x =  data[count].trading_partner;
          //   var y =  data[count].equipment; 
          //  var z =  data[count].receiving_tp; 
           //  var trans =  data[count].transaction; 
           //  var carr =  data[count].carrier; 
             var tps =  data[count].tp_type; 
-			//sender_tp[count]=x;
-			//equiee[count]=y;
-			//receiver_tp[count]=z;
-			//transaction[count]=trans;
-			//carri[count]=carr;   equipment
-			typ[count]=tps;
+      //sender_tp[count]=x;
+      //equiee[count]=y;
+      //receiver_tp[count]=z;
+      //transaction[count]=trans;
+      //carri[count]=carr;   equipment
+      typ[count]=tps;
           html += '<tr>';
           html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="tp_name" id="tp_name'+data[count].memberId+'" contenteditable>'+data[count].tp_name+'</td>';
           html += '<td  data-row_id="'+data[count].memberId+'"  data-column_name="tp_type"  contenteditable>  <select class="form-control  tp_type'+count+'" id="tp_type'+data[count].memberId+'"><option value="">Select TP Type</option><?php foreach($result as $row) { ?> <option value="<?php echo $row->tp_type; ?>"><?php echo $row->tp_type; ?></option> <?php } ?></select></td>';
-		  
+      
           html += '<td  data-row_id="'+data[count].memberId+'"  id="code'+data[count].memberId+'" data-column_name="code"  contenteditable>'+data[count].code+'</td>';
-		  
+      
           html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="emailid" id="emailid'+data[count].memberId+'" contenteditable>'+data[count].emailid+'</td>';
           html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="notify" id="notify'+data[count].memberId+'" contenteditable>'+data[count].notify+'</td>';
-		   html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="phone_number" id="phone_number'+data[count].memberId+'" contenteditable>'+data[count].phone_number+'</td>';
+       html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="phone_number" id="phone_number'+data[count].memberId+'" contenteditable>'+data[count].phone_number+'</td>';
           html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="internal" id="internal'+data[count].memberId+'" contenteditable>'+data[count].internal+'</td>';
           html += '<td  data-row_id="'+data[count].memberId+'" id="tp_primary'+data[count].memberId+'"  data-column_name="tp_primary"  contenteditable>'+data[count].tp_primary+'</td>';
           html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="lmd" id="lmd'+data[count].memberId+'" contenteditable>'+data[count].lmd+'</td>';
-		  
-		  
-		  
-		  html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="special" id="special'+data[count].memberId+'" contenteditable>'+data[count].special+'</td>';
-	      html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="location" id="location'+data[count].memberId+'" contenteditable>'+data[count].location+'</td>';
-		  html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="licence_number" id="licence_number'+data[count].memberId+'" contenteditable>'+data[count].licence_number+'</td>';
-		  html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="expiry_date" id="expiry_date'+data[count].memberId+'" contenteditable>'+data[count].expiry_date+'</td>';
-		   html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="active" id="active'+data[count].memberId+'" contenteditable>'+data[count].active+'</td>';
-		    html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="notes" id="notes'+data[count].memberId+'" contenteditable>'+data[count].notes+'</td>';
-			 
-		   html += '<td><button type="button" name="delete_btn" id="'+data[count].memberId+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
-		   html += '<td><button type="button" name="table_data" id="'+data[count].memberId+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>';
+      
+      
+      
+      html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="special" id="special'+data[count].memberId+'" contenteditable>'+data[count].special+'</td>';
+        html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="location" id="location'+data[count].memberId+'" contenteditable>'+data[count].location+'</td>';
+      html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="licence_number" id="licence_number'+data[count].memberId+'" contenteditable>'+data[count].licence_number+'</td>';
+      html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="expiry_date" id="expiry_date'+data[count].memberId+'" contenteditable>'+data[count].expiry_date+'</td>';
+       html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="active" id="active'+data[count].memberId+'" contenteditable>'+data[count].active+'</td>';
+        html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="notes" id="notes'+data[count].memberId+'" contenteditable>'+data[count].notes+'</td>';
+       
+       html += '<td><button type="button" name="delete_btn" id="'+data[count].memberId+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
+       html += '<td><button type="button" name="table_data" id="'+data[count].memberId+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>';
         }
         $('tbody').html(html);
-		   for(var count = 0; count < data.length; count++)
-        {	
-          load_equipment(typ[count],count);        			
-		}
+       for(var count = 0; count < data.length; count++)
+        { 
+          load_equipment(typ[count],count);             
+    }
       }
     });
   }
   load_data();
   $(document).on('click', '#btn_add', function(){
     var tp_name = $("#tp_name").text();
-	var tp_type=$('#tp_type').val(); 
+  var tp_type=$('#tp_type').val(); 
     var code = $('#code').text();
     var emailid=$('#emailid').text();
     var notify = $('#notify').text();
@@ -336,13 +336,13 @@ $(document).ready(function(){
   });
 
    $(document).on('click', '.table_data', function(){
-	   var id = $(this).attr('id');
+     var id = $(this).attr('id');
    var tp_name = $("#tp_name"+id).text();
-	var tp_type=$('#tp_type'+id).val();
+  var tp_type=$('#tp_type'+id).val();
     var code = $('#code'+id).text(); 
     var emailid=$('#emailid'+id).text();
     var notify = $('#notify'+id).text();
-	var phone_number = $('#phone_number'+id).text();
+  var phone_number = $('#phone_number'+id).text();
     var internal = $('#internal'+id).text();
     var tp_primary = $('#tp_primary'+id).text();
     var lmd = $('#lmd'+id).text();
@@ -352,7 +352,7 @@ $(document).ready(function(){
     var expiry_date = $('#expiry_date'+id).text();
     var active = $('#active'+id).text();
     var notes = $('#notes'+id).text();
-	//alert(equipments);
+  //alert(equipments);
     $.ajax({
       url:"<?php echo base_url('User/update_memberss')?>",
       method:"POST",
@@ -366,11 +366,11 @@ $(document).ready(function(){
 
   $(document).on('click', '.btn_delete', function(){
     var id = $(this).attr('id');
-	//alert(id);
+  //alert(id);
     if(confirm("Are you sure you want to delete this?"))
     {
       $.ajax({
-		 url:"<?php echo base_url('User/dalete_member_login')?>",
+     url:"<?php echo base_url('User/dalete_member_login')?>",
         //url:"<?php echo base_url(); ?>User/dalete_movemedsss",
         method:"POST",
         data:{id:id},
@@ -384,9 +384,9 @@ $(document).ready(function(){
   
   
     $(document).on('click', '.docket_tabel', function(){
-		 var id = $(this).attr('id');
-		 
-	 window.location='<?php echo base_url("User/movement_reports/")?>'+id;
+     var id = $(this).attr('id');
+     
+   window.location='<?php echo base_url("User/movement_reports/")?>'+id;
   
    });
   
@@ -459,7 +459,7 @@ $(".tp_type"+count).val(tp_type);
 //$(".carrier"+count).val(carrier);
 //$(".type"+count).val(type);
 return '1';
-	//alert('jjj');
+  //alert('jjj');
 }
 </script>
 
@@ -499,6 +499,6 @@ return '1';
 <script src="<?php echo base_url('assets/js/jquery.core.js')?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.app.js')?>"></script>
  
-		
+    
     </body>
 </html>
