@@ -15,6 +15,93 @@ class Edi_Model extends CI_Model
 		$this->load->library('session');
 	}
 
+  public function update2_sender_receiver($id,$data,$res)
+  {
+  	if( $res == 'send'){
+	   	 	$query = $this->db->query("update sender_receiver set sender_receiver_name = '$data' where sender_receiver_id = '$id'");
+		     return true;
+	   	 }
+	 else if( $res == 'phon' ){
+	   	 	$query = $this->db->query("update sender_receiver set phone_number = '$data' where sender_receiver_id = '$id'");
+		     return true;
+	   	 }
+	 else if( $res == 'mobi' ){
+	   	 	$query = $this->db->query("update sender_receiver set mobile_number = '$data' where sender_receiver_id = '$id'");
+		     return true;
+	   	 }
+	 else if( $res == 'emai' ){
+	   	 	$query = $this->db->query("update sender_receiver set email = '$data' where sender_receiver_id = '$id'");
+		     return true;
+	   	 } 
+	  else if( $res == 'trad' ){
+	   	 	$query = $this->db->query("update sender_receiver set trading_partner_name = '$data' where sender_receiver_id = '$id'");
+		     return true;
+	   	 }     	 	  	 
+  }
+
+  public function update2_carr_s($id,$data,$res)
+  {
+  	if( $res == 'carr'){
+	   	 	$query = $this->db->query("update carrier set carrier = '$data' where carrier_id = '$id'");
+		     return true;
+	   	 }
+   else if( $res == 'note' ){
+	   	 	$query = $this->db->query("update carrier set notes = '$data' where carrier_id = '$id'");
+		     return true;
+	   	 }
+  }
+
+   public function update2_trading_s($id,$data,$res){
+	   	 if( $res == 'tp_n'){
+	   	 	$query = $this->db->query("update member_management set tp_name = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	 else if( $res == 'code' ){
+	   	 	$query = $this->db->query("update member_management set code = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	  else if( $res == 'emai' ){
+	   	 	$query = $this->db->query("update member_management set emailid = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	 else if( $res == 'noti' ){
+	   	 	$query = $this->db->query("update member_management set notify = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	 else if( $res == 'phon' ){
+	   	 	$query = $this->db->query("update member_management set phone_number = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	  else if( $res == 'inte' ){
+	   	 	$query = $this->db->query("update member_management set internal = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	 else if( $res == 'tp_p' ){
+	   	 	$query = $this->db->query("update member_management set tp_primary = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	 else if( $res == 'spec' ){
+	   	 	$query = $this->db->query("update member_management set special = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	  else if( $res == 'loca' ){
+	   	 	$query = $this->db->query("update member_management set location = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	  else if( $res == 'lice' ){
+	   	 	$query = $this->db->query("update member_management set licence_number = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	  else if( $res == 'note' ){
+	   	 	$query = $this->db->query("update member_management set notes = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+	   	 else if( $res == 'tp_t' ){
+	   	 	$query = $this->db->query("update member_management set tp_type = '$data' where metaId = '$id'");
+		     return true;
+	   	 }
+   }
+
 	public function update2_movements($id,$data)
 	{		
 		$query = $this->db->query("update movements set movements_date = '$data' where movements_id = '$id'");

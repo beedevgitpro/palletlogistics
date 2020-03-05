@@ -73,6 +73,7 @@ th.scaffolding {
    <div class="table-responsive">
       <br />
       <table id="_datatable-buttons" class="footable table table-striped  table-colored table-info footable-info table-bordered m-0" data-toggle-column="first" data-paging="true">
+        <span id="f"></span>
         <thead>
 		                                    <th>Sender Receiver</th>
                                             <th data-breakpoints="xs">Trading Partner</th>
@@ -83,7 +84,7 @@ th.scaffolding {
                                             <th data-breakpoints="xs sm md">active</th>
                                                                                     
                                             <th data-breakpoints="xs sm md">Delete</th>
-                                            <th data-breakpoints="xs sm md">Update</th>
+                                            <!-- <th data-breakpoints="xs sm md">Update</th> -->
 </tr>
         </thead>
         <tbody>
@@ -140,15 +141,16 @@ $(document).ready(function(){
 			 all[count]=x;
 			
            html += '<tr>';
-           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="sender_receiver_name" id="sender_receiver_name'+data[count].metaid+'" contenteditable>'+data[count].sender_receiver_name+'</td>';
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="trading_partner_name" id="trading_partner_names'+data[count].metaid+'"  contenteditable></td>';
+           html+='<td hidden ><input hidden   type="text" class="idss'+data[count].metaid+'" value="'+data[count].sender_receiver_id+'"></td>';
+           html += '<td  data-row_id="'+data[count].metaid+'" class="sender_receiver_edit"  data-column_name="sender_receiver_name" id="sender_receiver_name'+data[count].metaid+'" contenteditable>'+data[count].sender_receiver_name+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'"   data-column_name="trading_partner_name" id="trading_partner_names'+data[count].metaid+'"  contenteditable></td>';
            html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="defaults" id="defaults'+data[count].metaid+'" contenteditable>'+data[count].defaults+'</td>';
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="phone_number" id="phone_number'+data[count].metaid+'" contenteditable>'+data[count].phone_number+'</td>';
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="mobile_number" id="mobile_number'+data[count].metaid+'" contenteditable>'+data[count].mobile_number+'</td>';
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="email" id="email'+data[count].metaid+'" contenteditable>'+data[count].email+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="phone_number" class="sender_receiver_edit" id="phone_number'+data[count].metaid+'" contenteditable>'+data[count].phone_number+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="mobile_number" class="sender_receiver_edit" id="mobile_number'+data[count].metaid+'" contenteditable>'+data[count].mobile_number+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="email" class="sender_receiver_edit" id="email'+data[count].metaid+'" contenteditable>'+data[count].email+'</td>';
 		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="active" id="active'+data[count].metaid+'" contenteditable>'+data[count].active+'</td>';
            html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
-		   html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
+		   // html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
         }
         $('tbody').html(html);
        for(var count = 0; count < data.length; count++)
@@ -163,6 +165,75 @@ $(document).ready(function(){
     });
   }
   load_data();
+
+   $(document).on('change', '.sender_edit_select', function(){
+    var Dates = $(this).val();
+    var id = $(this).attr('id');
+    var res = id.substring(0, 4);
+    var ress = id.substring(20, 29);
+    var ids = $(".idss"+ress).val(); 
+    // console.log(Dates);return;
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_sender_receiver')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids,res:res},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Data updated Successfully');
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+
+  $(document).on('keyup', '.sender_receiver_edit', function(){
+
+          var Dates = $(this).text();
+          var id = $(this).attr('id');
+          var res = id.substring(0, 4);
+         
+              if( res == 'send'){
+                var ress = id.substring(20, 25);
+               }
+              else if ( res == 'phon'){
+                var ress = id.substring(12, 18);
+                } 
+              else if ( res == 'mobi'){
+                var ress = id.substring(13, 18);
+                }
+              else if ( res == 'emai'){
+                var ress = id.substring(5, 18);
+                } 
+              else {
+                var ress = '';
+                }            
+
+          var ids = $(".idss"+ress).val();
+          
+          $.ajax({
+            url:"<?php echo base_url('Edit/update_sender_receiver')?>",
+            method:"POST",
+            data:{Dates:Dates,ids:ids,res:res},
+            success:function(data)
+            {
+              if( data == 'success' ){
+                // alert( "Data Updated Successfully ");
+                 $("#f").html('Data updated Successfully');  
+              }
+              else{
+               alert( "Data Not Updated ");
+              }
+            }
+          })
+    });
+
   $(document).on('click', '#btn_add', function(){
     var sender_receiver_name = $('#sender_receiver_name').text();
 	var trading_partner_name=$('#trading_partner_name_one').val();
@@ -248,7 +319,7 @@ $('#tradingpartnet_insert').load('<?php echo base_url("User/abcd")?>',{"otherssg
 function dropdown_lists(count,datas)
 {
 var otherss=count;
-$("#trading_partner_names"+count).load('<?php echo base_url("User/abc")?>',{"otherss":otherss,"datas":datas});
+$("#trading_partner_names"+count).load('<?php echo base_url("User/abcs")?>',{"otherss":otherss,"datas":datas});
 }
 </script>
 

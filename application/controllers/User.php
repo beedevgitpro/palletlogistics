@@ -2349,7 +2349,7 @@ public function abc()
 	 $y='';
  }
 	?>
-	<select class="form-control table_drop1 trading_partner_name<?php echo$x;?>" id="trading_partner_name<?php echo$x;?>"><?php foreach($sender as $row) {
+	<select class="form-control  table_drop1 trading_partner_name<?php echo$x;?>" id="trading_partner_name<?php echo$x;?>"><?php foreach($sender as $row) {
 		if($y==$row->tp_name)
 		{
 			$select="selected";
@@ -2357,7 +2357,34 @@ public function abc()
 		else{
 		$select='';	
 		}
-		?> <option value="<?php echo $row->tp_name; ?>" <?php echo $select; ?>><?php echo $row->tp_name; ?></option> <?php 
+		?> <option  value="<?php echo $row->metaId; ?>" <?php echo $select; ?>><?php echo $row->tp_name; ?></option> <?php 
+		} ?></select>
+	<?php
+}
+
+public function abcs()
+{ 
+    //$cs=json_encode($this->User_Model->fetch_trading_partner_sender());
+	$sender=$this->User_Model->fetch_trading_partner_sender();
+	if(isset($_REQUEST['otherss']))
+ {
+	$x=$_REQUEST['otherss'];
+	$y=$_REQUEST['datas'];
+ }
+ else{
+	 $x='';
+	 $y='';
+ }
+	?>
+	<select class="form-control sender_edit_select table_drop1 trading_partner_name<?php echo$x;?>" id="trading_partner_name<?php echo$x;?>"><?php foreach($sender as $row) {
+		if($y==$row->tp_name)
+		{
+			$select="selected";
+		}
+		else{
+		$select='';	
+		}
+		?> <option  value="<?php echo $row->tp_name; ?>" <?php echo $select; ?>><?php echo $row->tp_name; ?></option> <?php 
 		} ?></select>
 	<?php
 }
@@ -2380,7 +2407,7 @@ public function receiver_tps()
 		else{
 		$select='';	
 		}
-		?> <option  value="<?php echo $row->tp_name; ?>" <?php echo $select; ?>><?php echo $row->tp_name; ?></option> <?php 
+		?> <option  value="<?php echo $row->metaId; ?>" <?php echo $select; ?>><?php echo $row->tp_name; ?></option> <?php 
 		} ?></select>
 	<?php
 }
@@ -2445,7 +2472,7 @@ public function carrierlists()
 		else{
 		$select='';	
 		}
-		?> <option value="<?php echo $sha->carrier; ?>" <?php echo$select;?>><?php echo $sha->carrier; ?></option> <?php } ?></select>
+		?> <option value="<?php echo $sha->carrier_id; ?>" <?php echo$select;?>><?php echo $sha->carrier; ?></option> <?php } ?></select>
 	<?php
 	
 }

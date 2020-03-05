@@ -22,6 +22,54 @@ class Edit extends CI_Controller {
 	}
 
 
+   public function update_carr(){
+			
+		$date = $_POST['Dates'];
+		$id = $_POST['ids'];
+		$ress = $_POST['res'];
+		
+		$res = $this->Edi_Model->update2_carr_s($id,$date,$ress);
+
+		if( $res == 1 ){
+			echo "success";
+		}
+		else{
+			echo "not success";
+	}
+	}
+
+	public function update_sender_receiver(){
+				
+			$date = $_POST['Dates'];
+			$id = $_POST['ids'];
+			$ress = $_POST['res'];
+			
+			$res = $this->Edi_Model->update2_sender_receiver($id,$date,$ress);
+
+			if( $res == 1 ){
+				echo "success";
+			}
+			else{
+				echo "not success";
+		}
+	}
+
+
+	public function update_tradingss(){
+			
+		$date = $_POST['Dates'];
+		$id = $_POST['ids'];
+		$ress = $_POST['res'];
+		
+		$res = $this->Edi_Model->update2_trading_s($id,$date,$ress);
+
+		if( $res == 1 ){
+			echo "success";
+		}
+		else{
+			echo "not success";
+	}
+}
 
 	public function update_date(){
 		

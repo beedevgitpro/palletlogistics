@@ -157,6 +157,7 @@ $(".show1").show();
 
 
 <table id="_datatable-buttons" class="footable table table-striped  table-colored table-info footable-info table-bordered m-0" data-toggle-column="first" data-paging="true">
+  <span id="f"></span>
 <thead>
 <tr>
 
@@ -177,7 +178,7 @@ $(".show1").show();
 <th data-breakpoints="xs sm md">Active</th>
 <th data-breakpoints="xs sm md">Notes</th>
 <th data-breakpoints="xs sm md">Delete</th>
-<th data-breakpoints="xs sm md">Update</th>
+<!-- <th data-breakpoints="xs sm md">Update</th> -->
 </tr>
         </thead>
         <tbody>
@@ -252,6 +253,7 @@ $(document).ready(function(){
      var typ = new Array();
         for(var count = 0; count < data.length; count++)
         {
+
       //var x =  data[count].trading_partner;
          //   var y =  data[count].equipment; 
          //  var z =  data[count].receiving_tp; 
@@ -265,29 +267,30 @@ $(document).ready(function(){
       //carri[count]=carr;   equipment
       typ[count]=tps;
           html += '<tr>';
-          html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="tp_name" id="tp_name'+data[count].memberId+'" contenteditable>'+data[count].tp_name+'</td>';
-          html += '<td  data-row_id="'+data[count].memberId+'"  data-column_name="tp_type"  contenteditable>  <select class="form-control  tp_type'+count+'" id="tp_type'+data[count].memberId+'"><option value="">Select TP Type</option><?php foreach($result as $row) { ?> <option value="<?php echo $row->tp_type; ?>"><?php echo $row->tp_type; ?></option> <?php } ?></select></td>';
+          html+='<td hidden ><input  hidden type="text" class="idss'+data[count].memberId+'" value="'+data[count].metaId+'"></td>';
+          html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="tp_name" class="tradind_edit" id="tp_name'+data[count].memberId+'" contenteditable>'+data[count].tp_name+'</td>';
+          html += '<td  data-row_id="'+data[count].memberId+'"  data-column_name="tp_type"  contenteditable>  <select class="form-control tradind_edit_select  tp_type'+count+'" id="tp_type'+data[count].memberId+'"><option value="">Select TP Type</option><?php foreach($result as $row) { ?> <option value="<?php echo $row->type_id; ?>"><?php echo $row->tp_type; ?></option> <?php } ?></select></td>';
       
-          html += '<td  data-row_id="'+data[count].memberId+'"  id="code'+data[count].memberId+'" data-column_name="code"  contenteditable>'+data[count].code+'</td>';
+          html += '<td  data-row_id="'+data[count].memberId+'"  class="tradind_edit" id="code'+data[count].memberId+'" data-column_name="code"  contenteditable>'+data[count].code+'</td>';
       
-          html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="emailid" id="emailid'+data[count].memberId+'" contenteditable>'+data[count].emailid+'</td>';
-          html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="notify" id="notify'+data[count].memberId+'" contenteditable>'+data[count].notify+'</td>';
-       html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="phone_number" id="phone_number'+data[count].memberId+'" contenteditable>'+data[count].phone_number+'</td>';
-          html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="internal" id="internal'+data[count].memberId+'" contenteditable>'+data[count].internal+'</td>';
-          html += '<td  data-row_id="'+data[count].memberId+'" id="tp_primary'+data[count].memberId+'"  data-column_name="tp_primary"  contenteditable>'+data[count].tp_primary+'</td>';
-          html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="lmd" id="lmd'+data[count].memberId+'" contenteditable>'+data[count].lmd+'</td>';
+          html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="emailid" class="tradind_edit" id="emailid'+data[count].memberId+'" contenteditable>'+data[count].emailid+'</td>';
+          html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="notify" class="tradind_edit" id="notify'+data[count].memberId+'" contenteditable>'+data[count].notify+'</td>';
+       html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="phone_number" class="tradind_edit" id="phone_number'+data[count].memberId+'" contenteditable>'+data[count].phone_number+'</td>';
+          html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="internal" class="tradind_edit"id="internal'+data[count].memberId+'" contenteditable>'+data[count].internal+'</td>';
+          html += '<td  data-row_id="'+data[count].memberId+'" class="tradind_edit" id="tp_primary'+data[count].memberId+'"  data-column_name="tp_primary"  contenteditable>'+data[count].tp_primary+'</td>';
+          html += '<td  data-row_id="'+data[count].memberId+'"  class="tradind_edit" data-column_name="lmd" id="lmd'+data[count].memberId+'" contenteditable>'+data[count].lmd+'</td>';
       
       
       
-      html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="special" id="special'+data[count].memberId+'" contenteditable>'+data[count].special+'</td>';
-        html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="location" id="location'+data[count].memberId+'" contenteditable>'+data[count].location+'</td>';
-      html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="licence_number" id="licence_number'+data[count].memberId+'" contenteditable>'+data[count].licence_number+'</td>';
-      html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="expiry_date" id="expiry_date'+data[count].memberId+'" contenteditable>'+data[count].expiry_date+'</td>';
-       html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="active" id="active'+data[count].memberId+'" contenteditable>'+data[count].active+'</td>';
-        html += '<td  data-row_id="'+data[count].memberId+'" data-column_name="notes" id="notes'+data[count].memberId+'" contenteditable>'+data[count].notes+'</td>';
+      html += '<td  data-row_id="'+data[count].memberId+'" class="tradind_edit" data-column_name="special" id="special'+data[count].memberId+'" contenteditable>'+data[count].special+'</td>';
+        html += '<td  data-row_id="'+data[count].memberId+'" class="tradind_edit" data-column_name="location" id="location'+data[count].memberId+'" contenteditable>'+data[count].location+'</td>';
+      html += '<td  data-row_id="'+data[count].memberId+'" class="tradind_edit"  data-column_name="licence_number" id="licence_number'+data[count].memberId+'" contenteditable>'+data[count].licence_number+'</td>';
+      html += '<td  data-row_id="'+data[count].memberId+'" class="tradind_edit" data-column_name="expiry_date" id="expiry_date'+data[count].memberId+'" contenteditable>'+data[count].expiry_date+'</td>';
+       html += '<td  data-row_id="'+data[count].memberId+'" class="tradind_edit" data-column_name="active" id="active'+data[count].memberId+'" contenteditable>'+data[count].active+'</td>';
+        html += '<td  data-row_id="'+data[count].memberId+'"class="tradind_edit" data-column_name="notes" id="notes'+data[count].memberId+'" contenteditable>'+data[count].notes+'</td>';
        
        html += '<td><button type="button" name="delete_btn" id="'+data[count].memberId+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
-       html += '<td><button type="button" name="table_data" id="'+data[count].memberId+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>';
+       // html += '<td><button type="button" name="table_data" id="'+data[count].memberId+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>';
         }
         $('tbody').html(html);
        for(var count = 0; count < data.length; count++)
@@ -298,6 +301,92 @@ $(document).ready(function(){
     });
   }
   load_data();
+
+     $(document).on('change', '.tradind_edit_select', function(){
+    var Dates = $(this).val();
+    var id = $(this).attr('id');
+    var res = id.substring(0, 4);
+    var ress = id.substring(7, 10);
+    var ids = $(".idss"+ress).val();  
+  // alert(ids);return;
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_tradingss')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids,res:res},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Data updated Successfully');
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+   $(document).on('keyup', '.tradind_edit', function(){
+
+          var Dates = $(this).text();
+          var id = $(this).attr('id');
+          var res = id.substring(0, 4);
+
+               if( res == 'tp_n'){
+                var ress = id.substring(7, 11);
+               }
+               else if ( res == 'code'){
+                var ress = id.substring(4, 11); 
+                }
+                else if ( res == 'emai'){
+                var ress = id.substring(7, 11);
+                }
+                else if ( res == 'noti'){
+                var ress = id.substring(6, 11);
+                }
+                else if ( res == 'phon'){
+                var ress = id.substring(12, 18);
+                }
+                else if ( res == 'inte'){
+                var ress = id.substring(8, 18);
+                }
+                else if ( res == 'tp_p'){
+                var ress = id.substring(10, 18);
+                }
+                else if ( res == 'spec'){
+                var ress = id.substring(7, 18);
+                }
+                else if ( res == 'loca'){
+                var ress = id.substring(8, 18);
+                }
+                else if ( res == 'lice'){
+                var ress = id.substring(14, 18);
+                }
+                else if ( res == 'note'){
+                var ress = id.substring(5, 18);
+                }
+
+            
+          var ids = $(".idss"+ress).val(); 
+          $.ajax({
+            url:"<?php echo base_url('Edit/update_tradingss')?>",
+            method:"POST",
+            data:{Dates:Dates,ids:ids,res:res},
+            success:function(data)
+            {
+              if( data == 'success' ){
+                // alert( "Data Updated Successfully ");
+                 $("#f").html('Data updated Successfully');  
+              }
+              else{
+               alert( "Data Not Updated ");
+              }
+            }
+          })
+    });
+
   $(document).on('click', '#btn_add', function(){
     var tp_name = $("#tp_name").text();
   var tp_type=$('#tp_type').val(); 
@@ -397,6 +486,9 @@ $(document).ready(function(){
 
 
 <script>
+  
+
+
 $('#orig_bill').focus(function() {
 document.onkeyup = function(e) {
   if (e.altKey && e.which == 50) {

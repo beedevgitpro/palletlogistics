@@ -114,6 +114,7 @@ th.scaffolding {
    <div class="table-responsive">
       <br />
       <table id="_datatable-buttons" class="footable table table-striped  table-colored table-info footable-info table-bordered m-0" data-toggle-column="first" data-paging="true">
+        <span id="f"></span>
         <thead>
 <th>carrier</th>
 <th data-breakpoints="xs">active</th>
@@ -194,10 +195,11 @@ $(document).ready(function(){
         {
 
           html += '<tr>';
-           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="carrier" id="carrier'+data[count].metaid+'" contenteditable>'+data[count].carrier+'</td>';
+          html+='<td  hidden><input hidden  type="text" class="idss'+data[count].metaid+'" value="'+data[count].carrier_id+'"></td>';
+           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="carrier" class="carrier_edit" id="carrier'+data[count].metaid+'" contenteditable>'+data[count].carrier+'</td>';
         
 		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="actives" id="actives'+data[count].metaid+'" contenteditable>'+data[count].active+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="notes" id="notes'+data[count].metaid+'" contenteditable>'+data[count].notes+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="notes" class="carrier_edit" id="notes'+data[count].metaid+'" contenteditable>'+data[count].notes+'</td>';
 
           html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
 		  html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
@@ -218,6 +220,38 @@ $(document).ready(function(){
 
   
   load_data();
+
+  $(document).on('keyup', '.carrier_edit', function(){
+
+          var Dates = $(this).text();
+          var id = $(this).attr('id');
+          var res = id.substring(0, 4);
+
+              if( res == 'carr'){
+                var ress = id.substring(7, 11);
+               }
+              else if ( res == 'note'){
+                var ress = id.substring(5, 18);
+                }       
+
+          var ids = $(".idss"+ress).val(); 
+
+          $.ajax({
+            url:"<?php echo base_url('Edit/update_carr')?>",
+            method:"POST",
+            data:{Dates:Dates,ids:ids,res:res},
+            success:function(data)
+            {
+              if( data == 'success' ){
+                // alert( "Data Updated Successfully ");
+                 $("#f").html('Data updated Successfully');  
+              }
+              else{
+               alert( "Data Not Updated ");
+              }
+            }
+          })
+    });
 
 
   $(document).on('click', '#btn_add', function(){
