@@ -22,6 +22,40 @@ class Edit extends CI_Controller {
 	}
 
 
+public function update_taring(  ){
+		
+		$date = $_POST['Dates'];
+		$id = $_POST['ids'];
+		$ress = $_POST['res'];
+		
+		$res = $this->Edi_Model->update_tra($id,$date,$ress);
+		
+		if( $res == 1 ){
+			echo "success";
+		}
+		else{
+			echo "not success";
+	}
+	}  
+
+  public function update_bill_ss(){
+		// echo "hi";exit;	
+		$date = $_POST['Dates'];
+		$id = $_POST['ids'];
+		$ress = $_POST['res'];
+		
+		$res = $this->Edi_Model->update_bill_s($id,$date,$ress);
+
+		if( $res == 1 ){
+			echo "success";
+		}
+		else{
+			echo "not success";
+	}
+	}
+
+
+
    public function update_carr(){
 			
 		$date = $_POST['Dates'];
@@ -53,6 +87,23 @@ class Edit extends CI_Controller {
 				echo "not success";
 		}
 	}
+
+	public function update_stocktakes(){
+				
+			$date = $_POST['Dates'];
+			$id = $_POST['ids'];
+			$ress = $_POST['res'];
+			
+			$res = $this->Edi_Model->update2_stocktakes($id,$date,$ress);
+
+			if( $res == 1 ){
+				echo "success";
+			}
+			else{
+				echo "not success";
+		}
+	}
+
 
 
 	public function update_tradingss(){

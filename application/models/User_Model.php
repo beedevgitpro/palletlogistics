@@ -61,6 +61,10 @@ class User_Model extends CI_Model
 	return $query->result();
 	}
 	
+	public function views_company( $id ){
+		$query=$this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_typ from login where parent_id = '$id'");
+        return $query->result();	
+	}
 	public function get_max_franchiseId()
 	{
 		$query=$this->db->query("SELECT max(franchiseId) as franchiseId FROM franchise_view");
@@ -177,6 +181,64 @@ public function get_counts() {
         return $query->result();
     }
 
+    public function view_accounts($rowno,$rowperpage,$id,$login_type) {
+    	
+        // $this->db->limit($rowperpage, $rowno);
+        // $this->db->order_by('login_id', 'DESC');
+        // $query = $this->db->get('login');
+
+        if( $login_type == 'A'){
+        $query=$this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_typ from login where login_type not in ( 'A' ) limit $rowno ,$rowperpage ");
+        return $query->result();
+    }
+    else if( $login_type == 'M' ){
+    	$query=$this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_typ from login where parent_id = '$id' limit $rowno ,$rowperpage");
+        return $query->result();
+    }
+     else if( $login_type == 'C' ){
+    	$query=$this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_typ from login where parent_id = '$id' limit $rowno ,$rowperpage");
+        return $query->result();	
+    //  	$this->db->select('*');
+    //     $this->db->from('login');
+    //     $this->db->where('parent_id', $id);
+
+    //     $parent = $this->db->get();
+        
+    //     $categories = $parent->result();
+    //     $i=0;
+    //     foreach($categories as $p_cat){
+
+    //         $categories[$i]->sub = $this->sub_categories($p_cat->login_id);
+    //         $i++;
+
+
+    //     }
+        
+    //     return $categories;
+
+    // }
+    }
+}
+
+    //   public function sub_categories($id){
+    //   	$folders = array();
+    //     $this->db->select('*');
+    //     $this->db->from('login');
+    //     $this->db->where('parent_id', $id);
+
+    //     $child = $this->db->get();
+    //     $categories = $child->result();
+    //     $i=0;
+    //     foreach($categories as $p_cat){
+    //     	// array_push($folders, $folder);
+    //         $categories[$i]->sub = $this->sub_categories($p_cat->login_id);
+    //         $i++;
+    //     }
+    //     return $categories;       
+    // }
+
+    
+
 	public function insert_role($data){
 	    $res=$this->db->insert('role',$data);
 	    return $res;
@@ -219,6 +281,11 @@ public function get_counts() {
 	public function insert_login($login)
 	{
 	$result=$this->db->insert('login',$login);
+	return $result;
+	}
+	public function insert_loginview($login)
+	{
+	$result=$this->db->insert('login_view',$login);
 	return $result;
 	}
 	
@@ -825,8 +892,7 @@ public function  get_equipment_metaid($equipment_meta_id='')
 	
 	 return $query->result();
 }
-//---------------------------------------
-//---------------------------------------
+
 public function fetch_trading_partner_type()
 {
     $this->db->select('*');

@@ -105,6 +105,7 @@ button#fourth:focus
       <div class="table-responsive">
       <br />
       <table id="_datatable-buttons" class="footable table table-striped  table-colored table-info footable-info table-bordered m-0" data-toggle-column="first" data-paging="true">
+        <span id="f"></span>
         <thead>
       <tr>
 <th data-breakpoints="xs">Details</th>
@@ -118,7 +119,7 @@ button#fourth:focus
 <th data-breakpoints="xs sm md">Receiving Tp</th>
 <th data-breakpoints="xs sm md">Note</th>
 <th data-breakpoints="xs sm md">Delete</th>
-<th data-breakpoints="xs sm md">Update</th>
+<!-- <th data-breakpoints="xs sm md">Update</th> -->
 </tr>
         </thead>
         <tbody>
@@ -191,18 +192,19 @@ $(document).ready(function(){
 		  equiee[count]=y;
 		  receiver_tp[count]=z;
           html += '<tr>';
+          html+='<td  hidden ><input hidden   type="text" class="idss'+data[count].metaid+'" value="'+data[count].id+'"></td>';
 		  html += '<td><input type="checkbox" name="cb1"  id="'+data[count].metaid+'" class="chb btn btn-xs btn-info cha_id"></td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Date" id="Date'+data[count].metaid+'" contenteditable>'+data[count].date+'</td>';
           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="trading_partner" id="trading_partner_names'+data[count].metaid+'" contenteditable></td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="equipment"  contenteditable><select class="form-control equipment'+count+'" id="equipment'+data[count].metaid+'"><?php foreach($result as $rowss) { ?> <option value="<?php echo $rowss->equipment; ?>"><?php echo $rowss->equipment; ?></option> <?php } ?></select></td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="book_stock" id="book_stock'+data[count].metaid+'" contenteditable>'+data[count].book_stock+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="physical_stock" id="physical_stock'+data[count].metaid+'" contenteditable>'+data[count].physical_stock+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="shrinkage" id="shrinkage'+data[count].metaid+'" contenteditable>'+data[count].shrinkage+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="reported_variance" id="reported_variance'+data[count].metaid+'" contenteditable>'+data[count].reported_variance+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="receiving_tp"  contenteditable><select class="form-control receiver_tp'+count+'" id="receiving_tp'+data[count].metaid+'"><?php foreach($sender as $row) { ?> <option value="<?php echo $row->tp_name; ?>"><?php echo $row->tp_name; ?></option> <?php } ?></select></td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="notes" id="notes'+data[count].metaid+'" contenteditable>'+data[count].notes+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="equipment"  contenteditable><select class="form-control stocktakes_edit_select equipment'+count+'" id="equipment'+data[count].metaid+'"><?php foreach($result as $rowss) { ?> <option value="<?php echo $rowss->equipment; ?>"><?php echo $rowss->equipment; ?></option> <?php } ?></select></td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="book_stock" class="edit_stocktakes" id="book_stock'+data[count].metaid+'" contenteditable>'+data[count].book_stock+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="physical_stock" class="edit_stocktakes" id="physical_stock'+data[count].metaid+'" contenteditable>'+data[count].physical_stock+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="shrinkage" class="edit_stocktakes" id="shrinkage'+data[count].metaid+'" contenteditable>'+data[count].shrinkage+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="reported_variance" class="edit_stocktakes" id="reported_variance'+data[count].metaid+'" contenteditable>'+data[count].reported_variance+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="receiving_tp"  contenteditable><select class="form-control stocktakes_edit_select receiver_tp'+count+'" id="receiving_tp'+data[count].metaid+'"><?php foreach($sender as $row) { ?> <option value="<?php echo $row->tp_name; ?>"><?php echo $row->tp_name; ?></option> <?php } ?></select></td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="notes" class="edit_stocktakes" id="notes'+data[count].metaid+'" contenteditable>'+data[count].notes+'</td>';
 		   html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>';
-		   html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
+		   // html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
            }
         $('tbody').html(html);
 		   for(var count = 0; count < data.length; count++)
@@ -221,6 +223,87 @@ $(document).ready(function(){
     });
   }
   load_data();
+
+   $(document).on('change', '.stocktakes_edit_select', function(){
+    var Dates = $(this).val();
+    var id = $(this).attr('id');
+    var res = id.substring(0, 4);
+
+    if( res == 'trad' ){
+       var ress = id.substring(20, 29);
+    }
+    else if( res == 'equi' ){
+       var ress = id.substring(9, 29);  
+    }
+    else if( res == 'rece' ){
+       var ress = id.substring(12, 29);
+        
+    }
+   
+    var ids = $(".idss"+ress).val(); 
+    console.log( ids );
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_stocktakes')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids,res:res},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Data updated Successfully');
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        console.log( data );
+        // load_data();
+      }
+    })
+  });
+
+   $(document).on('keyup', '.edit_stocktakes', function(){
+
+          var Dates = $(this).text();
+          var id = $(this).attr('id');
+          var res = id.substring(0, 4);
+          
+              if( res == 'book'){
+                 var ress = id.substring(10, 25);
+               }
+              else if ( res == 'phys'){
+                 var ress = id.substring(14, 20);
+                } 
+              else if ( res == 'shri'){
+                 var ress = id.substring(9, 26);
+                }
+              else if ( res == 'repo'){
+                 var ress = id.substring(17, 22);
+                } 
+              else if ( res == 'note'){
+                 var ress = id.substring(5, 18);
+                }
+              else {
+                 var ress = '';
+                }            
+
+          var ids = $(".idss"+ress).val();
+          $.ajax({
+            url:"<?php echo base_url('Edit/update_stocktakes')?>",
+            method:"POST",
+            data:{Dates:Dates,ids:ids,res:res},
+            success:function(data)
+            {
+              if( data == 'success' ){
+                // alert( "Data Updated Successfully ");
+                 $("#f").html('Data updated Successfully');  
+              }
+              else{
+               alert( "Data Not Updated ");
+              }
+            }
+          })
+    });
+
   $(document).on('click', '#btn_add', function(){
     var Date = $("#Date").text();
 	var trading_partner=$('#trading_partner_name_one').val();
