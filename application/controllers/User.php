@@ -3593,8 +3593,9 @@ public function account_regis(){
 	 $result=$this->User_Model->get_max_memberId();
 	     foreach($result as $row)
 	     {
-	     $metaid=$row->memberId;
+	    	 $metaid=$row->memberId;
 	     }
+	     
 	     $metaid=++$metaid;
 		 
 	 $login=array(
