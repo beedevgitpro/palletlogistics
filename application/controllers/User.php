@@ -245,7 +245,7 @@ class User extends CI_Controller {
 		}
 		else
 		{
-		$this->session->set_flashdata('error','Username or Password is invalid');
+		$this->session->set_flashdata('error','Username or Password is Invalid');
 			redirect(base_url().'User');
 		}
 	}
