@@ -43,8 +43,7 @@
         </div>
 
         <!-- HOME -->
-        <?php if( $this->session->flashdata('message') ){ echo '<div class="alert alert-success"><strong>Success !! </strong>'.$this->session->flashdata('message').'</div>';} ?>
-<?php if( $this->session->flashdata('error') ){ echo '<div class="alert alert-info"><strong> </strong>'.$this->session->flashdata('error').'</div>';} ?>
+        
         <section>
 
             <div class="container-alt">
@@ -63,6 +62,8 @@
                                     <!--<h4 class="text-uppercase font-bold m-b-0">Sign In</h4>-->
                                 </div>
                                 <div class="account-content">
+                                     <?php if( $this->session->flashdata('message') ){ echo '<div class="alert alert-success"><strong>Success !! </strong>'.$this->session->flashdata('message').'</div>';} ?>
+<?php if( $this->session->flashdata('error') ){ echo '<div class="alert alert-success"><strong> </strong>'.$this->session->flashdata('error').'</div>';} ?>
                                     <form class="form-horizontal" method="post" action="<?php echo base_url('User/Login')?>">
 
                                         <div class="form-group ">
