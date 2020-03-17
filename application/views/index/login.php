@@ -43,7 +43,10 @@
         </div>
 
         <!-- HOME -->
+        <?php if( $this->session->flashdata('message') ){ echo '<div class="alert alert-success"><strong>Success !! </strong>'.$this->session->flashdata('message').'</div>';} ?>
+<?php if( $this->session->flashdata('error') ){ echo '<div class="alert alert-info"><strong> </strong>'.$this->session->flashdata('error').'</div>';} ?>
         <section>
+
             <div class="container-alt">
                 <div class="row">
                     <div class="col-sm-12">
