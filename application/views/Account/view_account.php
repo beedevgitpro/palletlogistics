@@ -269,7 +269,7 @@ input[type="checkbox"]{
       <br />
       <?php if( $login_type == 'A' ){ } else{ ?>
       <form id="for" method="Post" action="<?= base_url('User/view_account_company');?>">
-        <input type="text" name="newid" id="new_id">
+        <input type="hidden" name="newid" id="new_id">
       </form>
     <?php } ?>
       <table id="_datatable-buttons" class="footable table table-striped  table-colored table-info footable-info table-bordered m-0" data-toggle-column="first" data-paging="true">
@@ -406,6 +406,7 @@ $('#pagination').on('click','a',function(e){
 
   {
 
+
     $.ajax({
 
     //  url:"<?php echo base_url(); ?>livetable/load_data",
@@ -450,7 +451,7 @@ $('#pagination').on('click','a',function(e){
         <?php if( $login_type == 'A' ){ } else{ ?>
       html += '<td><button type="button" name="view_btn"  id="'+randomnumber+'" class="btn btn-xs btn-info btn_view"><span class="glyphicon glyphicon-eye-open"></span></button></td>'
            <?php } ?>
-           html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
+           html += '<td><button type="button" name="delete_btn" id="'+randomnumber+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
 
 		   // html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
 
@@ -488,9 +489,43 @@ $('#pagination').on('click','a',function(e){
 
   $(document).on('click', '.btn_view', function(){
     var id = $(this).attr('id');
+    // alert(id);return;
     var ids = $("#login"+id).val(); 
      $("#new_id").val( ids );
      $("#for").submit();
+  });
+
+$(document).on('click', '.btn_delete', function(){
+
+    // var id = $(this).attr('id');
+ var ids = $(this).attr('id');
+    // alert(ids);return;
+    var id = $("#login"+ids).val();
+  // alert(id);return;
+
+    if(confirm("Are you sure you want to delete this?"))
+
+    {
+
+      $.ajax({
+
+     url:"<?php echo base_url('User/delete_user')?>",
+
+        //url:"<?php echo base_url(); ?>User/dalete_movemedsss",
+
+        method:"POST",
+
+        data:{id:id},
+
+        success:function(data){
+          load_data();
+
+        }
+
+      })
+
+    }
+
   });
 
    $(document).on('change', '.table_drop_quipment', function(){
@@ -713,37 +748,7 @@ $('#pagination').on('click','a',function(e){
 
   });
 
-  $(document).on('click', '.btn_delete', function(){
-
-    var id = $(this).attr('id');
-
-	//alert(id);
-
-    if(confirm("Are you sure you want to delete this?"))
-
-    {
-
-      $.ajax({
-
-		 url:"<?php echo base_url('User/delete_bills')?>",
-
-        //url:"<?php echo base_url(); ?>User/dalete_movemedsss",
-
-        method:"POST",
-
-        data:{id:id},
-
-        success:function(data){
-
-          load_data();
-
-        }
-
-      })
-
-    }
-
-  });
+  
 
     $(document).on('click', '.docket_tabel', function(){
 

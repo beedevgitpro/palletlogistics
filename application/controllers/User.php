@@ -21,12 +21,15 @@ class User extends CI_Controller {
 	}
 	public function index()
 	{
-		
+
+
 		$this->load->view('index/login');
 	}
 	public function dashboard()
 	{
 		$login_id=$this->session->userdata('id');
+		$login_type=$this->session->userdata('login_type');
+		
 		$data['login_id']=$this->session->userdata('id');
 		if($login_id==null){redirect('User/');}
 		else
@@ -1395,6 +1398,7 @@ public function load_carrier($rowno=0)
 	}
 	public function add_carrier()
 	{
+		
 		$login_id=$this->session->userdata('id');
 		$data['login_id']=$this->session->userdata('id');
 		if($login_id==null){redirect('User/');}
@@ -3148,9 +3152,17 @@ public function delete_movement($metaid)
 	public function delete_bills()
 	{
 	 $id=$_POST['id'];
-	 $data=array('show_hide'=>1);
+	 $data=array('show_hide'=>'1');
      $this->db->where('metaid',$id);
      $res=$this->db->update('bills',$data);
+	 $res;	
+	}
+	public function delete_user()
+	{
+	 $id=$_POST['id'];
+	 $data=array('show_hide'=>'0');
+     $this->db->where('login_id',$id);
+     $res=$this->db->update('login',$data);
 	 $res;	
 	}
 	public function delete_sender_receivers()
@@ -3509,6 +3521,7 @@ public function bills_datass()
 
 public function add_account()
 {
+
         $login_id=$this->session->userdata('id');
         $data['login_type']=$this->session->userdata('login_type');
 		if($login_id==null){redirect('User/');}
@@ -3534,6 +3547,7 @@ public function view_account_company()
 {
      $id = $_POST['newid'];
      $data['view'] = $this->User_Model->views_company( $id);
+     // print_r( $id );exit;
         $login_id=$this->session->userdata('id');
         $data['login_type']=$this->session->userdata('login_type');
 		if($login_id==null){redirect('User/');}
