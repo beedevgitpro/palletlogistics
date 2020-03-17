@@ -519,6 +519,7 @@ $(document).on('click', '.btn_delete', function(){
 
         success:function(data){
           load_data();
+          
 
         }
 
