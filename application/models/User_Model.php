@@ -737,13 +737,13 @@ public function get_max_tp_equipment()
 	}
 	public function get_latest_login($login_id)
 	{
-	$this->db->select('*');
-	$this->db->from('login');
+	$query = $this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_type from login where show_hide = '1'");
 	if($login_id!=1)
 	{
-	$this->db->where('login_id',$login_id);
+	// $this->db->where('login_id',$login_id);
+	$query = $this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_type from login where login_id = '$login_id' and show_hide = '1'");
     }
-	$query=$this->db->get();
+	// $query=$this->db->get();
     return $query->result();
 	}
 	public function get_created_name($memberId)
