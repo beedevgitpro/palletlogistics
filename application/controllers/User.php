@@ -31,8 +31,8 @@ class User extends CI_Controller {
 		if($login_id==null){redirect('User/');}
 		else
 		{
-			$this->load->view('dashboard/index',$data);
-			// $this->load->view('dashboard/index_two',$data);
+			// $this->load->view('dashboard/index',$data);
+			$this->load->view('dashboard/index_two',$data);
 		}
 	}
 	public function add_franchise ()
