@@ -29,7 +29,9 @@ class User_Model extends CI_Model
 	//$query=$this->db->query("SELECT * FROM left_menu where menuParentId='0'");
 //	return $query->result();
 //	}
-	public function get_menu($login_id){
+	public function get_menu($login_id,$login_type){
+
+	    	if($login_type == 'M' ){
 	    	$query=$this->db->query("SELECT * FROM left_menu WHERE menuId in(SELECT menuParentId from left_menu where menuId 
 	    	in(select DISTINCT * from ((select menuId from user_right,role,assign_role_view where login_menuId=(select role.roleId 
 	    	from assign_role_view,role where assign_role_view.roleId=role.roleId and assign_role_view.empId='$login_id') and login_type='1' and 
@@ -38,8 +40,96 @@ class User_Model extends CI_Model
 	    	UNION (SELECT menuId FROM assign_role_view,`user_right`,role WHERE login_menuId='$login_id' and login_type='1'
 	    	and assign_role_view.empId=user_right.login_menuId and assign_role_view.roleId=role.roleId 
 	    	and user_right.date_time=(select max(date_time) from user_right where login_menuId='$login_id' and login_type='1')) )t))ORDER BY menuId ASC");
+	    	return $query->result();
+		}
+		else if( $login_type == 'A' or $login_type == 'C'  ){
+			$query = array(
+				'Dashboard' => array(
+					'icon' => 'mdi mdi-view-dashboard',
+					'd' => array(
+						'Home' => 'dashboard',
+					),
+				),
+
+				'Administration' => array(
+					'icon' => 'mdi mdi-account',
+					'd' => array(
+						'Add Equiments' => 'add_equipments',
+						'View Equiments' => 'view_equipments',
+						'Add Carrier'=>'add_carrier',
+						'View Carrier'=>'view_carrier',
+						'Add Sender/Receiver'=>'sender_receiver',
+						'View Sender/Receiver'=>'view_sender_receiver',
+						'Add Supplier'=>'add_supplier',
+						'View Supplier'=>'view_supplier',
+						'Add profile'=>'add_profile',
+						'Manage Form'=>'manage_form',
+						'View Sites'=>'view_sites',
+						'View 3rd Parties'=>'view_3rd_parties',
+						'Manual Upload Docket'=>'manual_upload_docket'
+					),
+					
+				),
+
+				'Trading Partner' => array(
+					'icon' => 'mdi mdi-account',
+					'd' => array(
+						'Add Trading Partner' => 'add_member',
+						'View Trading Partner' => 'view_member',
+						'Add Trading partner Account'=>'tp_account',
+						'View Trading partner Account'=>'view_accounts',
+					),
+					
+				),
+
+				'Operations' => array(
+					'icon' => 'fa fa-wrench',
+					'd' => array(
+						'Add Movements' => 'movements',
+						'View Movements' => 'view_movement',
+						'Add Stocktakes'=>'add_stocktakes',
+						'View Stocktakes'=>'view_stocktakes',
+						'Bills'=>'add_bills',
+						'View Bills'=>'view_bill',
+						'Imported Movements'=>'imports_csv_movements',
+
+					),
+					
+				),
+
+				'User Right' => array(
+					'icon' => 'mdi mdi-account',
+					'd' => array(
+						'Assign Role' => 'assign_role',
+						'Add Role' => 'add_role',
+						'User Right'=>'user_right',
+						'Add Account'=>'add_account',
+						'View Account'=>'view_account',
+					),
+					
+				),
+
+				'Pallet Reports' => array(
+					'icon' => 'fa fa-file',
+					'd' => array(
+						'Bills Report' => 'bills',
+						'Movement Reports' => 'movementreports',
+						'Equipment Report'=>'equipment_report',
+						'Trading Partner Report'=>'Trading_Partner_report',
+						'Financial Report'=>'financial_report',
+					),
+					
+				),
+
+			);
+
+			 
 	    	
-        	return $query->result();
+        	return $query;
+        }
+        else{
+        	return '';
+        }
 	}
 	
 	//public function get_sub_menu($menuId)
@@ -61,6 +151,10 @@ class User_Model extends CI_Model
 	return $query->result();
 	}
 	
+	public function views_company( $id ){
+		$query=$this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_typ from login where parent_id = '$id' and show_hide='1'");
+        return $query->result();	
+	}
 	public function get_max_franchiseId()
 	{
 		$query=$this->db->query("SELECT max(franchiseId) as franchiseId FROM franchise_view");
@@ -177,6 +271,64 @@ public function get_counts() {
         return $query->result();
     }
 
+    public function view_accounts($rowno,$rowperpage,$id,$login_type) {
+    	
+        // $this->db->limit($rowperpage, $rowno);
+        // $this->db->order_by('login_id', 'DESC');
+        // $query = $this->db->get('login');
+
+        if( $login_type == 'A'){
+        $query=$this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_typ from login where login_type not in ( 'A' ) and show_hide = '1' ");
+        return $query->result();
+    }
+    else if( $login_type == 'M' ){
+    	$query=$this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_typ from login where parent_id = '$id' and show_hide = '1'");
+        return $query->result();
+    }
+     else if( $login_type == 'C' ){
+    	$query=$this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_typ from login where parent_id = '$id' and show_hide = '1'");
+        return $query->result();	
+    //  	$this->db->select('*');
+    //     $this->db->from('login');
+    //     $this->db->where('parent_id', $id);
+
+    //     $parent = $this->db->get();
+        
+    //     $categories = $parent->result();
+    //     $i=0;
+    //     foreach($categories as $p_cat){
+
+    //         $categories[$i]->sub = $this->sub_categories($p_cat->login_id);
+    //         $i++;
+
+
+    //     }
+        
+    //     return $categories;
+
+    // }
+    }
+}
+
+    //   public function sub_categories($id){
+    //   	$folders = array();
+    //     $this->db->select('*');
+    //     $this->db->from('login');
+    //     $this->db->where('parent_id', $id);
+
+    //     $child = $this->db->get();
+    //     $categories = $child->result();
+    //     $i=0;
+    //     foreach($categories as $p_cat){
+    //     	// array_push($folders, $folder);
+    //         $categories[$i]->sub = $this->sub_categories($p_cat->login_id);
+    //         $i++;
+    //     }
+    //     return $categories;       
+    // }
+
+    
+
 	public function insert_role($data){
 	    $res=$this->db->insert('role',$data);
 	    return $res;
@@ -219,6 +371,11 @@ public function get_counts() {
 	public function insert_login($login)
 	{
 	$result=$this->db->insert('login',$login);
+	return $result;
+	}
+	public function insert_loginview($login)
+	{
+	$result=$this->db->insert('login_view',$login);
 	return $result;
 	}
 	
@@ -580,13 +737,13 @@ public function get_max_tp_equipment()
 	}
 	public function get_latest_login($login_id)
 	{
-	$this->db->select('*');
-	$this->db->from('login');
+	$query = $this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_type from login where show_hide = '1'");
 	if($login_id!=1)
 	{
-	$this->db->where('login_id',$login_id);
+	// $this->db->where('login_id',$login_id);
+	$query = $this->db->query("select * ,case login_type  when 'A' then 'Admin' when 'C' then 'Company' else 'User' end as login_type from login where login_id = '$login_id' and show_hide = '1'");
     }
-	$query=$this->db->get();
+	// $query=$this->db->get();
     return $query->result();
 	}
 	public function get_created_name($memberId)
@@ -825,8 +982,7 @@ public function  get_equipment_metaid($equipment_meta_id='')
 	
 	 return $query->result();
 }
-//---------------------------------------
-//---------------------------------------
+
 public function fetch_trading_partner_type()
 {
     $this->db->select('*');

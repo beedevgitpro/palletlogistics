@@ -97,7 +97,7 @@ height: 20px; /*Desired height*/
 <div class="row">
 <div class="col-xs-12">
 <div class="page-title-box">
-<h4 class="page-title">Pallet Logistics<span style="margin-left:100px;"><?php echo $this->session->flashdata('message');?></span></h4>
+<h4 class="page-title">Pallet Logistics<?php if($this->session->flashdata('message')){?><span style="margin-left:100px;"><?php echo $this->session->flashdata('message');?></span><?php }?></h4>
 <ol class="breadcrumb p-0 m-0">
 <li>
 <a href="#">Member</a>

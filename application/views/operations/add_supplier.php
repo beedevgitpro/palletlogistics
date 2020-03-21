@@ -103,6 +103,12 @@ display: none;
 
 }
 
+.page-title-box {
+    padding: 37px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    margin: 0 -20px 20px -20px;
+    background-color: #ffffff;
+}
 
 
 input::-webkit-calendar-picker-indicator {
@@ -165,11 +171,11 @@ opacity: 1;
 
 <div class="page-title-box">
 
-<h4 class="page-title">Pallet Logistics</h4><?php echo $this->session->flashdata('message'); ?>
+<h4 class="page-title" style="margin-top: -25px">Pallet Logistics</h4><?php echo $this->session->flashdata('message'); ?>
 
 <ol class="breadcrumb p-0 m-0">
 
-<input type="submit"   class="btn btn-danger"  onclick="myFunctionq()" value="Scroll down" /> 
+<input type="submit"  style="margin-top: -25px" class="btn btn-danger"  onclick="myFunctionq()" value="Scroll down" /> 
 
 <li>
 

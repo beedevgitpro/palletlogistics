@@ -21,12 +21,15 @@ class User extends CI_Controller {
 	}
 	public function index()
 	{
-		
+
+
 		$this->load->view('index/login');
 	}
 	public function dashboard()
 	{
 		$login_id=$this->session->userdata('id');
+		$login_type=$this->session->userdata('login_type');
+		
 		$data['login_id']=$this->session->userdata('id');
 		if($login_id==null){redirect('User/');}
 		else
@@ -232,7 +235,8 @@ class User extends CI_Controller {
 			    'username'=> $row->username,
 				'password'=> $row->password,
 				'id'=> $row->login_id,
-				'memberId'=> $row->memberId
+				'memberId'=> $row->memberId,
+				'login_type'=>$row->login_type,
 			);
 			}	
             
@@ -241,8 +245,8 @@ class User extends CI_Controller {
 		}
 		else
 		{
-			//$this->session->set_userdata($data);
-			redirect(base_url().'User/error');
+		$this->session->set_flashdata('error','Username or Password is Invalid');
+			redirect(base_url().'User');
 		}
 	}
 	
@@ -1389,11 +1393,12 @@ public function load_carrier($rowno=0)
 		if($login_id==null){redirect('User/');}
 		else
 		{
-		$this->load->view('member/view_stocktakes');
+		    $this->load->view('member/view_stocktakes');
 		}
 	}
 	public function add_carrier()
 	{
+		
 		$login_id=$this->session->userdata('id');
 		$data['login_id']=$this->session->userdata('id');
 		if($login_id==null){redirect('User/');}
@@ -2349,7 +2354,7 @@ public function abc()
 	 $y='';
  }
 	?>
-	<select class="form-control  table_drop1 trading_partner_name<?php echo$x;?>" id="trading_partner_name<?php echo$x;?>"><?php foreach($sender as $row) {
+	<select class="form-control stocktakes_edit_select  table_drop1 trading_partner_name<?php echo$x;?>" id="trading_partner_name<?php echo$x;?>"><?php foreach($sender as $row) {
 		if($y==$row->tp_name)
 		{
 			$select="selected";
@@ -3147,9 +3152,17 @@ public function delete_movement($metaid)
 	public function delete_bills()
 	{
 	 $id=$_POST['id'];
-	 $data=array('show_hide'=>1);
+	 $data=array('show_hide'=>'1');
      $this->db->where('metaid',$id);
      $res=$this->db->update('bills',$data);
+	 $res;	
+	}
+	public function delete_user()
+	{
+	 $id=$_POST['id'];
+	 $data=array('show_hide'=>'0');
+     $this->db->where('login_id',$id);
+     $res=$this->db->update('login',$data);
 	 $res;	
 	}
 	public function delete_sender_receivers()
@@ -3504,6 +3517,108 @@ public function bills_datass()
 		{	
 		$this->load->view('headerfile/bill_data');
 		}	
+}
+
+public function add_account()
+{
+
+        $login_id=$this->session->userdata('id');
+        $data['login_type']=$this->session->userdata('login_type');
+		if($login_id==null){redirect('User/');}
+		else
+		{	
+		$this->load->view('Account/add_account',$data);
+		}	
+}
+
+public function view_account()
+{
+
+        $login_id=$this->session->userdata('id');
+        $data['login_type']=$this->session->userdata('login_type');
+		if($login_id==null){redirect('User/');}
+		else
+		{	
+		$this->load->view('Account/view_account',$data);
+		}	
+}
+
+public function view_account_company()
+{
+     $id = $_POST['newid'];
+     $data['view'] = $this->User_Model->views_company( $id);
+     // print_r( $id );exit;
+        $login_id=$this->session->userdata('id');
+        $data['login_type']=$this->session->userdata('login_type');
+		if($login_id==null){redirect('User/');}
+		else
+		{	
+		$this->load->view('Account/company_member',$data);
+		}	
+}
+
+public function view_accountss( $rowno = 0)
+{
+	 //    $this->db->order_by('bills_id', 'DESC');
+		// $query = $this->db->get('bills_view');
+		// $datas=$query->result_array();
+		// echo json_encode($datas);  
+	$login_id=$this->session->userdata('id');
+        $login_type=$this->session->userdata('login_type');
+	   $rowperpage = 10;
+    if($rowno != 0){
+      $rowno = ($rowno-1) * $rowperpage;
+    }
+
+    $allcount = $this->User_Model->get_bill();
+    $users_record = $this->User_Model->view_accounts($rowno,$rowperpage,$login_id,$login_type);
+   
+    $configs['base_url'] = base_url()."User/view_carrier";
+    $configs['use_page_numbers'] = TRUE;
+    $configs['total_rows'] = $allcount;
+    $configs['per_page'] = $rowperpage;
+    $this->pagination->initialize($configs);
+    $data['links'] = $this->pagination->create_links();
+    $data['authors'] = $users_record;
+    $data['row'] = $rowno;
+
+    echo json_encode($data);
+		
+}
+
+public function account_regis(){
+	$post = $this->input->post();
+	$login_id=$this->session->userdata('id');
+	$date=date('Y-m-d H:i:s');
+	 $result=$this->User_Model->get_max_memberId();
+	     foreach($result as $row)
+	     {
+	    	 $metaid=$row->memberId;
+	     }
+	     
+	     $metaid=++$metaid;
+		 
+	 $login=array(
+	'memberId'=>$metaid,
+	'username'=>$post['username'],
+	'password'=>$post['password'],
+	'login_type'=>$post['roles'],
+	'parent_id'=>$login_id,
+	'date_time'=>$date
+	);   
+	    $result2=$this->User_Model->insert_login($login);
+	   
+	     if($result2)
+		{
+			$this->session->set_flashdata('message','<div class="alert alert-success"><strong>Success !! </strong>Trading Partner Added successfully</div>');
+			redirect('User/add_account');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','|| Error ||');
+			redirect('User/add_account');
+		}
+	
 }
 
 public function view_sites()
@@ -3958,9 +4073,20 @@ public function get_member_json()
 		echo json_encode($datas); 
 }
 
+public function get_supply_json()
+{ 
+	    $this->db->order_by('supplier_id', 'DESC');
+		$this->db->limit(10);
+		$query = $this->db->get('supplier_view');
+		
+		$datas=$query->result_array();
+		echo json_encode($datas); 
+}
+
 
 public function get_tp_accounts_json()
 {
+	
 	    $this->db->order_by('tpa_id', 'DESC');
 		$query = $this->db->get('trading_partner_accounts_view');
 		$datas=$query->result_array();

@@ -268,7 +268,7 @@ input[type="checkbox"]{
       <br />
 
       <table id="_datatable-buttons" class="footable table table-striped  table-colored table-info footable-info table-bordered m-0" data-toggle-column="first" data-paging="true">
-
+        <span id="f"></span>
         <thead>
 
                         <th data-breakpoints="xs">Details</th>
@@ -309,7 +309,7 @@ input[type="checkbox"]{
 
 						<th data-breakpoints="xs sm md">Delete</th>
 
-						<th data-breakpoints="xs sm md">Update</th>
+						<!-- <th data-breakpoints="xs sm md">Update</th> -->
 
 </tr>
 
@@ -492,48 +492,49 @@ $('#pagination').on('click','a',function(e){
 		   all[count]=x;
 
            html += '<tr>';
+                     html+='<td hidden ><input hidden type="text" class="ids'+data[count].metaid+'" value="'+data[count].bills_id+'"></td>';
 
 		   html += '<td><input type="checkbox" name="cb1"  id="'+data[count].metaid+'" class="chb btn btn-xs btn-info cha_id"></td>';
 
            html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="bills_date" id="bills_date'+data[count].metaid+'" contenteditable>'+data[count].bills_date+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="equipment"  contenteditable><select class="form-control" id="equipment'+data[count].metaid+'"><?php foreach($result as $rowss) { ?> <option value="<?php echo $rowss->equipment; ?>"><?php echo $rowss->equipment; ?></option> <?php } ?></select></td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="equipment"  contenteditable><select class="form-control table_drop_quipment" id="equipment'+data[count].metaid+'"><?php foreach($result as $rowss) { ?> <option value="<?php echo $rowss->equipment; ?>"><?php echo $rowss->equipment; ?></option> <?php } ?></select></td>';
 
-           html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="source" id="source'+data[count].metaid+'" contenteditable>'+data[count].source+'</td>';
+           html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="source" id="source'+data[count].metaid+'" contenteditable>'+data[count].source+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="opening_balance" id="opening_balance'+data[count].metaid+'" contenteditable>'+data[count].opening_balance+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="opening_balance" id="opening_balance'+data[count].metaid+'" contenteditable>'+data[count].opening_balance+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="quantity_on" id="quantity_on'+data[count].metaid+'" contenteditable>'+data[count].quantity_on+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="quantity_on" id="quantity_on'+data[count].metaid+'" contenteditable>'+data[count].quantity_on+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Unreconciled_qty_on" id="Unreconciled_qty_on'+data[count].metaid+'" contenteditable>'+data[count].Unreconciled_qty_on+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'"  class="bills_edit" data-column_name="Unreconciled_qty_on" id="Unreconciled_qty_on'+data[count].metaid+'" contenteditable>'+data[count].Unreconciled_qty_on+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="quantity_off" id="quantity_off'+data[count].metaid+'" contenteditable>'+data[count].quantity_off+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="quantity_off" id="qsuantity_off'+data[count].metaid+'" contenteditable>'+data[count].quantity_off+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="unreconciled_qty_off" id="unreconciled_qty_off'+data[count].metaid+'" contenteditable>'+data[count].unreconciled_qty_off+'</td>'; 
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="unreconciled_qty_off" id="unreconciled_qty_off'+data[count].metaid+'" contenteditable>'+data[count].unreconciled_qty_off+'</td>'; 
 
 		   
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="closing_balance" id="closing_balance'+data[count].metaid+'" contenteditable>'+data[count].closing_balance+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="closing_balance" id="closing_balance'+data[count].metaid+'" contenteditable>'+data[count].closing_balance+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="equipment_days" id="equipment_days'+data[count].metaid+'" contenteditable>'+data[count].equipment_days+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="equipment_days" id="equipment_days'+data[count].metaid+'" contenteditable>'+data[count].equipment_days+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="unreconciled_equipment_days" id="unreconciled_equipment_days'+data[count].metaid+'" contenteditable>'+data[count].unreconciled_equipment_days+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'"  class="bills_edit" data-column_name="unreconciled_equipment_days" id="sunreconciled_equipment_days'+data[count].metaid+'" contenteditable>'+data[count].unreconciled_equipment_days+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="rent_unit_price" id="rent_unit_price'+data[count].metaid+'" contenteditable>'+data[count].rent_unit_price+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'"  class="bills_edit" data-column_name="rent_unit_price" id="rent_unit_price'+data[count].metaid+'" contenteditable>'+data[count].rent_unit_price+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="rent" id="rent'+data[count].metaid+'" contenteditable>'+data[count].rent+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="rent" id="urent'+data[count].metaid+'" contenteditable>'+data[count].rent+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="fees" id="fees'+data[count].metaid+'" contenteditable>'+data[count].fees+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" class="bills_edit" data-column_name="fees" id="fees'+data[count].metaid+'" contenteditable>'+data[count].fees+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="Other_charges" id="Other_charges'+data[count].metaid+'" contenteditable>'+data[count].Other_charges+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="Other_charges" id="Other_charges'+data[count].metaid+'" contenteditable>'+data[count].Other_charges+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="amount" id="amount'+data[count].metaid+'" contenteditable>'+data[count].amount+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="amount" id="amount'+data[count].metaid+'" contenteditable>'+data[count].amount+'</td>';
 
-		   html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="unreconciled_amount" id="unreconciled_amount'+data[count].metaid+'" contenteditable>'+data[count].unreconciled_amount+'</td>';
+		   html += '<td  data-row_id="'+data[count].metaid+'" class="bills_edit" data-column_name="unreconciled_amount" id="unsreconciled_amount'+data[count].metaid+'" contenteditable>'+data[count].unreconciled_amount+'</td>';
 
            html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
 
-		   html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
+		   // html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
 
            }
 
@@ -566,6 +567,104 @@ $('#pagination').on('click','a',function(e){
   }
 
   load_data();
+
+   $(document).on('change', '.table_drop_quipment', function(){
+    var Dates = $(this).val();
+    var id = $(this).attr('id');
+    var ress = id.substring(9, 21);
+    var res = id.substring(0, 4);
+    var ids = $(".ids"+ress).val(); 
+    $.ajax({
+      url:"<?php echo base_url('Edit/update_bill_ss')?>",
+      method:"POST",
+      data:{Dates:Dates,ids:ids,res:res},
+      success:function(data)
+      {
+        if( data == 'success' ){
+          // alert( "Data Updated Successfully ");
+          $("#f").html('Data updated Successfully');
+
+        }
+        else{
+          alert( "Data Not Updated ");
+        }
+        
+      }
+    })
+  });
+
+   $(document).on('keyup', '.bills_edit', function(){
+
+          var Dates = $(this).text();
+          var id = $(this).attr('id');
+          var res = id.substring(0, 4);
+          
+               if( res == 'sour'){
+                var ress = id.substring(6, 11);
+               }
+               else if ( res == 'open'){
+                var ress = id.substring(15, 18); 
+                }
+                else if ( res == 'quan'){
+                var ress = id.substring(11, 20);
+                }
+                else if ( res == 'Unre'){
+                var ress = id.substring(19, 28);
+                }
+                else if ( res == 'qsua'){
+                var ress = id.substring(13, 18);
+                }
+                else if ( res == 'unre'){
+                var ress = id.substring(20, 28);
+                }
+                else if ( res == 'clos'){
+                var ress = id.substring(15, 28);
+                }
+                else if ( res == 'equi'){
+                var ress = id.substring(14, 18);
+                }
+                else if ( res == 'sunr'){
+                var ress = id.substring(28, 38);  
+                }
+                else if ( res == 'rent'){
+                var ress = id.substring(15, 19);
+                }
+                else if ( res == 'uren'){
+                var ress = id.substring(5, 18);
+                }
+                else if ( res == 'fees'){
+                var ress = id.substring(4, 18);
+                }
+                else if ( res == 'Othe'){
+                var ress = id.substring(13, 18);
+                }
+                 else if ( res == 'amou'){
+                var ress = id.substring(6, 18);
+                }
+                else if ( res == 'unsr'){
+                var ress = id.substring(20, 28);
+                }
+
+            
+          var ids = $(".ids"+ress).val(); 
+          $.ajax({
+            url:"<?php echo base_url('Edit/update_bill_ss')?>",
+            method:"POST",
+            data:{Dates:Dates,ids:ids,res:res},
+            success:function(data)
+            {
+              if( data == 'success' ){
+                // alert( "Data Updated Successfully ");
+                 $("#f").html('Data updated Successfully');  
+              }
+              else{
+                $("#f").html(data);
+               // alert( "Data Not Updated ");
+              }
+            }
+          })
+    });
+
 
   $(document).on('click', '#btn_add', function(){
 
@@ -907,9 +1006,13 @@ return '1';
 
 <script src="<?php echo base_url('assets/plugins2/switchery/switchery.min.js')?>"></script>
 
+
+
 <script src="<?php echo base_url('assets/plugins2/datatables/jquery.dataTables.min.js')?>"></script>
 
 <script src="<?php echo base_url('assets/plugins2/datatables/dataTables.bootstrap.js')?>"></script>
+
+
 
 <script src="<?php echo base_url('assets/plugins2/datatables/dataTables.buttons.min.js')?>"></script>
 
@@ -939,11 +1042,17 @@ return '1';
 
 <script src="<?php echo base_url('assets/plugins2/datatables/dataTables.fixedColumns.min.js')?>"></script>
 
+
+
 <!-- init -->
 
 <script src="<?php echo base_url('assets/pages/jquery.datatables.init.js')?>"></script>
 
+
+
 <script src="<?php echo base_url('assets/plugins2/footable/footable.min.js')?>"></script>
+
+
 
 <!-- App js -->
 
@@ -951,7 +1060,7 @@ return '1';
 
 <script src="<?php echo base_url('assets/js/jquery.app.js')?>"></script>
 
- 
+
 
 		
 

@@ -3,55 +3,55 @@
 
 <html lang="en">
 
+	<head>
 
+        <meta charset="utf-8">
 
-<!-- Mirrored from coderthemes.com/zircos/material-design/form-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Jun 2018 06:22:03 GMT -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
+        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
 
-<meta charset="utf-8">
+        <meta name="author" content="Coderthemes">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- App favicon -->
 
-<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+        <link rel="shortcut icon" href="<?php  base_url('assets/images/favicon.jpg'); ?>">
 
-<meta name="author" content="Coderthemes">
+        <!-- App title -->
 
+         <title>saas</title>
 
+        <!-- DataTables -->
 
-<!-- App favicon -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
-<link rel="shortcut icon" href="<?php  base_url('assets/images/favicon.jpg'); ?>">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 
-<!-- App title -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<title>Add Profile - Pallet Logistics</title>
+        <!-- App css -->
 
+        <link href="<?php echo base_url('assets/css/core.css')?>" rel="stylesheet" type="text/css" />
 
+        <link href="<?php echo base_url('assets/css/components.css')?>" rel="stylesheet" type="text/css" />
 
-<!-- App css -->
+        <link href="<?php echo base_url('assets/css/icons.css')?>" rel="stylesheet" type="text/css" />
 
-<link href="<?php echo base_url('assets/css/bootstrap.min.css')?>" rel="stylesheet" type="text/css" />
+     
 
-<!-- <link href="<?php echo base_url('assets/css/core.css')?>" rel="stylesheet" type="text/css" /> -->
+        <link href="<?php echo base_url('assets/css/menu.css')?>" rel="stylesheet" type="text/css" />
 
-<link href="<?php echo base_url('assets/css/components.css')?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url('assets/css/responsive.css')?>" rel="stylesheet" type="text/css" />
 
-<!-- <link href="<?php echo base_url('assets/css/icons.css')?>" rel="stylesheet" type="text/css" /> -->
+		<link rel="stylesheet" href="<?php echo base_url('assets/plugins2/switchery/switchery.min.css')?>">
 
-<link href="<?php echo base_url('assets/css/pages.css')?>" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="<?php echo base_url('assets/plugins2/footable/footable.bootstrap.min.css')?>">
 
-<link href="<?php echo base_url('assets/css/menu.css')?>" rel="stylesheet" type="text/css" />
+             <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-<link href="<?php echo base_url('assets/css/responsive.css')?>" rel="stylesheet" type="text/css" />
+        <script src="<?php echo base_url('assets/js/modernizr.min.js')?>"></script>
 
-<link rel="stylesheet" href="<?php echo base_url('assets/plugins2/switchery/switchery.min.css')?>">
-
-
-
-
-
-<script src="<?php echo base_url('assets/js/modernizr.min.js')?>"></script>
+   <script src="<?php echo base_url('assets/pages/jsgrid.min.js')?>"></script>
 
 <style type="text/css">
 
@@ -153,7 +153,7 @@ height: 30px;
 
 <div class="row">
 
-<div class="col-xs-12">
+<div class="col-lg-12">
 
 <div class="page-title-box">
 
@@ -973,8 +973,6 @@ var resizefunc = [];
 
 
 
-<!-- jQuery  -->
-
 <script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
 
 <script src="<?php echo base_url('assets/js/bootstrap.min.js')?>"></script>
@@ -993,21 +991,43 @@ var resizefunc = [];
 
 <script src="<?php echo base_url('assets/plugins2/switchery/switchery.min.js')?>"></script>
 
+<script src="<?php echo base_url('assets/plugins2/datatables/jquery.dataTables.min.js')?>"></script>
 
+<script src="<?php echo base_url('assets/plugins2/datatables/dataTables.bootstrap.js')?>"></script>
 
-<script src="<?php echo base_url('assets/plugins2/parsleyjs/parsley.min.js')?>"></script>
+<script src="<?php echo base_url('assets/plugins2/datatables/dataTables.buttons.min.js')?>"></script>
 
+<script src="<?php echo base_url('assets/plugins2/datatables/buttons.bootstrap.min.js')?>"></script>
 
+<script src="<?php echo base_url('assets/plugins2/datatables/jszip.min.js')?>"></script>
 
+<script src="<?php echo base_url('assets/plugins2/datatables/pdfmake.min.js')?>"></script>
 
+<script src="<?php echo base_url('assets/plugins2/datatables/vfs_fonts.js')?>"></script>
 
-<!--Form Wizard-->
+<script src="<?php echo base_url('assets/plugins2/datatables/buttons.html5.min.js')?>"></script>
 
-<script src="<?php echo base_url('assets/plugins2/jquery.steps/js/jquery.steps.min.js')?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/plugins2/datatables/buttons.print.min.js')?>"></script>
 
-<script type="text/javascript" src="<?php echo base_url('assets/plugins2/jquery-validation/js/jquery.validate.min.js')?>"></script>
+<script src="<?php echo base_url('assets/plugins2/datatables/dataTables.fixedHeader.min.js')?>"></script>
 
+<script src="<?php echo base_url('assets/plugins2/datatables/dataTables.keyTable.min.js')?>"></script>
 
+<script src="<?php echo base_url('assets/plugins2/datatables/dataTables.responsive.min.js')?>"></script>
+
+<script src="<?php echo base_url('assets/plugins2/datatables/responsive.bootstrap.min.js')?>"></script>
+
+<script src="<?php echo base_url('assets/plugins2/datatables/dataTables.scroller.min.js')?>"></script>
+
+<script src="<?php echo base_url('assets/plugins2/datatables/dataTables.colVis.js')?>"></script>
+
+<script src="<?php echo base_url('assets/plugins2/datatables/dataTables.fixedColumns.min.js')?>"></script>
+
+<!-- init -->
+
+<script src="<?php echo base_url('assets/pages/jquery.datatables.init.js')?>"></script>
+
+<script src="<?php echo base_url('assets/plugins2/footable/footable.min.js')?>"></script>
 
 <!-- App js -->
 
@@ -1015,48 +1035,9 @@ var resizefunc = [];
 
 <script src="<?php echo base_url('assets/js/jquery.app.js')?>"></script>
 
+ 
 
-
-<!--wizard initialization-->
-
-<script src="<?php echo base_url('assets/pages/jquery.wizard-init.js')?>" type="text/javascript"></script>
-
-
-
-<script type="text/javascript">
-
-/*$(document).ready(function() {
-
-$('form').parsley();
-
-});
-
-$(function () {
-
-$('#demo-form').parsley().on('field:validated', function () {
-
-var ok = $('.parsley-error').length === 0;
-
-$('.alert-info').toggleClass('hidden', !ok);
-
-$('.alert-warning').toggleClass('hidden', ok);
-
-})
-
-.on('form:submit', function () {
-
-return false; // Don't submit form for this demo
-
-});
-
-});*/
-
-</script>
-
-
-
-<script>
-
+		<script type="text/javascript">
 function myFunctionq(){
 
 	

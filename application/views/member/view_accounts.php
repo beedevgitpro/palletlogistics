@@ -87,6 +87,7 @@ th.scaffolding {
 	  
 	
       <table id="_datatable-buttons" class="footable table table-striped  table-colored table-info footable-info table-bordered m-0" data-toggle-column="first" data-paging="true">
+        <span id="f"></span>
         <thead>
       <tr>
 
@@ -114,7 +115,7 @@ th.scaffolding {
                                       
                                             <th data-breakpoints="xs sm md">Reminder</th>
                                             <th data-breakpoints="xs sm md">Notes</th>
-                                            <th data-breakpoints="xs sm md">Status</th>
+                                            <th data-breakpoints="xs sm md">Delete</th>
 
 </tr>
         </thead>
@@ -154,10 +155,12 @@ $result=$this->User_Model->fetch_equipment();
 $sender=$this->User_Model->fetch_trading_partner_sender();
 $suplier=$this->User_Model->fetch_trading_partner_supply();
 $profile=$this->User_Model->get_profile();
-// $receiver=$this->User_Model->get_sender_reciever();
-// $transaction=$this->User_Model->fetch_transaction();
-// $carrier=$this->User_Model->get_carriers();
-// $type=$this->User_Model->movement_type();
+
+    foreach($sender as $rows) {
+      $v = $rows->tp_name;
+      $p ="<option value='$rows->tp_name'>$rows->tp_name</option>";
+      echo $p; 
+     } 
 ?> 
 
 <script type="text/javascript" language="javascript" >
@@ -170,8 +173,8 @@ $(document).ready(function(){
       dataType:"JSON",
       success:function(data){
         var html = '<tr>';
-        html += '<td  contenteditable placeholder="Enter First Name"><select class="form-control" id="tpa_third_party"><?php foreach($sender as $row) { ?> <option value="<?php echo $row->tp_name;; ?>"><?php echo $row->tp_name; ?></option> <?php } ?></select></td>';
-        html += '<td   contenteditable><select class="form-control" id="tpa_supplier"><?php foreach($suplier as $row) { ?> <option value="<?php echo $row->supplier_name; ?>"><?php echo $row->supplier_name; ?></option> <?php } ?></select></td>';
+        // html += '<td  contenteditable><select class="form-control" id="tpsa_suppliers"><?=$p?></select></td>';
+        html += '<td  contenteditable><select class="form-control" id="tpa_supplier"><?php foreach($suplier as $row) { ?> <option value="<?php echo $row->supplier_name; ?>"><?php echo $row->supplier_name; ?></option> <?php } ?></select></td>';
         html += '<td id="tpa_account_number" contenteditable></td>';
         html += '<td id="tpa_tn_delay_rule" contenteditable></td>';
         html += '<td id="tpa_allow_tf" contenteditable></td>';
@@ -196,43 +199,136 @@ $(document).ready(function(){
         for(var count = 0; count < data.length; count++)
         {
           html += '<tr>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_third_party" id="tpa_third_party'+data[count].metaid+'" contenteditable>'+data[count].tpa_third_party+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_supplier" id="tpa_supplier'+data[count].metaid+'" contenteditable>'+data[count].tpa_supplier+'  </td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_account_number" id="tpa_account_number'+data[count].metaid+'" contenteditable>'+data[count].tpa_account_number+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_tn_delay_rule" id="tpa_tn_delay_rule'+data[count].metaid+'" contenteditable>'+data[count].tpa_tn_delay_rule+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_allow_tf" id="tpa_allow_tf'+data[count].metaid+'" contenteditable>'+data[count].tpa_allow_tf+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_tf_delay_type" id="tpa_tf_delay_type'+data[count].metaid+'" contenteditable>'+data[count].tpa_tf_delay_type+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_tf_delay_days" id="tpa_tf_delay_days'+data[count].metaid+'" contenteditable>'+data[count].tpa_tf_delay_days+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_tf_delay_rule" id="tpa_tf_delay_rule'+data[count].metaid+'" contenteditable>'+data[count].tpa_tf_delay_rule+'</td>';
-          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_redeem_exchange" id="tpa_redeem_exchange'+data[count].metaid+'" contenteditable>'+data[count].tpa_redeem_exchange+'</td>';
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_redeem_same" id="tpa_redeem_same'+data[count].metaid+'" contenteditable>'+data[count].tpa_redeem_same+'</td>';
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_complete" id="tpa_complete'+data[count].metaid+'" contenteditable>'+data[count].tpa_complete+'</td>';
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_override_export_status" id="tpa_override_export_status'+data[count].metaid+'" contenteditable>'+data[count].tpa_override_export_status+'</td>';
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_export_on" id="tpa_export_on'+data[count].metaid+'" contenteditable>'+data[count].tpa_export_on+'</td>';
+           html+='<td hidden ><input  hidden type="text" class="idss'+data[count].metaid+'" value="'+data[count].tpa_id+'"></td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_third_party" class="trading_parter_edit" id="tpa_third_party'+data[count].metaid+'" contenteditable>'+data[count].tpa_third_party+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_supplier" class="trading_parter_edit" id="tpas_supplier'+data[count].metaid+'" contenteditable>'+data[count].tpa_supplier+'  </td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_account_number" class="trading_parter_edit" id="tpaa_account_number'+data[count].metaid+'" contenteditable>'+data[count].tpa_account_number+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_tn_delay_rule" class="trading_parter_edit" id="tpar_tn_delay_rule'+data[count].metaid+'" contenteditable>'+data[count].tpa_tn_delay_rule+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_allow_tf" class="trading_parter_edit" id="tpam_allow_tf'+data[count].metaid+'" contenteditable>'+data[count].tpa_allow_tf+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_tf_delay_type" class="trading_parter_edit" id="tpad_tf_delay_type'+data[count].metaid+'" contenteditable>'+data[count].tpa_tf_delay_type+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_tf_delay_days" class="trading_parter_edit" id="tpaf_tf_delay_days'+data[count].metaid+'" contenteditable>'+data[count].tpa_tf_delay_days+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_tf_delay_rule" class="trading_parter_edit" id="tptf_tf_delay_rule'+data[count].metaid+'" contenteditable>'+data[count].tpa_tf_delay_rule+'</td>';
+          html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_redeem_exchange" class="trading_parter_edit" id="tpsp_redeem_exchange'+data[count].metaid+'" contenteditable>'+data[count].tpa_redeem_exchange+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_redeem_same" class="trading_parter_edit" id="tpav_redeem_same'+data[count].metaid+'" contenteditable>'+data[count].tpa_redeem_same+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_complete" class="trading_parter_edit" id="tpai_complete'+data[count].metaid+'" contenteditable>'+data[count].tpa_complete+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_override_export_status" class="trading_parter_edit" id="tpan_override_export_status'+data[count].metaid+'" contenteditable>'+data[count].tpa_override_export_status+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_export_on" class="trading_parter_edit" id="tpac_export_on'+data[count].metaid+'" contenteditable>'+data[count].tpa_export_on+'</td>';
 		  
 		  
 		  
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_export_off" id="tpa_export_off'+data[count].metaid+'" contenteditable>'+data[count].tpa_export_off+'</td>';
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_docket_format" id="tpa_docket_format'+data[count].metaid+'" contenteditable>'+data[count].tpa_docket_format+'</td>';
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_con_note_required" id="tpa_con_note_required'+data[count].metaid+'" contenteditable>'+data[count].tpa_con_note_required+'</td>';
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_con_note_characters" id="tpa_con_note_characters'+data[count].metaid+'" contenteditable>'+data[count].tpa_con_note_characters+'</td>';
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_con_note_numeric" id="tpa_con_note_numeric'+data[count].metaid+'" contenteditable>'+data[count].tpa_con_note_numeric+'</td>';
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_con_note_decription" id="tpa_con_note_decription'+data[count].metaid+'" contenteditable>'+data[count].tpa_con_note_decription+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_export_off" class="trading_parter_edit" id="tpao_export_off'+data[count].metaid+'" contenteditable>'+data[count].tpa_export_off+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_docket_format" class="trading_parter_edit" id="tpaq_docket_format'+data[count].metaid+'" contenteditable>'+data[count].tpa_docket_format+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_con_note_required" class="trading_parter_edit" id="tpae_con_note_required'+data[count].metaid+'" contenteditable>'+data[count].tpa_con_note_required+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_con_note_characters" class="trading_parter_edit" id="tpaw_con_note_characters'+data[count].metaid+'" contenteditable>'+data[count].tpa_con_note_characters+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_con_note_numeric" class="trading_parter_edit" id="tpay_con_note_numeric'+data[count].metaid+'" contenteditable>'+data[count].tpa_con_note_numeric+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_con_note_decription" class="trading_parter_edit" id="tpaz_con_note_decription'+data[count].metaid+'" contenteditable>'+data[count].tpa_con_note_decription+'</td>';
 		  
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_reminder" id="tpa_reminder'+data[count].metaid+'" contenteditable>'+data[count].tpa_reminder+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_reminder" class="trading_parter_edit" id="tpax_reminder'+data[count].metaid+'" contenteditable>'+data[count].tpa_reminder+'</td>';
 		  
-		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_notes" id="tpa_notes'+data[count].metaid+'" contenteditable>'+data[count].tpa_notes+'</td>';
+		  html += '<td  data-row_id="'+data[count].metaid+'" data-column_name="tpa_notes" class="trading_parter_edit" id="tpcv_notes'+data[count].metaid+'" contenteditable>'+data[count].tpa_notes+'</td>';
 		 
 		  
 		  
 		   html += '<td><button type="button" name="delete_btn" id="'+data[count].metaid+'" class="btn btn-xs btn-danger btn_delete"><span class="glyphicon glyphicon-remove"></span></button></td>'
-		   html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>';
+		   // html += '<td><button type="button" name="table_data" id="'+data[count].metaid+'" class="btn btn-xs btn-info table_data"><span class="glyphicon glyphicon-pencil"></span></button></td>';
         }
         $('tbody').html(html);
       }
     });
   }
   load_data();
+  $(document).on('keyup', '.trading_parter_edit', function(){
+
+          var Dates = $(this).text();
+          var id = $(this).attr('id');
+          var res = id.substring(0, 4);
+               if( res == 'tpa_'){
+                var ress = id.substring(15, 20);
+               }
+               else if ( res == 'tpas'){
+                var ress = id.substring(13,35); 
+                }
+                else if ( res == 'tpaa'){
+                var ress = id.substring(19, 25);
+                }
+                else if ( res == 'tpar'){
+                var ress = id.substring(18, 28);
+                }
+                else if ( res == 'tpam'){
+                var ress = id.substring(13, 18);
+                }
+                else if ( res == 'tpad'){
+                var ress = id.substring(18, 28);
+                }
+                else if ( res == 'tpaf'){
+                var ress = id.substring(18, 28);
+                }
+                else if ( res == 'tptf'){
+                var ress = id.substring(18, 28);
+                }
+                else if ( res == 'tpsp'){
+                var ress = id.substring(20, 28);
+                }
+                else if ( res == 'tpav'){
+                var ress = id.substring(16, 28);  
+                }
+                else if ( res == 'tpai'){
+                var ress = id.substring(13, 19);
+                }
+                else if ( res == 'tpan'){
+                var ress = id.substring(27, 30);
+                }
+                else if ( res == 'tpac'){
+                var ress = id.substring(14, 20);
+                }
+                else if ( res == 'tpao'){
+                var ress = id.substring(15, 19);
+                }
+                 else if ( res == 'tpaq'){
+                var ress = id.substring(18, 28);
+                }
+                else if ( res == 'tpae'){
+                var ress = id.substring(22, 28);
+                }
+                else if ( res == 'tpaw'){
+                var ress = id.substring(24, 28);
+                }
+                else if ( res == 'tpay'){
+                var ress = id.substring(21, 28);
+                }
+                else if ( res == 'tpaz'){
+                var ress = id.substring(24, 28);
+                }
+                else if ( res == 'tpax'){
+                var ress = id.substring(13, 28);
+                }
+                else if ( res == 'tpcv'){
+                var ress = id.substring(10, 28);
+                  
+                }
+
+            
+          var ids = $(".idss"+ress).val(); 
+          // console.log( ids );return;
+          $.ajax({
+            url:"<?php echo base_url('Edit/update_taring')?>",
+            method:"POST",
+            data:{Dates:Dates,ids:ids,res:res},
+            success:function(data)
+            {
+              if( data == 'success' ){
+                // alert( "Data Updated Successfully ");
+                 $("#f").html('Data updated Successfully');  
+              }
+              else{
+                $("#f").html(data);
+               // alert( "Data Not Updated ");
+              }
+            }
+          });
+    });
+
+
   $(document).on('click', '#btn_add', function(){
     var tpa_third_party = $("#tpa_third_party").val();
 	var tpa_supplier=$('#tpa_supplier').val();
