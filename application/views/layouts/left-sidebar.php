@@ -1,6 +1,7 @@
 <?php
 $login_id=$this->session->userdata('id');
 $id=$this->session->userdata('login_id');
+$login_type=$this->session->userdata('login_type');
 $username=$this->session->userdata('username');
 
 ?>
@@ -21,7 +22,7 @@ $username=$this->session->userdata('username');
             </div>
             <ul class="sidebar-menu">
             <?php
-						$result=$this->User_Model->get_menu($login_id);
+						$result=$this->User_Model->get_menu($login_id,$login_type);
 						foreach($result as $row)
 						{
 						?>
